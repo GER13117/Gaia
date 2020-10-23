@@ -5,7 +5,7 @@ public class Gaia {
         MainFrame frame = new MainFrame();
         frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setTitle("Gaia");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -17,3 +17,4 @@ public class Gaia {
 //TODO: Terrain Generation
 //TODO: Schlagen, bauen
 //TODO: Gegner
+//TODO: Waterblock
