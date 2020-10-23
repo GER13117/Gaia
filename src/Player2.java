@@ -105,6 +105,9 @@ public class Player2 {
         x += xspeed;
         y += yspeed;
 
+        //Death Code
+        if(y > 1500) panel.reset2();
+
         //bewegt die Hitbox mit dem Spieler
         hitBox.x = x;
         hitBox.y = y;

@@ -1,6 +1,4 @@
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class Player {
 
@@ -104,6 +102,9 @@ public class Player {
 
         x += xspeed;
         y += yspeed;
+
+        //Death Code
+        if(y > 1500) panel.reset1();
 
         //bewegt die Hitbox mit dem Spieler
         hitBox.x = x;

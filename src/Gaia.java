@@ -5,7 +5,10 @@ public class Gaia {
         MainFrame frame = new MainFrame();
         frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null);
+
+
         frame.setResizable(true);
+
         frame.setTitle("Gaia");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

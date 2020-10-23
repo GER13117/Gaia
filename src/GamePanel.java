@@ -1,6 +1,5 @@
 import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,14 +12,16 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer gameTimer;
     Player2 player2;
     ArrayList<Wall> walls = new ArrayList<>();
-
+    int windowHeight = 1080;
+    int windowWidth = 1920;
 
 
     public GamePanel(){
         //einfügen des Spiel-Objekts
         player = new Player(400,300,this);
         player2 = new Player2(500, 300, this);
-        makeWalls();
+
+        reset1();
 
         //Timer um Spiel laufen zu lassen.
         gameTimer = new Timer();
@@ -37,37 +38,56 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
-    public void makeWalls() {
+    public void reset1(){
+        player.x = 200;
+        player.y = 150;
+        player.xspeed = 0;
+        player.yspeed = 0;
+        walls.clear();
+        int offset = 50;
+        makeWalls(offset);
+    }
+
+    public void reset2(){
+        player2.x = 300;
+        player2.y = 150;
+        player2.xspeed = 0;
+        player2.yspeed = 0;
+        walls.clear();
+        int offset = 50;
+        makeWalls(offset);
+    }
+
+    public void makeWalls(int offset) {
         int squareSize = 50;
-        for(int i = 50; i < 1870; i += 50){
-            walls.add(new Wall(i, 600, 50, 50));
+        for(int i = 50; i < windowWidth-50; i += 50){
+            walls.add(new Wall(i, windowHeight-80, 50, 50));
 
         }
+        int bottomRow = windowHeight - 80;
         //Left endwall
-        walls.add(new Wall(50, 550, 50, 50));
-        walls.add(new Wall(50, 500, 50, 50));
-        walls.add(new Wall(50, 450, 50, 50));
+        walls.add(new Wall(50, bottomRow-50, 50, 50));
 
-        //middle walls frome left to right
-        walls.add(new Wall(450, 550, 50, 50));
+        //middle walls from left to right
+        walls.add(new Wall(450, bottomRow-50, 50, 50));
 
-        walls.add(new Wall(600, 500, 50, 50));
-        walls.add(new Wall(600, 550, 50, 50));
+        walls.add(new Wall(600, bottomRow-100, 50, 50));
+        walls.add(new Wall(600, bottomRow-50, 50, 50));
 
-        walls.add(new Wall(650, 550, squareSize, squareSize));
-        walls.add(new Wall(650, 500, squareSize, squareSize));
-        walls.add(new Wall(650, 450, squareSize, squareSize));
+        walls.add(new Wall(650, bottomRow-50, squareSize, squareSize));
+        walls.add(new Wall(650, bottomRow-100, squareSize, squareSize));
+        walls.add(new Wall(650, bottomRow-150, squareSize, squareSize));
 
-        walls.add(new Wall(700, 500, 50, 50));
-        walls.add(new Wall(700, 550, 50, 50));
+        walls.add(new Wall(700, bottomRow-100, 50, 50));
+        walls.add(new Wall(700, bottomRow-50, 50, 50));
 
-        walls.add(new Wall(750, 550, 50, 50));
+        walls.add(new Wall(750, bottomRow-50, 50, 50));
 
 
         //right endwall
-        walls.add(new Wall(1850, 450, squareSize, squareSize ));
-        walls.add(new Wall(1850, 500, squareSize, squareSize ));
-        walls.add(new Wall(1850, 550, squareSize, squareSize ));
+        walls.add(new Wall(1850, bottomRow-150, squareSize, squareSize ));
+        walls.add(new Wall(1850, bottomRow-100, squareSize, squareSize ));
+        walls.add(new Wall(1850, bottomRow-50, squareSize, squareSize ));
 
     }
 
