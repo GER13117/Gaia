@@ -48,14 +48,26 @@ public class GamePanel extends JPanel implements ActionListener {
         walls.add(new Wall(50, 500, 50, 50));
         walls.add(new Wall(50, 450, 50, 50));
 
-        walls.add(new Wall(600, 500, 50, 50));
-        walls.add(new Wall(600, 550, 50, 50));
+        //middle walls frome left to right
         walls.add(new Wall(450, 550, 50, 50));
 
+        walls.add(new Wall(600, 500, 50, 50));
+        walls.add(new Wall(600, 550, 50, 50));
+
+        walls.add(new Wall(650, 550, squareSize, squareSize));
+        walls.add(new Wall(650, 500, squareSize, squareSize));
+        walls.add(new Wall(650, 450, squareSize, squareSize));
+
+        walls.add(new Wall(700, 500, 50, 50));
+        walls.add(new Wall(700, 550, 50, 50));
+
+        walls.add(new Wall(750, 550, 50, 50));
+
+
         //right endwall
-        walls.add(new Wall(1820, 450, squareSize, squareSize ));
-        walls.add(new Wall(1820, 500, squareSize, squareSize ));
-        walls.add(new Wall(1820, 550, squareSize, squareSize ));
+        walls.add(new Wall(1850, 450, squareSize, squareSize ));
+        walls.add(new Wall(1850, 500, squareSize, squareSize ));
+        walls.add(new Wall(1850, 550, squareSize, squareSize ));
 
     }
 
@@ -103,6 +115,5 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-
     }
 }
