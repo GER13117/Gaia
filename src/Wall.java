@@ -1,5 +1,7 @@
 import javax.swing.ImageIcon;
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
 
 
 public class Wall {
@@ -25,12 +27,7 @@ public class Wall {
 
 
     public void draw(Graphics2D gtd) {
-        gtd.setColor(Color.BLACK);
-        gtd.drawRect(x, y, width, height);
-        gtd.setColor(Color.WHITE);
-        gtd.fillRect(x+1,y+1,width-2,height-2);
+        gtd.drawImage(wall, x, y, null);
     }
-
-
 
 }
