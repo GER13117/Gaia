@@ -3,7 +3,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class Gaia {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
-        frame.setSize(700,700);
+        frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setTitle("Gaia");
@@ -12,7 +12,7 @@ public class Gaia {
     }
 }
 
-//TODO: Zweiter Spieler
+
 //TODO: Texturen und Animationen
 //TODO: Terrain Generation
 //TODO: Schlagen, bauen
