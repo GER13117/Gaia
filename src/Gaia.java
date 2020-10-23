@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Gaia {
@@ -13,3 +11,9 @@ public class Gaia {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
+
+//TODO: Zweiter Spieler
+//TODO: Texturen und Animationen
+//TODO: Terrain Generation
+//TODO: Schlagen, bauen
+//TODO: Gegner
