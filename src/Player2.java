@@ -103,7 +103,8 @@ public class Player2 {
         }
 
 
-        panel.cameraX -= xspeed;
+        panel.cameraX -= xspeed; //Bindet Kamerageschwindigkeit
+        //x += xspeed;
         y += yspeed;
 
         //Death Code

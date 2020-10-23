@@ -1,4 +1,6 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class Player {
 
@@ -100,9 +102,10 @@ public class Player {
 
         }
 
-
-        panel.cameraX -= xspeed;
+        panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
+        //x += xspeed;
         y += yspeed;
+        System.out.println(xspeed);
 
         //Death Code
         if(y > 1500) panel.reset1();
