@@ -9,6 +9,9 @@ public class Wall {
     int y;
     int width;
     int height;
+    //sichert Postion zu den anderen Blöcken
+    int startX;
+
     private Image wall;
 
     Rectangle hitBox;
@@ -17,6 +20,7 @@ public class Wall {
 
         this.x = x;
         this.y = y;
+        startX = x;
         this.width = width;
         this.height = height;
         ImageIcon iconWall = new ImageIcon("wall.png");
@@ -28,6 +32,14 @@ public class Wall {
 
     public void draw(Graphics2D gtd) {
         gtd.drawImage(wall, x, y, null);
+    }
+
+    public int set(int cameraX){
+        x = startX + cameraX;
+        hitBox.x = x;
+
+        return x;
+
     }
 
 }

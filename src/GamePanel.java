@@ -12,6 +12,10 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer gameTimer;
     Player2 player2;
     ArrayList<Wall> walls = new ArrayList<>();
+    //Variablen zum Definieren der Kamerposition
+    int cameraX;
+
+    //Fenstergröße für vereinfachte verwendung
     int windowHeight = 1080;
     int windowWidth = 1920;
 
@@ -30,6 +34,9 @@ public class GamePanel extends JPanel implements ActionListener {
             public void run() {
                 player.set();
                 player2.set();
+                for( Wall wall: walls){
+                    wall.set(cameraX);
+                }
                 repaint();
 
             }
@@ -41,6 +48,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void reset1(){
         player.x = 200;
         player.y = 150;
+        cameraX = (150 + player2.x) / 2;
         player.xspeed = 0;
         player.yspeed = 0;
         walls.clear();
@@ -51,6 +59,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void reset2(){
         player2.x = 300;
         player2.y = 150;
+        cameraX = (player.x + 150) / 2;
         player2.xspeed = 0;
         player2.yspeed = 0;
         walls.clear();

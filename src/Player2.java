@@ -81,8 +81,9 @@ public class Player2 {
                     hitBox.x += Math.signum(xspeed);//TODO: Googlen wie signum funktioniert
                 }
                 hitBox.x -= Math.signum(xspeed);
+                panel.cameraX += x - hitBox.x;
                 xspeed = 0;
-                x = hitBox.x;
+                hitBox.x = x;
             }
 
         }
@@ -102,7 +103,7 @@ public class Player2 {
         }
 
 
-        x += xspeed;
+        panel.cameraX -= xspeed;
         y += yspeed;
 
         //Death Code
@@ -117,5 +118,7 @@ public class Player2 {
 
         gtd.setColor(Color.BLACK);
         gtd.fillRect(x, y, width, height);
+
+
     }
 }

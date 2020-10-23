@@ -5,6 +5,7 @@ public class Player {
     int x;
     int y;
     GamePanel panel;
+    Wall wall;
     int width;
     int height;
     //Velocities of the player
@@ -100,7 +101,7 @@ public class Player {
         }
 
 
-        x += xspeed;
+        panel.cameraX -= xspeed;
         y += yspeed;
 
         //Death Code
