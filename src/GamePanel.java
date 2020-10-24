@@ -118,6 +118,29 @@ public class GamePanel extends JPanel implements ActionListener {
                 walls.add(new Wall((offset+ 36*50), bottomRow-150, s, s, imageWall));
                 for(int i=36; i<= 39; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s, imageWall));
                 walls.add(new Wall((offset+ 39*50), bottomRow-50, s, s, imageWall));
+                walls.add(new Wall((offset+ 14*50), bottomRow-250, s, s, imageWall));
+                walls.add(new Wall((offset+ 26*50), bottomRow-400, s, s, imageWall));
+
+                //Stone
+                for(int i=4; i<= 8; i++) walls.add(new Wall((offset+ i*50), bottomRow-50, s, s, imageStone));
+                for(int i=15; i<= 38; i++) walls.add(new Wall((offset+ i*50), bottomRow-50, s, s, imageStone));
+                walls.add(new Wall((offset+ 5*50), bottomRow-100, s, s, imageStone));
+                for(int i=16; i<= 19; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s, imageStone));
+                for(int i=24; i<= 35; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s, imageStone));
+                for(int i=17; i<= 18; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, imageStone));
+                for(int i=26; i<= 35; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, imageStone));
+                walls.add(new Wall((offset+ 21*50), bottomRow-200, s, s, imageStone));
+                for(int i=27; i<= 29; i++) walls.add(new Wall((offset+ i*50), bottomRow-200, s, s, imageStone));
+                for(int i=21; i<= 24; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, imageStone));
+                for(int i=27; i<= 28; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, imageStone));
+                for(int i=16; i<= 21; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, imageStone));
+                walls.add(new Wall((offset+ 20*50), bottomRow-350, s, s, imageStone));
+
+
+
+
+
+
 
 
 
