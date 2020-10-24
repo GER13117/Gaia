@@ -17,9 +17,12 @@ public class GamePanel extends JPanel implements ActionListener {
     int cameraX;
     int offset;
 
-    //Fenstergröße für vereinfachte verwendung
-    int windowHeight = 1080;
+    // gerundete Fenstergröße für vereinfachte verwendung
+    int windowHeight = 1100;//1100, da bei 1080 immer 20 px verschiebung war
     int windowWidth = 1920;
+
+    //Import Images for the different solids
+
 
 
     public GamePanel(){
