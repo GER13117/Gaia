@@ -12,14 +12,17 @@ import java.util.TimerTask;
 public class GamePanel extends JPanel implements ActionListener {
     Player player;
     Timer gameTimer;
+    //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
     int cameraX;
     int offset;
+    int s = 50;
 
     // gerundete Fenstergröße für vereinfachte verwendung
     int windowHeight = 1100;//1100, da bei 1080 immer 20 px verschiebung war
     int windowWidth = 1920;
+    int bottomRow = windowHeight - 150;
 
     //Import Images for the different solids
     String imageWall = "wall.png"; //Placeholder
@@ -76,11 +79,13 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void makeWalls(int offset) {
-        int s = 50;
-        int bottomRow = windowHeight - 150;
+
+
         Random rand = new Random();
         int index = rand.nextInt(2);
         System.out.println(index);
+        //biomes = new Biomes();
+
 
         switch (index){
             case 0:
@@ -90,6 +95,8 @@ public class GamePanel extends JPanel implements ActionListener {
                 walls.add(new Wall((offset+ 3*50), (bottomRow-150), s, s, imageWall));
             break;
             case 1:
+                //biomes.Mountain1();
+
                 //BottomLayer Texture: Stone
                 for(int i=0; i<40; i++) {
                     walls.add(new Wall((offset + i*50), bottomRow, s, s, imageStone));
@@ -135,10 +142,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 for(int i=27; i<= 28; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, imageStone));
                 for(int i=16; i<= 21; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, imageStone));
                 walls.add(new Wall((offset+ 20*50), bottomRow-350, s, s, imageStone));
-
-
-
-
 
 
 
