@@ -100,6 +100,7 @@ public class GamePanel extends JPanel implements ActionListener {
             break;
             case 1:
                 //for-Schleife mit dem Aufbau
+            break;
             default:
                 for(int i=0; i<40; i++) {
                     walls.add(new Wall((offset + i*50), bottomRow, s, s));
@@ -159,11 +160,14 @@ public class GamePanel extends JPanel implements ActionListener {
         if(e.getKeyChar() == 'd') player.keyRight = true;
         if(e.getKeyChar() == 'w') player.keyUp = true;
         if(e.getKeyChar() == 's') player.keyLeft = true;
+        //respawn
+        if(e.getKeyChar() == 'r') reset1();
         //movement player 2
         if(e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
         if(e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
         if(e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
         if(e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = true;
+        if(e.getKeyCode() == KeyEvent.VK_NUMPAD7) reset2();
 
     }
 

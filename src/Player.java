@@ -65,13 +65,13 @@ public class Player {
             hitBox.y ++;
             for(Wall wall: panel.walls){
                 if(wall.hitBox.intersects(hitBox)){
-                    yspeed = -6;//deaktiviert fliegen
+                    yspeed = -11;//deaktiviert fliegen
                 }
             }
             hitBox.y --;
         }
 
-        yspeed +=0.3;
+        yspeed +=0.5;
 
         //horizontale Kolllision
         hitBox.x += xspeed;
