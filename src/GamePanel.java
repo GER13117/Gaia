@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 if(walls.get(walls.size() - 1).x < (windowWidth + 100) ){
                     offset += windowWidth;
                     makeWalls(offset);
-                    System.out.println(walls.size());
+                    //System.out.println(walls.size()); //prints the amount of generated walls
 
                 }
 
@@ -89,18 +89,30 @@ public class GamePanel extends JPanel implements ActionListener {
         int s = 50;
         int bottomRow = windowHeight - 100;
         Random rand = new Random();
-        int index = rand.nextInt(1);
+        int index = rand.nextInt(2);
+        System.out.println(index);
 
         switch (index){
             case 0:
                 for(int i=0; i<40; i++) {
                     walls.add(new Wall((offset + i*50), bottomRow, s, s));
-                    walls.add(new Wall((offset+ 3*50), (bottomRow-150), s, s));
                 }
+                walls.add(new Wall((offset+ 3*50), (bottomRow-150), s, s));
             break;
             case 1:
-                //for-Schleife mit dem Aufbau
-            break;
+                //BottomLayer Texture Stone
+                for(int i=0; i<40; i++) {
+                    walls.add(new Wall((offset + i*50), bottomRow, s, s));
+                }
+                //Grass
+                for(int i=2; i<= 4; i++) walls.add(new Wall((offset+ i*50), bottomRow-50, s, s));
+                walls.add(new Wall((offset+ 4*50), (bottomRow-100), s, s));
+                for(int i=4; i<= 6; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s));
+                for(int i=6; i<= 9; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s));
+
+
+
+                break;
             default:
                 for(int i=0; i<40; i++) {
                     walls.add(new Wall((offset + i*50), bottomRow, s, s));

@@ -82,6 +82,7 @@ public class Player {
                     hitBox.x += Math.signum(xspeed);//TODO: Googlen wie signum funktioniert
                 }
                 hitBox.x -= Math.signum(xspeed);
+                panel.cameraX += x - hitBox.x;
                 xspeed = 0;
                 hitBox.x = x;
             }
@@ -96,7 +97,6 @@ public class Player {
                     hitBox.y += Math.signum(yspeed);
                 }
                 hitBox.y -= Math.signum(yspeed);
-                panel.cameraX += x - hitBox.x;
                 yspeed = 0;
                 y = hitBox.y;
             }
