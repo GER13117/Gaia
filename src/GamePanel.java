@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +16,7 @@ public class GamePanel extends JPanel implements ActionListener {
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
     int cameraX;
+    int offset;
 
     //Fenstergröße für vereinfachte verwendung
     int windowHeight = 1080;
@@ -33,11 +35,26 @@ public class GamePanel extends JPanel implements ActionListener {
         gameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
+                //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
+                if(walls.get(walls.size() - 1).x < (windowWidth + 100) ){
+                    offset += windowWidth;
+                    makeWalls(offset);
+                    System.out.println(walls.size());
+
+                }
+
                 player.set();
                 player2.set();
                 for( Wall wall: walls){
                     wall.set(cameraX);
                 }
+                //entfernt walls außerhalb des Bildschirms
+                for(int i = 0; i<walls.size(); i++){
+                    if(walls.get(i).x < -windowWidth){
+                        walls.remove(i);
+                    }
+                }
+
                 repaint();
 
             }
@@ -53,7 +70,7 @@ public class GamePanel extends JPanel implements ActionListener {
         player.xspeed = 0;
         player.yspeed = 0;
         walls.clear();
-        int offset = 50;
+        offset = -150;
         makeWalls(offset);
     }
 
@@ -64,17 +81,36 @@ public class GamePanel extends JPanel implements ActionListener {
         player2.xspeed = 0;
         player2.yspeed = 0;
         walls.clear();
-        int offset = 50;
+        offset = -150;
         makeWalls(offset);
     }
 
     public void makeWalls(int offset) {
-        int squareSize = 50;
+        int s = 50;
+        int bottomRow = windowHeight - 100;
+        Random rand = new Random();
+        int index = rand.nextInt(1);
+
+        switch (index){
+            case 0:
+                for(int i=0; i<40; i++) {
+                    walls.add(new Wall((offset + i*50), bottomRow, s, s));
+                }
+            case 1:
+                //for-Schleife mit dem Aufbau
+            default:
+                for(int i=0; i<40; i++) {
+                    walls.add(new Wall((offset + i*50), bottomRow, s, s));
+                }
+
+        }
+        /*
+        //Altes Test Terrain
         for(int i = 50; i < windowWidth-50; i += 50){
             walls.add(new Wall(i, windowHeight-80, 50, 50));
 
         }
-        int bottomRow = windowHeight - 80;
+
         //Left endwall
         walls.add(new Wall(50, bottomRow-50, 50, 50));
 
@@ -84,9 +120,9 @@ public class GamePanel extends JPanel implements ActionListener {
         walls.add(new Wall(600, bottomRow-100, 50, 50));
         walls.add(new Wall(600, bottomRow-50, 50, 50));
 
-        walls.add(new Wall(650, bottomRow-50, squareSize, squareSize));
-        walls.add(new Wall(650, bottomRow-100, squareSize, squareSize));
-        walls.add(new Wall(650, bottomRow-150, squareSize, squareSize));
+        walls.add(new Wall(650, bottomRow-50, s, s));
+        walls.add(new Wall(650, bottomRow-100, s, s));
+        walls.add(new Wall(650, bottomRow-150, s, s));
 
         walls.add(new Wall(700, bottomRow-100, 50, 50));
         walls.add(new Wall(700, bottomRow-50, 50, 50));
@@ -95,10 +131,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
         //right endwall
-        walls.add(new Wall(1850, bottomRow-150, squareSize, squareSize ));
-        walls.add(new Wall(1850, bottomRow-100, squareSize, squareSize ));
-        walls.add(new Wall(1850, bottomRow-50, squareSize, squareSize ));
-
+        walls.add(new Wall(1850, bottomRow-100, s, s ));
+        walls.add(new Wall(1850, bottomRow-50, s, s ));
+        */
     }
 
     public void paint(Graphics g){

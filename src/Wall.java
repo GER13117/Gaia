@@ -20,7 +20,7 @@ public class Wall {
 
         this.x = x;
         this.y = y;
-        startX = x;
+        startX = x;//StartX wird am Anfang einmal festgelegt
         this.width = width;
         this.height = height;
         ImageIcon iconWall = new ImageIcon("wall.png");

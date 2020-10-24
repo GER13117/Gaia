@@ -83,7 +83,7 @@ public class Player {
                 }
                 hitBox.x -= Math.signum(xspeed);
                 xspeed = 0;
-                x = hitBox.x;
+                hitBox.x = x;
             }
 
         }
@@ -96,6 +96,7 @@ public class Player {
                     hitBox.y += Math.signum(yspeed);
                 }
                 hitBox.y -= Math.signum(yspeed);
+                panel.cameraX += x - hitBox.x;
                 yspeed = 0;
                 y = hitBox.y;
             }
@@ -105,7 +106,8 @@ public class Player {
         panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
         //x += xspeed;
         y += yspeed;
-        System.out.println(xspeed);
+
+        //System.out.println(xspeed); //prints velocity needed for bugfixing
 
         //Death Code
         if(y > 1500) panel.reset1();
