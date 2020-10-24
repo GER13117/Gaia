@@ -1,11 +1,13 @@
+import javax.swing.JFrame;
+
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 
 public class Gaia {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
-        frame.setSize(1920, 1080);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
-
 
         frame.setResizable(true);
 
@@ -17,6 +19,7 @@ public class Gaia {
 
 
 //TODO: Texturen und Animationen
+//TODO: Texturen über GamePanel in die Blöcke
 //TODO: weitere Blöcke / Materialien hinzufügen
 //TODO: Terrain: Verschiedene Gelände länge minimum 40 blöcke
 //TODO: Fix Movement der Spieler
