@@ -50,11 +50,11 @@ public class Player {
             xspeed = 0;
         }
 
-        if(xspeed > 7){
-            xspeed = 7;
+        if(xspeed > 8){
+            xspeed = 8;
         }
-        if(xspeed < -7){
-            xspeed = -7;
+        if(xspeed < -8){
+            xspeed = -8;
         }
 
         //Gravitation und un Kollision

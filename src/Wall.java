@@ -16,14 +16,14 @@ public class Wall {
 
     Rectangle hitBox;
 
-    public Wall(int x, int y, int width, int height){
+    public Wall(int x, int y, int width, int height, String imageWall){
 
         this.x = x;
         this.y = y;
         startX = x;//StartX wird am Anfang einmal festgelegt
         this.width = width;
         this.height = height;
-        ImageIcon iconWall = new ImageIcon("wall.png");
+        ImageIcon iconWall = new ImageIcon(imageWall);
         wall = iconWall.getImage();
 
         hitBox = new Rectangle(x, y, width, height);
