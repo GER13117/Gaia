@@ -65,7 +65,7 @@ public class Player {
             hitBox.y ++;
             for(Wall wall: panel.walls){
                 if(wall.hitBox.intersects(hitBox)){
-                    yspeed = -11;//deaktiviert fliegen
+                    yspeed = -11;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
                 }
             }
             hitBox.y --;

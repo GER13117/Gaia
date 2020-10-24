@@ -12,7 +12,6 @@ import java.util.TimerTask;
 public class GamePanel extends JPanel implements ActionListener {
     Player player;
     Timer gameTimer;
-    Player2 player2;
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
     int cameraX;
@@ -26,7 +25,6 @@ public class GamePanel extends JPanel implements ActionListener {
     public GamePanel(){
         //einfügen des Spiel-Objekts
         player = new Player(400,300,this);
-        player2 = new Player2(500, 300, this);
 
         reset1();
 
@@ -44,7 +42,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
                 player.set();
-                player2.set();
                 for( Wall wall: walls){
                     wall.set(cameraX);
                 }
@@ -64,9 +61,9 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void reset1(){
-        player.x = 200;
+        player.x = 300;
         player.y = 150;
-        cameraX = (150 + player2.x) / 2;
+        cameraX = 150;
         player.xspeed = 0;
         player.yspeed = 0;
         walls.clear();
@@ -74,16 +71,6 @@ public class GamePanel extends JPanel implements ActionListener {
         makeWalls(offset);
     }
 
-    public void reset2(){
-        player2.x = 300;
-        player2.y = 150;
-        cameraX = (player.x + 150) / 2;
-        player2.xspeed = 0;
-        player2.yspeed = 0;
-        walls.clear();
-        offset = -150;
-        makeWalls(offset);
-    }
 
     public void makeWalls(int offset) {
         int s = 50;
@@ -175,7 +162,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
         Graphics2D gtd = (Graphics2D) g;
         player.draw(gtd);
-        player2.draw(gtd);
 
         for(Wall wall: walls){
             wall.draw(gtd);
@@ -193,12 +179,6 @@ public class GamePanel extends JPanel implements ActionListener {
         if(e.getKeyChar() == 's') player.keyLeft = true;
         //respawn
         if(e.getKeyChar() == 'r') reset1();
-        //movement player 2
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
-        if(e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
-        if(e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = true;
-        if(e.getKeyCode() == KeyEvent.VK_NUMPAD7) reset2();
 
     }
 
@@ -208,11 +188,6 @@ public class GamePanel extends JPanel implements ActionListener {
         if(e.getKeyChar() == 'd') player.keyRight = false;
         if(e.getKeyChar() == 'w') player.keyUp = false;
         if(e.getKeyChar() == 's') player.keyLeft = false;
-        //stop movement player2
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = false;
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = false;
-        if(e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = false;
-        if(e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = false;
     }
 
     @Override
