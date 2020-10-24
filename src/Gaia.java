@@ -17,7 +17,11 @@ public class Gaia {
 
 
 //TODO: Texturen und Animationen
-//TODO: Terrain Generation
+//TODO: weitere Blöcke / Materialien hinzufügen
+//TODO: Terrain: Verschiedene Gelände länge minimum 40 blöcke
+//TODO: Fix Movement der Spieler
 //TODO: Schlagen, bauen
 //TODO: Gegner
 //TODO: Waterblock
+
+//TODO: Warum werden immer mehr Blöcke gespeichert

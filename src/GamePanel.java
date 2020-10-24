@@ -95,7 +95,9 @@ public class GamePanel extends JPanel implements ActionListener {
             case 0:
                 for(int i=0; i<40; i++) {
                     walls.add(new Wall((offset + i*50), bottomRow, s, s));
+                    walls.add(new Wall((offset+ 3*50), (bottomRow-150), s, s));
                 }
+            break;
             case 1:
                 //for-Schleife mit dem Aufbau
             default:
