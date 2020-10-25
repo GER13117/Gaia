@@ -26,3 +26,4 @@ public class Gaia {
 //TODO: Gegner
 //TODO: Waterblock
 //TODO: Bunnyhop in schön
+//TODO: Change music to wav
