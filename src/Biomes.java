@@ -7,7 +7,6 @@ public class Biomes extends Thread {
     String imageWall = "wall.png"; //Placeholder
     String imageStone = "stone.png"; //Placeholder
 
-
     public void Mountain1(){
         panel = new GamePanel();
         //BottomLayer Texture: Stone

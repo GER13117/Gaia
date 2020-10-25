@@ -25,12 +25,13 @@ public class GamePanel extends JPanel implements ActionListener {
     int bottomRow = windowHeight - 150;
 
     //Import Images for the different solids
-    String imageWall = "wall.png"; //Placeholder
-    String imageStone = "stone.png"; //Placeholder
+    String imageWall = "res/textures/wall.png"; //Placeholder
+    String imageStone = "res/textures/stone.png"; //Placeholder
 
 
     public GamePanel(){
-        //einfügen des Spiel-Objekts
+        music();
+        //einfügen des Spieler-Objekts
         player = new Player(400,300,this);
 
         reset1();
@@ -222,4 +223,28 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
     }
+    public static void music(){
+        Random rand = new Random();
+        int index = rand.nextInt(3);
+        String filepath;
+        switch (index){
+            case 0:
+                filepath = "res/Music/far-from-the-world.mp3";
+                break;
+            case 1:
+                filepath = "res/Music/impavid.mp3";
+                break;
+            case 2:
+                filepath = "res/Music/mountains.mp3";
+                break;
+            default:
+                filepath = "Music/song1.wav"; //Einfach irgendein Path es wird so oder so ein error geschmissen
+        }
+
+        MusicStuff musicObject;
+        musicObject = new MusicStuff();
+        musicObject.playMusic(filepath);
+    }
+
+
 }
