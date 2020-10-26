@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener {
     int bottomRow = windowHeight - 150;
 
     //Import Images for the different solids
-    String imageWall = "res/textures/wall.png"; //Placeholder
+    String imageWall = "res/textures/gras.png"; //Placeholder
     String imageStone = "res/textures/stone.png"; //Placeholder
 
 
