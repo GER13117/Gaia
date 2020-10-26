@@ -206,7 +206,7 @@ public class GamePanel extends JPanel implements ActionListener {
         if(e.getKeyChar() == 'a') player.keyLeft = true;
         if(e.getKeyChar() == 'd') player.keyRight = true;
         if(e.getKeyChar() == 'w') player.keyUp = true;
-        if(e.getKeyChar() == 's') player.keyLeft = true;
+
         //respawn
         if(e.getKeyChar() == 'r') reset1();
 
@@ -217,7 +217,7 @@ public class GamePanel extends JPanel implements ActionListener {
         if(e.getKeyChar() == 'a') player.keyLeft = false;
         if(e.getKeyChar() == 'd') player.keyRight = false;
         if(e.getKeyChar() == 'w') player.keyUp = false;
-        if(e.getKeyChar() == 's') player.keyLeft = false;
+
     }
 
     @Override
