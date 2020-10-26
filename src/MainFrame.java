@@ -6,7 +6,8 @@ public class MainFrame extends JFrame {
         GamePanel panel = new GamePanel();
         panel.setLocation(0,0);
         panel.setSize(this.getSize());
-        panel.setBackground(Color.LIGHT_GRAY);
+        Color skyPlaceholder =new Color (78,147,202);
+        panel.setBackground(skyPlaceholder);
         panel.setVisible(true);
         this.add(panel);
 
