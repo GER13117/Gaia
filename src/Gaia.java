@@ -19,11 +19,12 @@ public class Gaia {
 
 
 //TODO: Texturen und Animationen
+//TODO: SpriteSheet Stein
+//TODO: Alte PNGs löschen und durch SpriteSheet ersetzen
 //TODO: weitere Blöcke / Materialien hinzufügen
 //TODO: Terrain: Verschiedene Gelände länge minimum 40 blöcke
-//TODO: Fix Movement der Spieler
+//TODO: 2. Spieler hinzufügen? oder zweiten PVP Modus
+//TODO: Menü (Möglichkeit die Lautstärke einzustellen)
 //TODO: Schlagen, bauen
 //TODO: Gegner
 //TODO: Waterblock
-//TODO: Bunnyhop in schön
-//TODO: Change music to wav
