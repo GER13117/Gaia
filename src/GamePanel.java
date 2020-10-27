@@ -12,17 +12,20 @@ import java.util.TimerTask;
 public class GamePanel extends JPanel implements ActionListener {
     Player player;
     Timer gameTimer;
+    ImprovedNoise improvedNoise;
+
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
     int cameraX;
+    int cameraY;
     int offset;
     int s = 50;
 
     // gerundete Fenstergröße für vereinfachte verwendung
     int windowHeight = 1100;//1100, da bei 1080 immer 20 px verschiebung war
     int windowWidth = 1920;
-    int bottomRow = windowHeight - 150;
+    int bottomRow = windowHeight - 100;
 
     //Import Images for the different solids
     String imageWall = "res/textures/gras.png"; //Placeholder
@@ -50,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
                 }
                 for( Wall wall: walls){
-                    wall.set(cameraX);
+                    wall.set(cameraX, cameraY);
                 }
                 //entfernt walls außerhalb des Bildschirms
                 for(int i = 0; i<walls.size(); i++){
@@ -71,6 +74,7 @@ public class GamePanel extends JPanel implements ActionListener {
         player.x = 300;
         player.y = 150;
         cameraX = 150;
+        cameraY = 500;
         player.xspeed = 0;
         player.yspeed = 0;
         walls.clear();
@@ -80,7 +84,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void makeWalls(int offset) {
-
+        improvedNoise = new ImprovedNoise();
 
         Random rand = new Random();
         int index = rand.nextInt(2);
@@ -143,12 +147,15 @@ public class GamePanel extends JPanel implements ActionListener {
                 for(int i=27; i<= 28; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, imageStone));
                 for(int i=16; i<= 21; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, imageStone));
                 walls.add(new Wall((offset+ 20*50), bottomRow-350, s, s, imageStone));
-
-
-
-
-
                 break;
+            /*case 0:
+                for (double i = 0; i < 40; i+= 0.02){
+                    double terrainHeight = improvedNoise.noise(i) * 100;
+                    int rTerrainHeight = ((int) terrainHeight)*25;
+                    walls.add(new Wall((int)(offset + (i*50*50)), bottomRow- rTerrainHeight,s,s, imageWall));
+                    System.out.println(rTerrainHeight);
+                }
+                break;*/
             default:
                 for(int i=0; i<40; i++) {
                     walls.add(new Wall((offset + i*50), bottomRow, s, s, imageWall));

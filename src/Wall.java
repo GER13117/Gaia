@@ -11,6 +11,7 @@ public class Wall {
     int height;
     //sichert Postion zu den anderen Blöcken
     int startX;
+    int startY;
 
     private Image wall;
 
@@ -20,7 +21,8 @@ public class Wall {
 
         this.x = x;
         this.y = y;
-        startX = x;//StartX wird am Anfang einmal festgelegt
+        startX = x;
+        startY = y;//StartX wird am Anfang einmal festgelegt
         this.width = width;
         this.height = height;
         ImageIcon iconWall = new ImageIcon(imageWall);
@@ -34,9 +36,11 @@ public class Wall {
         gtd.drawImage(wall, x, y, null);
     }
 
-    public int set(int cameraX){
+    public int set(int cameraX, int cameraY){
         x = startX + cameraX;
         hitBox.x = x;
+        /*y = startY + cameraY;
+        hitBox.y = y;*/
 
         return x;
 
