@@ -91,14 +91,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void makeWalls(int offset) {
-        /*loader = new BufferedImageLoader();
+        loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("res/textures/gras_dirt_sprite.png");
+            spriteSheet = loader.loadImage("gras_dirt_sprite.png");
         }catch (IOException e){
             e.printStackTrace();
         }
         ss = new SpriteSheet(spriteSheet);
-        BufferedImage grasLeft = ss.grabImage(1,1, s, s);*/
+        BufferedImage grasLeft = ss.grabImage(1,1, s, s);
 
         //improvedNoise = new ImprovedNoise();
 
