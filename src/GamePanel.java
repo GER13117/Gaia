@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -30,6 +32,9 @@ public class GamePanel extends JPanel implements ActionListener {
     //Import Images for the different solids
     String imageWall = "res/textures/gras.png"; //Placeholder
     String imageStone = "res/textures/stone.png"; //Placeholder
+    private BufferedImage spriteSheet;
+
+
 
 
     public GamePanel(){
@@ -84,7 +89,17 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void makeWalls(int offset) {
-        improvedNoise = new ImprovedNoise();
+        BufferedImageLoader loader = new BufferedImageLoader();
+        try{
+            spriteSheet = loader.loadImage("res/textures/gras_dirt_sprite.png");
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        SpriteSheet ss = new SpriteSheet(spriteSheet);
+        BufferedImage grasLeft = ss.grabImage(1,1, s, s);
+
+        //improvedNoise = new ImprovedNoise();
 
         Random rand = new Random();
         int index = rand.nextInt(2);
