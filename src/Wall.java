@@ -2,6 +2,7 @@ import javax.swing.ImageIcon;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 
 public class Wall {
@@ -17,7 +18,7 @@ public class Wall {
 
     Rectangle hitBox;
 
-    public Wall(int x, int y, int width, int height, String imageWall){
+    public Wall(int x, int y, int width, int height, BufferedImage imageWall){
 
         this.x = x;
         this.y = y;
