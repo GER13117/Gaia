@@ -32,7 +32,9 @@ public class GamePanel extends JPanel implements ActionListener {
     //Import Images for the different solids
     String imageWall = "res/textures/gras.png"; //Placeholder
     String imageStone = "res/textures/stone.png"; //Placeholder
-    private BufferedImage spriteSheet;
+    private BufferedImage spriteSheet = null;
+    SpriteSheet ss;
+    BufferedImageLoader loader;
 
 
 
@@ -89,15 +91,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void makeWalls(int offset) {
-        BufferedImageLoader loader = new BufferedImageLoader();
+        /*loader = new BufferedImageLoader();
         try{
             spriteSheet = loader.loadImage("res/textures/gras_dirt_sprite.png");
-
         }catch (IOException e){
             e.printStackTrace();
         }
-        SpriteSheet ss = new SpriteSheet(spriteSheet);
-        BufferedImage grasLeft = ss.grabImage(1,1, s, s);
+        ss = new SpriteSheet(spriteSheet);
+        BufferedImage grasLeft = ss.grabImage(1,1, s, s);*/
 
         //improvedNoise = new ImprovedNoise();
 
@@ -257,7 +258,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 filepath = "res/Music/impavid.wav";
                 break;
             case 2:
-                filepath = "res/Music/mountains.wav";
+                filepath = "res/Music/mountains-past.wav";
                 break;
             default:
                 filepath = "Music/song1.wav"; //Einfach irgendein Path es wird so oder so ein error geschmissen
