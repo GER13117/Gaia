@@ -98,12 +98,12 @@ public class GamePanel extends JPanel implements ActionListener {
         ss = new SpriteSheet(spriteSheet);
         BufferedImage grasLeft = ss.grabImage(1,1, s, s);
         BufferedImage dirt = ss.grabImage(2,2 ,s,s);
+        BufferedImage gras = ss.grabImage(2,1,s,s);
         //improvedNoise = new ImprovedNoise();
 
         Random rand = new Random();
         int index = rand.nextInt(2);
         System.out.println(index);
-        //biomes = new Biomes();
 
 
         switch (index){
