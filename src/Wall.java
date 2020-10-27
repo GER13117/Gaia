@@ -43,7 +43,6 @@ public class Wall {
         hitBox.y = y;*/
 
         return x;
-
     }
 
 }

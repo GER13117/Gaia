@@ -236,13 +236,13 @@ public class GamePanel extends JPanel implements ActionListener {
         String filepath;
         switch (index){
             case 0:
-                filepath = "res/Music/far-from-the-world.mp3";
+                filepath = "res/Music/far-from-the-world.wav";
                 break;
             case 1:
-                filepath = "res/Music/impavid.mp3";
+                filepath = "res/Music/impavid.wav";
                 break;
             case 2:
-                filepath = "res/Music/mountains.mp3";
+                filepath = "res/Music/mountains.wav";
                 break;
             default:
                 filepath = "Music/song1.wav"; //Einfach irgendein Path es wird so oder so ein error geschmissen
