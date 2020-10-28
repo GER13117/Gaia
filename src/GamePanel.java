@@ -26,12 +26,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
     // gerundete Fenstergröße für vereinfachte verwendung
     int windowHeight = 1100;//1100, da bei 1080 immer 20 px verschiebung war
-    int windowWidth = 1920;
+    int windowWidth = 2400;
     int bottomRow = windowHeight - 100;
 
     //Import Images for the different solids
     private BufferedImage spriteSheet = null;
+    private BufferedImage stonePlaceholder = null;
     SpriteSheet ss;
+    SpriteSheet stoneSheet;
     BufferedImageLoader loader;
 
 
@@ -89,9 +91,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void makeWalls(int offset) {
+
+        //improvedNoise = new ImprovedNoise();
         loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("gras_dirt_sprite.png");
+            spriteSheet = loader.loadImage("textures/gras_dirt_sprite.png");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -99,20 +103,104 @@ public class GamePanel extends JPanel implements ActionListener {
         BufferedImage grasLeft = ss.grabImage(1,1, s, s);
         BufferedImage dirt = ss.grabImage(2,2 ,s,s);
         BufferedImage gras = ss.grabImage(2,1,s,s);
-        //improvedNoise = new ImprovedNoise();
+        BufferedImage dirtLeftDown = ss.grabImage(1,3,s,s);
+        BufferedImage grasRight = ss.grabImage(3,1,s,s);
+        BufferedImage dirtRight = ss.grabImage(3,2,s,s);
+
+        try {
+            stonePlaceholder = loader.loadImage("textures/stone.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stoneSheet = new SpriteSheet(stonePlaceholder);
+        BufferedImage stone = stoneSheet.grabImage(1,1,s,s);
+
 
         Random rand = new Random();
-        int index = rand.nextInt(2);
+        int index = rand.nextInt(1);
         System.out.println(index);
 
 
         switch (index){
             case 0:
-                for(int i=0; i<40; i++) {
-                    walls.add(new Wall((offset + i*50), bottomRow, s, s, dirt));
+                for(int i=0; i<48; i++) {
+                    walls.add(new Wall((offset + i*50), bottomRow, s, s, stone));
                 }
-                walls.add(new Wall((offset+ 3*50), (bottomRow-150), s, s, grasLeft));
-            break;
+
+                walls.add(new Wall((offset+ 0*50), (bottomRow-50), s, s, grasLeft));
+                walls.add(new Wall((offset+ 1*50), (bottomRow-50), s, s, dirt));
+                walls.add(new Wall((offset+ 1*50), (bottomRow-100), s, s, grasLeft));
+                walls.add(new Wall((offset+ 2*50), (bottomRow-100), s, s, dirt));
+                walls.add(new Wall((offset+ 2*50), (bottomRow-150), s, s, dirtLeftDown));
+                walls.add(new Wall((offset+ 2*50), (bottomRow-200), s, s, grasLeft));
+                walls.add(new Wall((offset+ 3*50), (bottomRow-200), s, s, dirt));
+                walls.add(new Wall((offset+ 3*50), (bottomRow-250), s, s, grasLeft));
+                for(int i=4; i<= 5; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, gras));
+                walls.add(new Wall((offset+ 6*50), (bottomRow-250), s, s, grasRight));
+                walls.add(new Wall((offset+ 6*50), (bottomRow-200), s, s, dirt));
+                walls.add(new Wall((offset+ 7*50), (bottomRow-200), s, s, grasRight));
+                walls.add(new Wall((offset+ 7*50), (bottomRow-150), s, s, dirt));
+                walls.add(new Wall((offset+ 8*50), (bottomRow-150), s, s, gras));
+                walls.add(new Wall((offset+ 9*50), (bottomRow-150), s, s, dirt));
+                walls.add(new Wall((offset+ 9*50), (bottomRow-200), s, s, dirtLeftDown));
+                for(int i=10; i<= 11; i++) walls.add(new Wall((offset+ i*50), bottomRow-200, s, s, dirt));
+                walls.add(new Wall((offset+ 9*50), bottomRow-250, s, s, grasLeft));
+                for(int i=10; i<= 11; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, dirt));
+                walls.add(new Wall((offset+ 10*50), bottomRow-300, s, s, grasLeft));
+                for(int i=11; i<= 14; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, gras));
+                for(int i=15; i<= 18; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, dirt));
+                walls.add(new Wall((offset+ 15*50), bottomRow-350, s, s, grasLeft));
+                for(int i=16; i<= 17; i++) walls.add(new Wall((offset+ i*50), bottomRow-350, s, s, gras));
+                walls.add(new Wall((offset+ 18*50), bottomRow-350, s, s, grasRight));
+                walls.add(new Wall((offset+ 19*50), bottomRow-300, s, s, dirtRight));
+                walls.add(new Wall((offset+ 19*50), bottomRow-250, s, s, stone));
+                walls.add(new Wall((offset+ 19*50), bottomRow-200, s, s, stone));
+                walls.add(new Wall((offset+ 19*50), bottomRow-150, s, s, stone));
+                walls.add(new Wall((offset+ 19*50), bottomRow-100, s, s, stone));
+                walls.add(new Wall((offset+ 19*50), bottomRow-50, s, s, stone));
+                walls.add(new Wall((offset+ 21*50), bottomRow-50, s, s, stone));
+                walls.add(new Wall((offset+ 21*50), bottomRow-100, s, s, stone));
+                for(int i=21; i<= 22; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, stone));
+                walls.add(new Wall((offset+ 22*50), bottomRow-200, s, s, stone));
+                walls.add(new Wall((offset+ 22*50), bottomRow-250, s, s, grasLeft));
+                walls.add(new Wall((offset+ 23*50), bottomRow-250, s, s, dirt));
+                walls.add(new Wall((offset+ 23*50), bottomRow-300, s, s, grasLeft));
+                walls.add(new Wall((offset+ 24*50), bottomRow-300, s, s, gras));
+                for(int i=25; i<= 28; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, dirt));
+                for(int i=29; i<= 32; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, gras));
+                walls.add(new Wall((offset+ 33*50), bottomRow-300, s, s, grasRight));
+                for(int i=34; i<= 39; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, gras));
+                walls.add(new Wall((offset+ 40*50), bottomRow-250, s, s, grasRight));
+                walls.add(new Wall((offset+ 41*50), bottomRow-200, s, s, gras));
+                walls.add(new Wall((offset+ 42*50), bottomRow-200, s, s, grasRight));
+                for(int i=43; i<= 45; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, gras));
+                walls.add(new Wall((offset+ 46*50), bottomRow-150, s, s, grasRight));
+                walls.add(new Wall((offset+ 47*50), bottomRow-50, s, s, grasRight));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                break;
             case 1:
                 //biomes.Mountain1();
 
@@ -162,7 +250,8 @@ public class GamePanel extends JPanel implements ActionListener {
                 for(int i=16; i<= 21; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, dirt));
                 walls.add(new Wall((offset+ 20*50), bottomRow-350, s, s, dirt));
                 break;
-            /*case 0:
+
+            /*case 0: //Noise Terrain-Gen
                 for (double i = 0; i < 40; i+= 0.02){
                     double terrainHeight = improvedNoise.noise(i) * 100;
                     int rTerrainHeight = ((int) terrainHeight)*25;
