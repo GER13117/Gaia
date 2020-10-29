@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     //Import Images for the different solids
     private BufferedImage spriteSheet = null;
-    private BufferedImage stonePlaceholder = null;
+    private BufferedImage spriteSheetStone = null;
     SpriteSheet ss;
     SpriteSheet stoneSheet;
     BufferedImageLoader loader;
@@ -106,14 +106,17 @@ public class GamePanel extends JPanel implements ActionListener {
         BufferedImage dirtLeftDown = ss.grabImage(1,3,s,s);
         BufferedImage grasRight = ss.grabImage(3,1,s,s);
         BufferedImage dirtRight = ss.grabImage(3,2,s,s);
+        BufferedImage grasRightDown = ss.grabImage(3,3,s,s);
 
         try {
-            stonePlaceholder = loader.loadImage("textures/stone.png");
+            spriteSheetStone = loader.loadImage("textures/stone_sprite.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stoneSheet = new SpriteSheet(stonePlaceholder);
-        BufferedImage stone = stoneSheet.grabImage(1,1,s,s);
+        stoneSheet = new SpriteSheet(spriteSheetStone);
+        BufferedImage stone = stoneSheet.grabImage(2,1,s,s);
+        BufferedImage  stoneRight = stoneSheet.grabImage(3,1,s,s);
+        BufferedImage stoneLeft = stoneSheet.grabImage(1,1,s,s);
 
 
         Random rand = new Random();
@@ -124,10 +127,10 @@ public class GamePanel extends JPanel implements ActionListener {
         switch (index){
             case 0:
 
-                canyon(walls, offset, bottomRow, s, stone, grasLeft, dirt, gras, dirtLeftDown, grasRight, dirtRight);
+                canyon(walls, offset, bottomRow, s, stone, grasLeft, dirt, gras, dirtLeftDown, grasRight, dirtRight, stoneLeft, stoneRight, grasRightDown);
                 break;
             case 1:
-                smallHills1(walls, offset, bottomRow, s, stone, grasLeft, dirt, gras, dirtLeftDown, grasRight, dirtRight);
+                smallHills1(walls, offset, bottomRow, s, stone, grasLeft, dirt, gras, dirtLeftDown, grasRight, dirtRight, stoneLeft, stoneRight);
 
                 //BottomLayer Texture: Stone
 
@@ -238,7 +241,7 @@ public class GamePanel extends JPanel implements ActionListener {
         musicObject = new MusicStuff();
         musicObject.playMusic(filepath);
     }
-    private static void canyon(ArrayList<Wall> walls, int offset, int bottomRow, int s, BufferedImage stone, BufferedImage grasLeft, BufferedImage dirt, BufferedImage gras, BufferedImage dirtLeftDown, BufferedImage grasRight, BufferedImage dirtRight){
+    private static void canyon(ArrayList<Wall> walls, int offset, int bottomRow, int s, BufferedImage stone, BufferedImage grasLeft, BufferedImage dirt, BufferedImage gras, BufferedImage dirtLeftDown, BufferedImage grasRight, BufferedImage dirtRight, BufferedImage stoneLeft, BufferedImage stoneRight, BufferedImage grasRightDown){
         for(int i=0; i<50; i++) {
             walls.add(new Wall((offset + i*50), bottomRow, s, s, stone));
         }
@@ -269,15 +272,16 @@ public class GamePanel extends JPanel implements ActionListener {
         for(int i=16; i<= 17; i++) walls.add(new Wall((offset+ i*50), bottomRow-350, s, s, gras));
         walls.add(new Wall((offset+ 18*50), bottomRow-350, s, s, grasRight));
         walls.add(new Wall((offset+ 19*50), bottomRow-300, s, s, dirtRight));
-        walls.add(new Wall((offset+ 19*50), bottomRow-250, s, s, stone));
-        walls.add(new Wall((offset+ 19*50), bottomRow-200, s, s, stone));
-        walls.add(new Wall((offset+ 19*50), bottomRow-150, s, s, stone));
-        walls.add(new Wall((offset+ 19*50), bottomRow-100, s, s, stone));
-        walls.add(new Wall((offset+ 19*50), bottomRow-50, s, s, stone));
-        walls.add(new Wall((offset+ 21*50), bottomRow-50, s, s, stone));
-        walls.add(new Wall((offset+ 21*50), bottomRow-100, s, s, stone));
-        for(int i=21; i<= 22; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, stone));
-        walls.add(new Wall((offset+ 22*50), bottomRow-200, s, s, stone));
+        walls.add(new Wall((offset+ 19*50), bottomRow-250, s, s, stoneRight));
+        walls.add(new Wall((offset+ 19*50), bottomRow-200, s, s, stoneRight));
+        walls.add(new Wall((offset+ 19*50), bottomRow-150, s, s, stoneRight));
+        walls.add(new Wall((offset+ 19*50), bottomRow-100, s, s, stoneRight));
+        walls.add(new Wall((offset+ 19*50), bottomRow-50, s, s, stoneRight));
+        walls.add(new Wall((offset+ 21*50), bottomRow-50, s, s, stoneLeft));
+        walls.add(new Wall((offset+ 21*50), bottomRow-100, s, s, stoneLeft));
+        walls.add(new Wall((offset+ 21*50), bottomRow-150, s, s, stoneLeft));
+        walls.add(new Wall((offset+ 22*50), bottomRow-150, s, s, stone));
+        walls.add(new Wall((offset+ 22*50), bottomRow-200, s, s, stoneLeft));
         walls.add(new Wall((offset+ 22*50), bottomRow-250, s, s, grasLeft));
         walls.add(new Wall((offset+ 23*50), bottomRow-250, s, s, dirt));
         walls.add(new Wall((offset+ 23*50), bottomRow-300, s, s, grasLeft));
@@ -289,15 +293,20 @@ public class GamePanel extends JPanel implements ActionListener {
         for(int i=29; i<= 32; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, gras));
         walls.add(new Wall((offset+ 33*50), bottomRow-300, s, s, grasRight));
         for(int i=34; i<= 39; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, gras));
+        walls.add(new Wall((offset+ 33*50), bottomRow-250, s, s, dirt));
         walls.add(new Wall((offset+ 40*50), bottomRow-250, s, s, grasRight));
+        walls.add(new Wall((offset+ 40*50), bottomRow-200, s, s, dirt));
         walls.add(new Wall((offset+ 41*50), bottomRow-200, s, s, gras));
         walls.add(new Wall((offset+ 42*50), bottomRow-200, s, s, grasRight));
+        walls.add(new Wall((offset+ 42*50), bottomRow-150, s, s, dirt));
         for(int i=43; i<= 45; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, gras));
         walls.add(new Wall((offset+ 46*50), bottomRow-150, s, s, grasRight));
+        walls.add(new Wall((offset+ 46*50), bottomRow-100, s, s, grasRightDown));
+        walls.add(new Wall((offset+ 46*50), bottomRow-50, s, s, dirt));
         walls.add(new Wall((offset+ 47*50), bottomRow-50, s, s, grasRight));
     }
 
-    private void smallHills1(ArrayList<Wall> walls, int offset, int bottomRow, int s, BufferedImage stone, BufferedImage grasLeft, BufferedImage dirt, BufferedImage gras, BufferedImage dirtLeftDown, BufferedImage grasRight, BufferedImage dirtRight) {
+    private void smallHills1(ArrayList<Wall> walls, int offset, int bottomRow, int s, BufferedImage stone, BufferedImage grasLeft, BufferedImage dirt, BufferedImage gras, BufferedImage dirtLeftDown, BufferedImage grasRight, BufferedImage dirtRight, BufferedImage stoneLeft, BufferedImage stoneRight) {
         for(int i=0; i<50; i++) {
             walls.add(new Wall((offset + i*50), bottomRow, s, s, stone));
         }
