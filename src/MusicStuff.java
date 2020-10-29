@@ -3,6 +3,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
+/**
+ * Class for loading the Music / Sounds
+ */
 public class MusicStuff{
     void playMusic(String MusicLocation){
         try {

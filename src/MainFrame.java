@@ -1,6 +1,9 @@
 import javax.swing.JFrame;
 import java.awt.Color;
 
+/**
+ * Creates MainFrame
+ */
 public class MainFrame extends JFrame {
     public MainFrame(){
         GamePanel panel = new GamePanel();

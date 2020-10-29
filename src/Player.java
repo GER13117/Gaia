@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+/**
+ * Player Class
+ */
 public class Player extends Thread{
 
     int x;
@@ -22,6 +25,11 @@ public class Player extends Thread{
     boolean keyUp;
     boolean keyDown;
 
+    /**
+     * @param x xPosition of a specific Player
+     * @param y yPosition of a specific Player
+     * @param panel the panel where the Player ist drawn on
+     */
     public Player(int x, int y, GamePanel panel){
 
         this.panel = panel;
@@ -33,6 +41,10 @@ public class Player extends Thread{
         hitBox = new Rectangle(x, y, width, height);
     }
 
+    /**
+     * Sets the maximum Velocity, Gravitation and Collision detection.
+     * Also sets the "Camera Movement" the same as the Player Movement (Player ist always in the center)
+     */
     public void set(){
 
         //Bedingungen und einschränkungen vertikal
@@ -49,7 +61,6 @@ public class Player extends Thread{
         if(xspeed<0 && xspeed > -0.75 ){
             xspeed = 0;
         }
-
         if(xspeed > 8){
             xspeed = 8;
         }
@@ -59,8 +70,6 @@ public class Player extends Thread{
 
         //Gravitation und un Kollision
         if(keyUp){
-
-
             //check if touching ground
             hitBox.y ++;
             for(Wall wall: panel.walls){
@@ -70,9 +79,7 @@ public class Player extends Thread{
             }
             hitBox.y --;
         }
-
         yspeed +=0.5;
-
         //horizontale Kolllision
         hitBox.x += xspeed;
         for(Wall wall: panel.walls){
@@ -86,7 +93,6 @@ public class Player extends Thread{
                 xspeed = 0;
                 hitBox.x = x;
             }
-
         }
         //vertikale Kollision
         hitBox.y += yspeed;

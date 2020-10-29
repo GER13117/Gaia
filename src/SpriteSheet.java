@@ -1,5 +1,8 @@
 import java.awt.image.BufferedImage;
 
+/**
+ * Splits BufferedImages at given Points: Used for extracting the different Tiles of a SpriteSheet.
+ */
 public class SpriteSheet {
 
     private BufferedImage image;

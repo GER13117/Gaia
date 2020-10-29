@@ -3,6 +3,9 @@ import javax.swing.JFrame;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
+/**
+ * MainMethod
+ */
 public class Gaia {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
