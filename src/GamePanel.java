@@ -1,9 +1,7 @@
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +9,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GamePanel extends JPanel implements ActionListener {
+
+public class GamePanel extends JPanel implements ActionListener{
     Player player;
     Timer gameTimer;
     ImprovedNoise improvedNoise;
@@ -32,6 +31,7 @@ public class GamePanel extends JPanel implements ActionListener {
     //Import Images for the different solids
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
+    BufferedImage stone;
     SpriteSheet ss;
     SpriteSheet stoneSheet;
     BufferedImageLoader loader;
@@ -91,8 +91,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void makeWalls(int offset) {
-
-        //improvedNoise = new ImprovedNoise();
         loader = new BufferedImageLoader();
         try{
             spriteSheet = loader.loadImage("textures/gras_dirt_sprite.png");
@@ -114,14 +112,14 @@ public class GamePanel extends JPanel implements ActionListener {
             e.printStackTrace();
         }
         stoneSheet = new SpriteSheet(spriteSheetStone);
-        BufferedImage stone = stoneSheet.grabImage(2,1,s,s);
+        stone = stoneSheet.grabImage(2,1,s,s);
         BufferedImage  stoneRight = stoneSheet.grabImage(3,1,s,s);
         BufferedImage stoneLeft = stoneSheet.grabImage(1,1,s,s);
 
 
         Random rand = new Random();
         int index = rand.nextInt(2);
-        System.out.println(index);
+        //System.out.println(index);
 
 
         switch (index){
@@ -131,8 +129,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 break;
             case 1:
                 smallHills1(walls, offset, bottomRow, s, stone, grasLeft, dirt, gras, dirtLeftDown, grasRight, dirtRight, stoneLeft, stoneRight);
-
-                //BottomLayer Texture: Stone
 
                 break;
 
@@ -150,36 +146,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
         }
-        /*
-        //Altes Test Terrain
-        for(int i = 50; i < windowWidth-50; i += 50){
-            walls.add(new Wall(i, windowHeight-80, 50, 50));
 
-        }
-
-        //Left endwall
-        walls.add(new Wall(50, bottomRow-50, 50, 50));
-
-        //middle walls from left to right
-        walls.add(new Wall(450, bottomRow-50, 50, 50));
-
-        walls.add(new Wall(600, bottomRow-100, 50, 50));
-        walls.add(new Wall(600, bottomRow-50, 50, 50));
-
-        walls.add(new Wall(650, bottomRow-50, s, s));
-        walls.add(new Wall(650, bottomRow-100, s, s));
-        walls.add(new Wall(650, bottomRow-150, s, s));
-
-        walls.add(new Wall(700, bottomRow-100, 50, 50));
-        walls.add(new Wall(700, bottomRow-50, 50, 50));
-
-        walls.add(new Wall(750, bottomRow-50, 50, 50));
-
-
-        //right endwall
-        walls.add(new Wall(1850, bottomRow-100, s, s ));
-        walls.add(new Wall(1850, bottomRow-50, s, s ));
-        */
     }
 
 
@@ -197,24 +164,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
 
-    public void keyPressed(KeyEvent e) {
-        //movement player 1
-        if(e.getKeyChar() == 'a') player.keyLeft = true;
-        if(e.getKeyChar() == 'd') player.keyRight = true;
-        if(e.getKeyChar() == 'w') player.keyUp = true;
 
-        //respawn
-        if(e.getKeyChar() == 'r') reset1();
-
-    }
-
-    public void keyReleased(KeyEvent e) {
-        //stop movement player1
-        if(e.getKeyChar() == 'a') player.keyLeft = false;
-        if(e.getKeyChar() == 'd') player.keyRight = false;
-        if(e.getKeyChar() == 'w') player.keyUp = false;
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -355,4 +305,22 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
 
+    public void keyPressed(KeyEvent e) {
+        //movement player 1
+        if(e.getKeyChar() == 'a') player.keyLeft = true;
+        if(e.getKeyChar() == 'd') player.keyRight = true;
+        if(e.getKeyChar() == 'w') player.keyUp = true;
+
+        //respawn
+        if(e.getKeyChar() == 'r') reset1();
+
+    }
+
+    public void keyReleased(KeyEvent e) {
+        //stop movement player1
+        if(e.getKeyChar() == 'a') player.keyLeft = false;
+        if(e.getKeyChar() == 'd') player.keyRight = false;
+        if(e.getKeyChar() == 'w') player.keyUp = false;
+
+    }
 }
