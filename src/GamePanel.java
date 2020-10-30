@@ -13,7 +13,6 @@ import java.util.TimerTask;
 public class GamePanel extends JPanel implements ActionListener{
     Player player;
     Timer gameTimer;
-    ImprovedNoise improvedNoise;
 
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
