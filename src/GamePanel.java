@@ -181,9 +181,9 @@ public class GamePanel extends JPanel implements ActionListener{
                     }
                 }
                 walls.add(new Wall((offset + x*50), height, s, s, gras));
-            }
-
+            
         }
+}
 
     public void keyPressed(KeyEvent e) {
         //movement player 1
@@ -193,7 +193,6 @@ public class GamePanel extends JPanel implements ActionListener{
 
         //respawn
         if(e.getKeyChar() == 'r') reset1();
-
     }
 
     public void keyReleased(KeyEvent e) {
@@ -201,6 +200,5 @@ public class GamePanel extends JPanel implements ActionListener{
         if(e.getKeyChar() == 'a') player.keyLeft = false;
         if(e.getKeyChar() == 'd') player.keyRight = false;
         if(e.getKeyChar() == 'w') player.keyUp = false;
-
     }
 }
