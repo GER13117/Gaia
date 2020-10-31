@@ -31,6 +31,8 @@ public class GamePanel extends JPanel implements ActionListener{
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
     BufferedImage stone;
+    BufferedImage dirt;
+    BufferedImage gras;
     SpriteSheet ss;
     SpriteSheet stoneSheet;
     BufferedImageLoader loader;
@@ -98,8 +100,8 @@ public class GamePanel extends JPanel implements ActionListener{
         }
         ss = new SpriteSheet(spriteSheet);
         BufferedImage grasLeft = ss.grabImage(1,1, s, s);
-        BufferedImage dirt = ss.grabImage(2,2 ,s,s);
-        BufferedImage gras = ss.grabImage(2,1,s,s);
+        dirt = ss.grabImage(2,2 ,s,s);
+        gras = ss.grabImage(2,1,s,s);
         BufferedImage dirtLeftDown = ss.grabImage(1,3,s,s);
         BufferedImage grasRight = ss.grabImage(3,1,s,s);
         BufferedImage dirtRight = ss.grabImage(3,2,s,s);
@@ -114,37 +116,9 @@ public class GamePanel extends JPanel implements ActionListener{
         stone = stoneSheet.grabImage(2,1,s,s);
         BufferedImage  stoneRight = stoneSheet.grabImage(3,1,s,s);
         BufferedImage stoneLeft = stoneSheet.grabImage(1,1,s,s);
+        int height = 500;
+        terrainGen(height);
 
-
-        Random rand = new Random();
-        int index = rand.nextInt(2);
-        //System.out.println(index);
-
-
-        switch (index){
-            case 0:
-
-                canyon(walls, offset, bottomRow, s, stone, grasLeft, dirt, gras, dirtLeftDown, grasRight, dirtRight, stoneLeft, stoneRight, grasRightDown);
-                break;
-            case 1:
-                smallHills1(walls, offset, bottomRow, s, stone, grasLeft, dirt, gras, dirtLeftDown, grasRight, dirtRight, stoneLeft, stoneRight);
-
-                break;
-
-            /*case 0: //Noise Terrain-Gen
-                for (double i = 0; i < 40; i+= 0.02){
-                    double terrainHeight = improvedNoise.noise(i) * 100;
-                    int rTerrainHeight = ((int) terrainHeight)*25;
-                    walls.add(new Wall((int)(offset + (i*50*50)), bottomRow- rTerrainHeight,s,s, grasLeft));
-                    System.out.println(rTerrainHeight);
-                }
-                break;*/
-            default:
-                for(int i=0; i<40; i++) {
-                    walls.add(new Wall((offset + i*50), bottomRow, s, s, grasLeft));
-                }
-
-        }
 
     }
 
@@ -190,119 +164,26 @@ public class GamePanel extends JPanel implements ActionListener{
         musicObject = new MusicStuff();
         musicObject.playMusic(filepath);
     }
-    private static void canyon(ArrayList<Wall> walls, int offset, int bottomRow, int s, BufferedImage stone, BufferedImage grasLeft, BufferedImage dirt, BufferedImage gras, BufferedImage dirtLeftDown, BufferedImage grasRight, BufferedImage dirtRight, BufferedImage stoneLeft, BufferedImage stoneRight, BufferedImage grasRightDown){
-        for(int i=0; i<50; i++) {
-            walls.add(new Wall((offset + i*50), bottomRow, s, s, stone));
+        public void terrainGen(int height){
+            for (int x = 0; x < 50; x++){
+                int minHeight = (height) - 50;
+                int maxHeight = (height) + 100;
+                height = ((int) (Math.random() * (maxHeight-minHeight) + minHeight)/50) * 50;
+                int minStoneSpawnDistance = height + 250;
+                int maxStoneSpawnDistance = height + 300;
+                int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance-minStoneSpawnDistance) + minStoneSpawnDistance)/50) * 50;
+                for (int y = 1100; y > height; y-=50){
+                    if (y>totalSpawnDistance){
+                        walls.add(new Wall((offset + x*50), y, s, s, stone));
+                    } else {
+                        walls.add(new Wall((offset + x*50), y, s, s, dirt));
+
+                    }
+                }
+                walls.add(new Wall((offset + x*50), height, s, s, gras));
+            }
+
         }
-
-        walls.add(new Wall((offset+ 0*50), (bottomRow-50), s, s, grasLeft));
-        walls.add(new Wall((offset+ 1*50), (bottomRow-50), s, s, dirt));
-        walls.add(new Wall((offset+ 1*50), (bottomRow-100), s, s, grasLeft));
-        walls.add(new Wall((offset+ 2*50), (bottomRow-100), s, s, dirt));
-        walls.add(new Wall((offset+ 2*50), (bottomRow-150), s, s, dirtLeftDown));
-        walls.add(new Wall((offset+ 2*50), (bottomRow-200), s, s, grasLeft));
-        walls.add(new Wall((offset+ 3*50), (bottomRow-200), s, s, dirt));
-        walls.add(new Wall((offset+ 3*50), (bottomRow-250), s, s, grasLeft));
-        for(int i=4; i<= 5; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, gras));
-        walls.add(new Wall((offset+ 6*50), (bottomRow-250), s, s, grasRight));
-        walls.add(new Wall((offset+ 6*50), (bottomRow-200), s, s, dirt));
-        walls.add(new Wall((offset+ 7*50), (bottomRow-200), s, s, grasRight));
-        walls.add(new Wall((offset+ 7*50), (bottomRow-150), s, s, dirt));
-        walls.add(new Wall((offset+ 8*50), (bottomRow-150), s, s, gras));
-        walls.add(new Wall((offset+ 9*50), (bottomRow-150), s, s, dirt));
-        walls.add(new Wall((offset+ 9*50), (bottomRow-200), s, s, dirtLeftDown));
-        for(int i=10; i<= 11; i++) walls.add(new Wall((offset+ i*50), bottomRow-200, s, s, dirt));
-        walls.add(new Wall((offset+ 9*50), bottomRow-250, s, s, grasLeft));
-        for(int i=10; i<= 11; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, dirt));
-        walls.add(new Wall((offset+ 10*50), bottomRow-300, s, s, grasLeft));
-        for(int i=11; i<= 14; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, gras));
-        for(int i=15; i<= 18; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, dirt));
-        walls.add(new Wall((offset+ 15*50), bottomRow-350, s, s, grasLeft));
-        for(int i=16; i<= 17; i++) walls.add(new Wall((offset+ i*50), bottomRow-350, s, s, gras));
-        walls.add(new Wall((offset+ 18*50), bottomRow-350, s, s, grasRight));
-        walls.add(new Wall((offset+ 19*50), bottomRow-300, s, s, dirtRight));
-        walls.add(new Wall((offset+ 19*50), bottomRow-250, s, s, stoneRight));
-        walls.add(new Wall((offset+ 19*50), bottomRow-200, s, s, stoneRight));
-        walls.add(new Wall((offset+ 19*50), bottomRow-150, s, s, stoneRight));
-        walls.add(new Wall((offset+ 19*50), bottomRow-100, s, s, stoneRight));
-        walls.add(new Wall((offset+ 19*50), bottomRow-50, s, s, stoneRight));
-        walls.add(new Wall((offset+ 21*50), bottomRow-50, s, s, stoneLeft));
-        walls.add(new Wall((offset+ 21*50), bottomRow-100, s, s, stoneLeft));
-        walls.add(new Wall((offset+ 21*50), bottomRow-150, s, s, stoneLeft));
-        walls.add(new Wall((offset+ 22*50), bottomRow-150, s, s, stone));
-        walls.add(new Wall((offset+ 22*50), bottomRow-200, s, s, stoneLeft));
-        walls.add(new Wall((offset+ 22*50), bottomRow-250, s, s, grasLeft));
-        walls.add(new Wall((offset+ 23*50), bottomRow-250, s, s, dirt));
-        walls.add(new Wall((offset+ 23*50), bottomRow-300, s, s, grasLeft));
-        walls.add(new Wall((offset+ 24*50), bottomRow-300, s, s, gras));
-        walls.add(new Wall((offset+ 25*50), bottomRow-350, s, s, grasLeft));
-        for(int i=26; i<= 27; i++) walls.add(new Wall((offset+ i*50), bottomRow-350, s, s, gras));
-        walls.add(new Wall((offset+ 28*50), bottomRow-350, s, s, grasRight));
-        for(int i=25; i<= 28; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, dirt));
-        for(int i=29; i<= 32; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, gras));
-        walls.add(new Wall((offset+ 33*50), bottomRow-300, s, s, grasRight));
-        for(int i=34; i<= 39; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, gras));
-        walls.add(new Wall((offset+ 33*50), bottomRow-250, s, s, dirt));
-        walls.add(new Wall((offset+ 40*50), bottomRow-250, s, s, grasRight));
-        walls.add(new Wall((offset+ 40*50), bottomRow-200, s, s, dirt));
-        walls.add(new Wall((offset+ 41*50), bottomRow-200, s, s, gras));
-        walls.add(new Wall((offset+ 42*50), bottomRow-200, s, s, grasRight));
-        walls.add(new Wall((offset+ 42*50), bottomRow-150, s, s, dirt));
-        for(int i=43; i<= 45; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, gras));
-        walls.add(new Wall((offset+ 46*50), bottomRow-150, s, s, grasRight));
-        walls.add(new Wall((offset+ 46*50), bottomRow-100, s, s, grasRightDown));
-        walls.add(new Wall((offset+ 46*50), bottomRow-50, s, s, dirt));
-        walls.add(new Wall((offset+ 47*50), bottomRow-50, s, s, grasRight));
-    }
-
-    private void smallHills1(ArrayList<Wall> walls, int offset, int bottomRow, int s, BufferedImage stone, BufferedImage grasLeft, BufferedImage dirt, BufferedImage gras, BufferedImage dirtLeftDown, BufferedImage grasRight, BufferedImage dirtRight, BufferedImage stoneLeft, BufferedImage stoneRight) {
-        for(int i=0; i<50; i++) {
-            walls.add(new Wall((offset + i*50), bottomRow, s, s, stone));
-        }
-        //Grass or dirt
-        for(int i=2; i<= 4; i++) walls.add(new Wall((offset+ i*50), bottomRow-50, s, s, grasLeft));
-        walls.add(new Wall((offset+ 4*50), (bottomRow-100), s, s, grasLeft));
-        for(int i=4; i<= 6; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, grasLeft));
-        for(int i=6; i<= 9; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s, grasLeft));
-        walls.add(new Wall((offset+ 9*50), bottomRow-150, s, s, grasLeft));
-        for(int i=9; i<= 11; i++) walls.add(new Wall((offset+ i*50), bottomRow-200, s, s, grasLeft));
-        for(int i=11; i<= 13; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, grasLeft));
-        for(int i=14; i<= 15; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, grasLeft));
-        for(int i=15; i<= 19; i++) walls.add(new Wall((offset+ i*50), bottomRow-350, s, s, grasLeft));
-        for(int i=15; i<= 16; i++) walls.add(new Wall((offset+ i*50), bottomRow-400, s, s, grasLeft));
-        for(int i=19; i<= 23; i++) walls.add(new Wall((offset+ i*50), bottomRow-500, s, s, grasLeft));
-        for(int i=21; i<= 22; i++) walls.add(new Wall((offset+ i*50), bottomRow-550, s, s, grasLeft));
-        for(int i=22; i<= 23; i++) walls.add(new Wall((offset+ i*50), bottomRow-500, s, s, grasLeft));
-        for(int i=23; i<= 26; i++) walls.add(new Wall((offset+ i*50), bottomRow-450, s, s, grasLeft));
-        walls.add(new Wall((offset+ 27*50), bottomRow-400, s, s, grasLeft));
-        for(int i=27; i<= 28; i++) walls.add(new Wall((offset+ i*50), bottomRow-350, s, s, grasLeft));
-        for(int i=28; i<= 29; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, grasLeft));
-        for(int i=29; i<= 30; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, grasLeft));
-        for(int i=30; i<= 36; i++) walls.add(new Wall((offset+ i*50), bottomRow-200, s, s, grasLeft));
-        for(int i=33; i<= 34; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, grasLeft));
-        walls.add(new Wall((offset+ 36*50), bottomRow-150, s, s, grasLeft));
-        for(int i=36; i<= 39; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s, grasLeft));
-        walls.add(new Wall((offset+ 39*50), bottomRow-50, s, s, grasLeft));
-        walls.add(new Wall((offset+ 14*50), bottomRow-250, s, s, grasLeft));
-        walls.add(new Wall((offset+ 26*50), bottomRow-400, s, s, grasLeft));
-
-        //Stone
-        for(int i=4; i<= 8; i++) walls.add(new Wall((offset+ i*50), bottomRow-50, s, s, stone));
-        for(int i=15; i<= 38; i++) walls.add(new Wall((offset+ i*50), bottomRow-50, s, s, stone));
-        walls.add(new Wall((offset+ 5*50), bottomRow-100, s, s, stone));
-        for(int i=16; i<= 19; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s, stone));
-        for(int i=24; i<= 35; i++) walls.add(new Wall((offset+ i*50), bottomRow-100, s, s, stone));
-        for(int i=17; i<= 18; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, stone));
-        for(int i=26; i<= 35; i++) walls.add(new Wall((offset+ i*50), bottomRow-150, s, s, stone));
-        walls.add(new Wall((offset+ 21*50), bottomRow-200, s, s, stone));
-        for(int i=27; i<= 29; i++) walls.add(new Wall((offset+ i*50), bottomRow-200, s, s, stone));
-        for(int i=21; i<= 24; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, stone));
-        for(int i=27; i<= 28; i++) walls.add(new Wall((offset+ i*50), bottomRow-250, s, s, stone));
-        for(int i=16; i<= 21; i++) walls.add(new Wall((offset+ i*50), bottomRow-300, s, s, stone));
-        walls.add(new Wall((offset+ 20*50), bottomRow-350, s, s, stone));
-
-    }
-
 
     public void keyPressed(KeyEvent e) {
         //movement player 1
