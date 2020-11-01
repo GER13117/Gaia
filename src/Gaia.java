@@ -27,7 +27,7 @@ public class Gaia {
 //TODO: weitere Blöcke / Materialien hinzufügen
 //TODO: Terrain: Fix chunk loading
 //TODO: Variable für temperaturen
-//TODO: Regeln zum auswählen der texturen
+//TODO: Regeln zum auswählen der texturen, fix von topLayer[x]
 //TODO: 2. Spieler hinzufügen? oder zweiten PVP Modus
 //TODO: Menü (Möglichkeit die Lautstärke einzustellen)
 //TODO: Schlagen, bauen

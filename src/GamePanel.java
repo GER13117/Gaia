@@ -33,9 +33,11 @@ public class GamePanel extends JPanel implements ActionListener{
     BufferedImage stone;
     BufferedImage dirt;
     BufferedImage gras;
+    BufferedImage grasLeft;
     SpriteSheet ss;
     SpriteSheet stoneSheet;
     BufferedImageLoader loader;
+    int height = 500;
 
 
 
@@ -99,7 +101,7 @@ public class GamePanel extends JPanel implements ActionListener{
             e.printStackTrace();
         }
         ss = new SpriteSheet(spriteSheet);
-        BufferedImage grasLeft = ss.grabImage(1,1, s, s);
+        grasLeft = ss.grabImage(1,1, s, s);
         dirt = ss.grabImage(2,2 ,s,s);
         gras = ss.grabImage(2,1,s,s);
         BufferedImage dirtLeftDown = ss.grabImage(1,3,s,s);
@@ -116,7 +118,7 @@ public class GamePanel extends JPanel implements ActionListener{
         stone = stoneSheet.grabImage(2,1,s,s);
         BufferedImage  stoneRight = stoneSheet.grabImage(3,1,s,s);
         BufferedImage stoneLeft = stoneSheet.grabImage(1,1,s,s);
-        int height = 500;
+
         terrainGen(height);
 
 
@@ -165,11 +167,12 @@ public class GamePanel extends JPanel implements ActionListener{
         musicObject.playMusic(filepath);
     }
         public void terrainGen(int height){
-            for (int x = 0; x < 50; x++){
+
+            for (int x=0; x < 50; x++){
                 int minHeight = (height) - 50;
                 int maxHeight = (height) + 100;
                 height = ((int) (Math.random() * (maxHeight-minHeight) + minHeight)/50) * 50;
-                int minStoneSpawnDistance = height + 250;
+                int minStoneSpawnDistance = height + 0;
                 int maxStoneSpawnDistance = height + 300;
                 int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance-minStoneSpawnDistance) + minStoneSpawnDistance)/50) * 50;
                 for (int y = 1100; y > height; y-=50){
@@ -180,9 +183,27 @@ public class GamePanel extends JPanel implements ActionListener{
 
                     }
                 }
-                walls.add(new Wall((offset + x*50), height, s, s, gras));
+
+                int[] topLayer = new int[51];
+                topLayer[x] = height;
+
+                if (x==0) walls.add(new Wall((offset), height, s, s, grasLeft));
+                else {
+                    //Platzhalter
+                    walls.add(new Wall((offset + x*50), height, s, s, gras));
+                    /*
+                    System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
+                    //rules for grass
+                    if (topLayer[x-1] == height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, gras));
+                    else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
+
+                    //else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
+                    else if (topLayer[x-1] < height && topLayer[x+1] > height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));*/
+                }
+
+
             
-        }
+            }
 }
 
     public void keyPressed(KeyEvent e) {
