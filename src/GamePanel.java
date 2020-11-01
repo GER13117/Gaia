@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     // gerundete Fenstergröße für vereinfachte verwendung
     int windowHeight = 1100;//1100, da bei 1080 immer 20 px verschiebung war
-    int windowWidth = 2500;//die renderdistanz ist damit gemeint
+    int windowWidth = 2000;//die renderdistanz ist damit gemeint
     int bottomRow = windowHeight - 100;
     BufferedImage stone;
     BufferedImage dirt;
@@ -56,10 +56,10 @@ public class GamePanel extends JPanel implements ActionListener {
             public void run() {
                 player.set();
                 //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
-                if (walls.get(walls.size() - 1).x < (windowWidth)) {
+                if (walls.get(walls.size()-1).x < (windowWidth)) {
                     offset += windowWidth;
                     makeWalls();
-                    //System.out.println(walls.size()); //prints the amount of generated walls
+                    System.out.println(walls.size()); //prints the amount of generated walls
 
                 }
                 for (Wall wall : walls) {
@@ -181,11 +181,11 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void terrainGen(int height) {
 
-        for (int x = 0; x < 50; x++) {
+        for (int x = 0; x < 40; x++) {
             int minHeight = (height) - 50;
             int maxHeight = (height) + 100;
             height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
-            int minStoneSpawnDistance = height + 0;
+            int minStoneSpawnDistance = height + 50;
             int maxStoneSpawnDistance = height + 300;
             int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
             for (int y = 1100; y > height; y -= 50) {
@@ -197,7 +197,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
             }
 
-            int[] topLayer = new int[51];
+            int[] topLayer = new int[41];
             topLayer[x] = height;
 
             if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
