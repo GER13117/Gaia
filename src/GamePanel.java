@@ -39,6 +39,9 @@ public class GamePanel extends JPanel implements ActionListener {
     private BufferedImage spriteSheetStone = null;
 
 
+    /**
+     *Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
+     */
     public GamePanel() {
         music();
         //einfügen des Spieler-Objekts
@@ -55,7 +58,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
                 if (walls.get(walls.size() - 1).x < (windowWidth)) {
                     offset += windowWidth;
-                    makeWalls(offset);
+                    makeWalls();
                     //System.out.println(walls.size()); //prints the amount of generated walls
 
                 }
@@ -77,6 +80,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Plays random chosen music.
+     */
     public static void music() {
         Random rand = new Random();
         int index = rand.nextInt(3);
@@ -100,6 +106,9 @@ public class GamePanel extends JPanel implements ActionListener {
         musicObject.playMusic(filepath);
     }
 
+    /**
+     * Method for resetting Player and the world. Shouldn't be used that often
+     */
     public void reset1() {
         player.x = 300;
         player.y = 150;
@@ -109,10 +118,14 @@ public class GamePanel extends JPanel implements ActionListener {
         player.yspeed = 0;
         walls.clear();
         offset = -150;
-        makeWalls(offset);
+        makeWalls();
     }
 
-    public void makeWalls(int offset) {
+    /**
+     * Method to make the walls / blocks.
+     * It defines the different Tiles from the sprites. The Generation is happening some where else
+     */
+    public void makeWalls() {
         loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("textures/gras_dirt_sprite.png");
@@ -143,6 +156,10 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Method for painting the tiles on a given location
+     * @param g name for the Graphics to paint the tiles
+     */
     public void paint(Graphics g) {
         super.paint(g);
 
@@ -158,6 +175,10 @@ public class GamePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
     }
 
+    /**
+     * The method for creating the terrain, by subtracting or adding height.
+     * @param height startheight of the terrain
+     */
     public void terrainGen(int height) {
 
         for (int x = 0; x < 50; x++) {
@@ -197,6 +218,10 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Checks the KeyPressed inputs and perform the specific actions.
+     * @param e The KeyEvent received from KeyChecker
+     */
     public void keyPressed(KeyEvent e) {
         //movement player 1
         if (e.getKeyChar() == 'a') player.keyLeft = true;
@@ -207,6 +232,10 @@ public class GamePanel extends JPanel implements ActionListener {
         if (e.getKeyChar() == 'r') reset1();
     }
 
+    /**
+     * Checks the KeyReleased inputs and perform the specific actions.
+     * @param e The KeyEvent received from KeyChecker
+     */
     public void keyReleased(KeyEvent e) {
         //stop movement player1
         if (e.getKeyChar() == 'a') player.keyLeft = false;
