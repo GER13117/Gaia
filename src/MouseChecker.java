@@ -9,11 +9,11 @@ public class MouseChecker implements MouseListener {
 
 
         if (e.getButton() == MouseEvent.BUTTON1) {
-            float x = (e.getX() - offset)/50;
+            float x = (e.getX() - offset) / 50;
             int xPos = ((int) x) * 50;
-            float y = e.getY()/50;
+            float y = e.getY() / 50;
             int yPos = ((int) y) * 50;
-            MainFrame.panel.walls.add(new Wall(xPos,yPos,MainFrame.panel.s,MainFrame.panel.s, MainFrame.panel.stone));
+            MainFrame.panel.walls.add(new Wall(xPos, yPos, MainFrame.panel.s, MainFrame.panel.s, MainFrame.panel.stone));
         }
 
     }

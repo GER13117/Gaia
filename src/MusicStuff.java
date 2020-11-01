@@ -6,11 +6,11 @@ import java.io.File;
 /**
  * Class for loading the Music / Sounds
  */
-public class MusicStuff{
-    void playMusic(String MusicLocation){
+public class MusicStuff {
+    void playMusic(String MusicLocation) {
         try {
             File musicPath = new File(MusicLocation);
-            if (musicPath.exists()){
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
@@ -19,7 +19,7 @@ public class MusicStuff{
             } else {
                 System.out.println("Can't find file");
             }
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
