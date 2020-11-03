@@ -105,17 +105,11 @@ public class Player extends Thread {
                 hitBox.y -= Math.signum(yspeed);
                 yspeed = 0;
                 y = hitBox.y;
-                /*hitBox.y -= Math.signum(yspeed);
-                panel.cameraY += y - hitBox.y;
-                yspeed = 0;
-                hitBox.y = y;*/
             }
 
         }
 
         panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
-        //x += xspeed;
-        //panel.cameraY -= yspeed;
         y += yspeed;
 
         //System.out.println(xspeed); //prints velocity needed for bugfixing

@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener {
     //Import Images for the different solids
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
+    int[] topLayer;
 
 
     /**
@@ -59,7 +60,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 if (walls.get(walls.size()-1).x < (windowWidth)) {
                     offset += windowWidth;
                     makeWalls();
-                    System.out.println(walls.size()); //prints the amount of generated walls
 
                 }
                 for (Wall wall : walls) {
@@ -197,16 +197,17 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
             }
 
-            int[] topLayer = new int[41];
+            topLayer = new int[41];
             topLayer[x] = height;
 
             if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
             else {
                 //Platzhalter
                 walls.add(new Wall((offset + x * 50), height, s, s, gras));
-                    /*
-                    System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
+
+                    //System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
                     //rules for grass
+                /*
                     if (topLayer[x-1] == height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, gras));
                     else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
 
