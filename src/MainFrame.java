@@ -6,8 +6,7 @@ import java.awt.Color;
  */
 public class MainFrame extends JFrame {
     public static GamePanel panel;
-
-    public MainFrame() {
+    private void initUI(){
         panel = new GamePanel();
         panel.setLocation(0, 0);
         panel.setSize(this.getSize());
@@ -18,5 +17,9 @@ public class MainFrame extends JFrame {
 
         addKeyListener(new KeyChecker(panel));
         panel.addMouseListener(new MouseChecker());
+    }
+
+    public MainFrame() {
+        initUI();
     }
 }

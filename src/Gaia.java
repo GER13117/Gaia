@@ -1,5 +1,7 @@
 import javax.swing.JFrame;
 
+import java.awt.EventQueue;
+
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
@@ -22,7 +24,6 @@ public class Gaia {
 
 
 //TODO: Texturen und Animationen
-//TODO: SpriteSheet Stein
 //TODO: weitere Blöcke / Materialien hinzufügen
 //TODO: Terrain: Fix chunk loading??
 //TODO: Variable für temperaturen
@@ -32,5 +33,4 @@ public class Gaia {
 //TODO: Schlagen, bauen
 //TODO: Gegner
 //TODO: Waterblock
-//TODO: Snake Minigame
 //TODO: JavaDoc Kommentare erweitern

@@ -1,3 +1,4 @@
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -231,6 +234,16 @@ public class GamePanel extends JPanel implements ActionListener {
 
         //respawn
         if (e.getKeyChar() == 'r') reset1();
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            MenuFrame menuFrame = new MenuFrame();
+            menuFrame.setSize(300,300);
+            menuFrame.setLocationRelativeTo(null);
+
+            menuFrame.setResizable(true);
+
+            menuFrame.setTitle("Gaia");
+            menuFrame.setVisible(true);
+        } //Open Menu
     }
 
     /**
