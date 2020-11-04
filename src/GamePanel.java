@@ -1,5 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.*;
@@ -234,6 +236,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         menuFrame.setTitle("Menu");
         menuFrame.setVisible(true);
+        menuFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
