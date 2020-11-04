@@ -223,6 +223,20 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
+     * Method for opening the Menu
+     */
+    public void openMenu(){
+        MenuFrame menuFrame = new MenuFrame();
+        menuFrame.setSize(300,300);
+        menuFrame.setLocationRelativeTo(null);
+
+        menuFrame.setResizable(true);
+
+        menuFrame.setTitle("Menu");
+        menuFrame.setVisible(true);
+    }
+
+    /**
      * Checks the KeyPressed inputs and perform the specific actions.
      * @param e The KeyEvent received from KeyChecker
      */
@@ -234,16 +248,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         //respawn
         if (e.getKeyChar() == 'r') reset1();
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
-            MenuFrame menuFrame = new MenuFrame();
-            menuFrame.setSize(300,300);
-            menuFrame.setLocationRelativeTo(null);
-
-            menuFrame.setResizable(true);
-
-            menuFrame.setTitle("Gaia");
-            menuFrame.setVisible(true);
-        } //Open Menu
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
     }
 
     /**
