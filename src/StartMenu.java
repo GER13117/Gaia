@@ -15,8 +15,8 @@ public class StartMenu extends JFrame implements Runnable{
         run();
     }
 
-    public void openGame(){
-        MainFrame frame = new MainFrame();
+    public void openGame(int gameMode){
+        MainFrame frame = new MainFrame(gameMode);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
 
@@ -32,7 +32,7 @@ public class StartMenu extends JFrame implements Runnable{
         story.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                openGame();
+                openGame(1);
                 dispose();
             }
         });

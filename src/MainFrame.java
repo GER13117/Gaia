@@ -6,8 +6,13 @@ import java.awt.Color;
  */
 public class MainFrame extends JFrame {
     public static GamePanel panel;
-    private void initUI(){
-        panel = new GamePanel();
+    public MainFrame(int gameMode) {
+        initUI(gameMode);
+    }
+
+    private void initUI(int gameMode){
+
+        panel = new GamePanel(gameMode);
         panel.setLocation(0, 0);
         panel.setSize(this.getSize());
         Color skyPlaceholder = new Color(78, 147, 202);
@@ -19,7 +24,5 @@ public class MainFrame extends JFrame {
         panel.addMouseListener(new MouseChecker());
     }
 
-    public MainFrame() {
-        initUI();
-    }
+
 }

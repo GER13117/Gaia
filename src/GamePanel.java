@@ -17,6 +17,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GamePanel extends JPanel implements ActionListener {
     Player player;
+    Player player2;
     Timer gameTimer;
 
     //Biomes biomes;
@@ -43,15 +44,23 @@ public class GamePanel extends JPanel implements ActionListener {
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
     int[] topLayer;
+    int gameMode;
 
 
     /**
      *Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
      */
-    public GamePanel() {
+    public GamePanel(int gameMode) {
+        this.gameMode = gameMode;
         music();
         //einfügen des Spieler-Objekts
-        player = new Player(400, 300, this);
+        if (gameMode == 1){
+            player = new Player(400, 300, this);
+        } else{
+            player = new Player(500, 300, this);
+            player2 = new Player(300, 300, this);
+        }
+
 
         reset1();
 
@@ -115,15 +124,18 @@ public class GamePanel extends JPanel implements ActionListener {
      * Method for resetting Player and the world. Shouldn't be used that often
      */
     public void reset1() {
-        player.x = 300;
-        player.y = 150;
+        respawn();
         cameraX = 150;
         cameraY = 500;
-        player.xspeed = 0;
-        player.yspeed = 0;
         walls.clear();
         offset = -150;
         makeWalls();
+    }
+    public void respawn(){
+        player.x = 300;
+        player.y = 150;
+        player.xspeed = 0;
+        player.yspeed = 0;
     }
 
     /**
@@ -252,6 +264,11 @@ public class GamePanel extends JPanel implements ActionListener {
         //respawn
         if (e.getKeyChar() == 'r') reset1();
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
+
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
+        if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
+
     }
 
     /**
