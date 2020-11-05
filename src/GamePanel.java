@@ -197,30 +197,30 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param height startheight of the terrain
      */
     public void terrainGen(int height) {
+        if (gameMode == 1){
+            for (int x = 0; x < 40; x++) {
+                int minHeight = (height) - 50;
+                int maxHeight = (height) + 100;
+                height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
+                int minStoneSpawnDistance = height + 50;
+                int maxStoneSpawnDistance = height + 300;
+                int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
+                for (int y = 1100; y > height; y -= 50) {
+                    if (y > totalSpawnDistance) {
+                        walls.add(new Wall((offset + x * 50), y, s, s, stone));
+                    } else {
+                        walls.add(new Wall((offset + x * 50), y, s, s, dirt));
 
-        for (int x = 0; x < 40; x++) {
-            int minHeight = (height) - 50;
-            int maxHeight = (height) + 100;
-            height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
-            int minStoneSpawnDistance = height + 50;
-            int maxStoneSpawnDistance = height + 300;
-            int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
-            for (int y = 1100; y > height; y -= 50) {
-                if (y > totalSpawnDistance) {
-                    walls.add(new Wall((offset + x * 50), y, s, s, stone));
-                } else {
-                    walls.add(new Wall((offset + x * 50), y, s, s, dirt));
-
+                    }
                 }
-            }
 
-            topLayer = new int[41];
-            topLayer[x] = height;
+                topLayer = new int[41];
+                topLayer[x] = height;
 
-            if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
-            else {
-                //Platzhalter
-                walls.add(new Wall((offset + x * 50), height, s, s, gras));
+                if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
+                else {
+                    //Platzhalter
+                    walls.add(new Wall((offset + x * 50), height, s, s, gras));
 
                     //System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
                     //rules for grass
@@ -230,10 +230,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
                     //else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
                     else if (topLayer[x-1] < height && topLayer[x+1] > height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));*/
+                }
             }
-
-
         }
+        else if (gameMode == 2){
+            //TODO: Arena bauen
+        }
+
+
     }
 
     /**
@@ -256,18 +260,30 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param e The KeyEvent received from KeyChecker
      */
     public void keyPressed(KeyEvent e) {
-        //movement player 1
-        if (e.getKeyChar() == 'a') player.keyLeft = true;
-        if (e.getKeyChar() == 'd') player.keyRight = true;
-        if (e.getKeyChar() == 'w') player.keyUp = true;
+        if (gameMode == 1){
+            //movement player 1
+            if (e.getKeyChar() == 'a') player.keyLeft = true;
+            if (e.getKeyChar() == 'd') player.keyRight = true;
+            if (e.getKeyChar() == 'w') player.keyUp = true;
 
-        //respawn
-        if (e.getKeyChar() == 'r') reset1();
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
+            //respawn
+            if (e.getKeyChar() == 'r') reset1();
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
+        }
+        else if (gameMode == 2){
+            //movement player 1
 
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
-        if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
+            if (e.getKeyChar() == 'a') player.keyLeft = true;
+            if (e.getKeyChar() == 'd') player.keyRight = true;
+            if (e.getKeyChar() == 'w') player.keyUp = true;
+
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
+
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
+            if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
+        }
+
 
     }
 
@@ -276,9 +292,22 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param e The KeyEvent received from KeyChecker
      */
     public void keyReleased(KeyEvent e) {
-        //stop movement player1
-        if (e.getKeyChar() == 'a') player.keyLeft = false;
-        if (e.getKeyChar() == 'd') player.keyRight = false;
-        if (e.getKeyChar() == 'w') player.keyUp = false;
+        if (gameMode == 1){
+            //stop movement player1
+            if (e.getKeyChar() == 'a') player.keyLeft = false;
+            if (e.getKeyChar() == 'd') player.keyRight = false;
+            if (e.getKeyChar() == 'w') player.keyUp = false;
+        }
+        else if (gameMode == 2){
+            //stop movement player1
+            if (e.getKeyChar() == 'a') player.keyLeft = false;
+            if (e.getKeyChar() == 'd') player.keyRight = false;
+            if (e.getKeyChar() == 'w') player.keyUp = false;
+            //stop movement Player2
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = false;
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = false;
+            if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = false;
+        }
+
     }
 }
