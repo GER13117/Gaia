@@ -69,7 +69,13 @@ public class GamePanel extends JPanel implements ActionListener {
         gameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                player.set();
+                if (gameMode == 1){
+                    player.set();
+                }
+                else if (gameMode == 2){
+                    player.set();
+                    player2.set();
+                }
                 //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
                 if (walls.get(walls.size()-1).x < (windowWidth)) {
                     offset += windowWidth;
@@ -132,10 +138,18 @@ public class GamePanel extends JPanel implements ActionListener {
         makeWalls();
     }
     public void respawn(){
-        player.x = 300;
-        player.y = 150;
-        player.xspeed = 0;
-        player.yspeed = 0;
+        if (gameMode == 1){
+            player.x = 400;
+            player.y = 150;
+            player.xspeed = 0;
+            player.yspeed = 0;
+        } else if (gameMode == 2){
+            player.x = 200;
+            player.y = 150;
+            player.xspeed = 0;
+            player.yspeed = 0;
+        }
+
     }
 
     /**
@@ -181,7 +195,14 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paint(g);
 
         Graphics2D gtd = (Graphics2D) g;
-        player.draw(gtd);
+        if (gameMode == 1){
+            player.draw(gtd);
+        } else if(gameMode == 2){
+            player.draw(gtd);
+            player2.draw(gtd);
+        }
+
+
 
         for (Wall wall : walls) {
             wall.draw(gtd);

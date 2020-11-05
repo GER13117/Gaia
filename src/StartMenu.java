@@ -26,13 +26,22 @@ public class StartMenu extends JFrame implements Runnable{
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+    //gamemode 2 = PVP
+    //gamemode 1 = story / jump and run
     public void buttons(){
-        story.setPreferredSize(new Dimension(200,200));
         pane.add(story);
         story.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openGame(1);
+                dispose();
+            }
+        });
+        pane.add(pvp);
+        pvp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openGame(2);
                 dispose();
             }
         });

@@ -26,7 +26,6 @@ public class MenuFrame extends JFrame implements Runnable{
     public void MenuBar(){
         JMenu test = new JMenu("test");
         setJMenuBar(menuBar);
-        System.out.println("MENÜÜÜ");
         menuBar.add(test);
     }
     public void Buttons(){
