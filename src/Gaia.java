@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import java.awt.EventQueue;
 
@@ -9,16 +10,17 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  * MainMethod
  */
 public class Gaia {
+
     public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setLocationRelativeTo(null);
+        StartMenu startMenu = new StartMenu();
+        startMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        startMenu.setLocationRelativeTo(null);
 
-        frame.setResizable(true);
+        startMenu.setResizable(true);
 
-        frame.setTitle("Gaia");
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        startMenu.setTitle("Gaia");
+        startMenu.setVisible(true);
+        startMenu.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 }
 
