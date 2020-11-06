@@ -15,7 +15,6 @@ public class MenuFrame extends JFrame implements Runnable{
     public MenuFrame(){
         run();
     }
-
     @Override
     public void run() {
         pane.setLayout(new FlowLayout());

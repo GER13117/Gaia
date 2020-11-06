@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -154,6 +155,20 @@ public class GamePanelPvP extends JPanel implements ActionListener {
             wall.draw(gtd);
         }
     }
+    /**
+     * Method for opening the Menu
+     */
+    public void openMenu(){
+        MenuFrame menuFrame = new MenuFrame();
+        menuFrame.setSize(300,300);
+        menuFrame.setLocationRelativeTo(null);
+
+        menuFrame.setResizable(true);
+
+        menuFrame.setTitle("Menu");
+        menuFrame.setVisible(true);
+        menuFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
 
 
 
@@ -168,6 +183,8 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
         if(e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
         if(e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = true;
+
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
 
     }
 
