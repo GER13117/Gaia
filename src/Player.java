@@ -108,11 +108,9 @@ public class Player extends Thread {
             }
 
         }
+            panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
+            y += yspeed;
 
-        panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
-        y += yspeed;
-
-        //System.out.println(xspeed); //prints velocity needed for bugfixing
 
         //Death Code
         if (y > 1500) panel.reset1();

@@ -1,18 +1,16 @@
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -50,7 +48,7 @@ public class GamePanel extends JPanel implements ActionListener {
     /**
      *Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
      */
-    public GamePanel(int gameMode) {
+    public GamePanel() {
         this.gameMode = gameMode;
         music();
         //einfügen des Spieler-Objekts
@@ -69,13 +67,8 @@ public class GamePanel extends JPanel implements ActionListener {
         gameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (gameMode == 1){
                     player.set();
-                }
-                else if (gameMode == 2){
-                    player.set();
-                    player2.set();
-                }
+
                 //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
                 if (walls.get(walls.size()-1).x < (windowWidth)) {
                     offset += windowWidth;
@@ -138,17 +131,10 @@ public class GamePanel extends JPanel implements ActionListener {
         makeWalls();
     }
     public void respawn(){
-        if (gameMode == 1){
             player.x = 400;
             player.y = 150;
             player.xspeed = 0;
             player.yspeed = 0;
-        } else if (gameMode == 2){
-            player.x = 200;
-            player.y = 150;
-            player.xspeed = 0;
-            player.yspeed = 0;
-        }
 
     }
 
@@ -195,12 +181,7 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paint(g);
 
         Graphics2D gtd = (Graphics2D) g;
-        if (gameMode == 1){
             player.draw(gtd);
-        } else if(gameMode == 2){
-            player.draw(gtd);
-            player2.draw(gtd);
-        }
 
 
 
@@ -218,7 +199,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param height startheight of the terrain
      */
     public void terrainGen(int height) {
-        if (gameMode == 1){
             for (int x = 0; x < 40; x++) {
                 int minHeight = (height) - 50;
                 int maxHeight = (height) + 100;
@@ -254,12 +234,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
             }
         }
-        else if (gameMode == 2){
-            //TODO: Arena bauen
-        }
-
-
-    }
 
     /**
      * Method for opening the Menu
@@ -281,7 +255,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param e The KeyEvent received from KeyChecker
      */
     public void keyPressed(KeyEvent e) {
-        if (gameMode == 1){
             //movement player 1
             if (e.getKeyChar() == 'a') player.keyLeft = true;
             if (e.getKeyChar() == 'd') player.keyRight = true;
@@ -290,20 +263,7 @@ public class GamePanel extends JPanel implements ActionListener {
             //respawn
             if (e.getKeyChar() == 'r') reset1();
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
-        }
-        else if (gameMode == 2){
-            //movement player 1
 
-            if (e.getKeyChar() == 'a') player.keyLeft = true;
-            if (e.getKeyChar() == 'd') player.keyRight = true;
-            if (e.getKeyChar() == 'w') player.keyUp = true;
-
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
-
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
-            if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
-        }
 
 
     }
@@ -313,22 +273,11 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param e The KeyEvent received from KeyChecker
      */
     public void keyReleased(KeyEvent e) {
-        if (gameMode == 1){
             //stop movement player1
             if (e.getKeyChar() == 'a') player.keyLeft = false;
             if (e.getKeyChar() == 'd') player.keyRight = false;
             if (e.getKeyChar() == 'w') player.keyUp = false;
-        }
-        else if (gameMode == 2){
-            //stop movement player1
-            if (e.getKeyChar() == 'a') player.keyLeft = false;
-            if (e.getKeyChar() == 'd') player.keyRight = false;
-            if (e.getKeyChar() == 'w') player.keyUp = false;
-            //stop movement Player2
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = false;
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = false;
-            if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = false;
-        }
+
 
     }
 }
