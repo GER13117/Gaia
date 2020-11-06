@@ -5,16 +5,17 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuFrame extends JFrame implements Runnable{
+public class MenuFrame extends JFrame implements Runnable {
     //Member
     JMenuBar menuBar = new JMenuBar();
     Container pane = getContentPane();
     JButton leaveGame = new JButton("Leave Game");
     JButton backToGame = new JButton("Continue");
 
-    public MenuFrame(){
+    public MenuFrame() {
         run();
     }
+
     @Override
     public void run() {
         pane.setLayout(new FlowLayout());
@@ -22,12 +23,14 @@ public class MenuFrame extends JFrame implements Runnable{
         Buttons();
 
     }
-    public void MenuBar(){
+
+    public void MenuBar() {
         JMenu test = new JMenu("test");
         setJMenuBar(menuBar);
         menuBar.add(test);
     }
-    public void Buttons(){
+
+    public void Buttons() {
         pane.add(leaveGame);
         leaveGame.addActionListener(new ActionListener() {
             @Override

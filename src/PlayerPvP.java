@@ -21,7 +21,7 @@ public class PlayerPvP {
     boolean keyUp;
     boolean keyDown;
 
-    public PlayerPvP(int x, int y, GamePanelPvP panel){
+    public PlayerPvP(int x, int y, GamePanelPvP panel) {
 
         this.panel = panel;
         this.x = x;
@@ -32,52 +32,52 @@ public class PlayerPvP {
         hitBox = new Rectangle(x, y, width, height);
     }
 
-    public void set(){
+    public void set() {
 
         //Bedingungen und einschränkungen vertikal
-        if(keyLeft && keyRight || !keyLeft && !keyRight){
+        if (keyLeft && keyRight || !keyLeft && !keyRight) {
             xspeed *= 0.8;
-        } else if(keyLeft && !keyRight){
+        } else if (keyLeft && !keyRight) {
             xspeed--;
-        } else if(keyRight&& !keyLeft){
+        } else if (keyRight && !keyLeft) {
             xspeed++;
         }
-        if(xspeed>0 && xspeed < 0.75 ){
+        if (xspeed > 0 && xspeed < 0.75) {
             xspeed = 0;
         }
-        if(xspeed<0 && xspeed > -0.75 ){
+        if (xspeed < 0 && xspeed > -0.75) {
             xspeed = 0;
         }
 
-        if(xspeed > 7){
+        if (xspeed > 7) {
             xspeed = 7;
         }
-        if(xspeed < -7){
+        if (xspeed < -7) {
             xspeed = -7;
         }
 
         //Gravitation und un Kollision
-        if(keyUp){
+        if (keyUp) {
 
 
             //check if touching ground
-            hitBox.y ++;
-            for(Wall wall: panel.walls){
-                if(wall.hitBox.intersects(hitBox)){
+            hitBox.y++;
+            for (Wall wall : panel.walls) {
+                if (wall.hitBox.intersects(hitBox)) {
                     yspeed = -11;//deaktiviert fliegen
                 }
             }
-            hitBox.y --;
+            hitBox.y--;
         }
 
-        yspeed +=0.5;
+        yspeed += 0.5;
 
         //horizontale Kolllision
         hitBox.x += xspeed;
-        for(Wall wall: panel.walls){
-            if(hitBox.intersects(wall.hitBox)){
+        for (Wall wall : panel.walls) {
+            if (hitBox.intersects(wall.hitBox)) {
                 hitBox.x -= xspeed;
-                while(!wall.hitBox.intersects(hitBox)){
+                while (!wall.hitBox.intersects(hitBox)) {
                     hitBox.x += Math.signum(xspeed);//TODO: Googlen wie signum funktioniert
                 }
                 hitBox.x -= Math.signum(xspeed);
@@ -88,10 +88,10 @@ public class PlayerPvP {
         }
         //vertikale Kollision
         hitBox.y += yspeed;
-        for(Wall wall: panel.walls){
-            if(hitBox.intersects(wall.hitBox)){//Horizontal
+        for (Wall wall : panel.walls) {
+            if (hitBox.intersects(wall.hitBox)) {//Horizontal
                 hitBox.y -= yspeed;
-                while(!wall.hitBox.intersects(hitBox)){
+                while (!wall.hitBox.intersects(hitBox)) {
                     hitBox.y += Math.signum(yspeed);
                 }
                 hitBox.y -= Math.signum(yspeed);
@@ -106,15 +106,16 @@ public class PlayerPvP {
         y += yspeed;
 
         //Death Code
-        if(panel.player.y > 1500) panel.reset1();
-        if(panel.player2.y > 1500) panel.reset2();
+        if (panel.player.y > 1500) panel.reset1();
+        if (panel.player2.y > 1500) panel.reset2();
 
         //bewegt die Hitbox mit dem Spieler
         hitBox.x = x;
         hitBox.y = y;
     }
+
     //Platzhalter für animierten Charakter
-    public void draw(Graphics2D gtd){
+    public void draw(Graphics2D gtd) {
 
         gtd.setColor(Color.BLACK);
         gtd.fillRect(x, y, width, height);

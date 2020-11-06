@@ -108,8 +108,8 @@ public class Player extends Thread {
             }
 
         }
-            panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
-            y += yspeed;
+        panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
+        y += yspeed;
 
 
         //Death Code

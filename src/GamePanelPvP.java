@@ -43,9 +43,9 @@ public class GamePanelPvP extends JPanel implements ActionListener {
     int gameMode;
 
 
-    public GamePanelPvP(){
+    public GamePanelPvP() {
         //einfügen des Spieler-Objekts
-        player = new PlayerPvP(400,300,this);
+        player = new PlayerPvP(400, 300, this);
         player2 = new PlayerPvP(200, 300, this);
 
         reset1();
@@ -66,7 +66,7 @@ public class GamePanelPvP extends JPanel implements ActionListener {
 
     }
 
-    public void reset1(){
+    public void reset1() {
         player.x = 200;
         player.y = 150;
         player.xspeed = 0;
@@ -75,7 +75,8 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         int offset = 50;
         makeWalls(offset);
     }
-    public void reset2(){
+
+    public void reset2() {
         player2.x = 200;
         player2.y = 150;
         player2.xspeed = 0;
@@ -84,7 +85,6 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         int offset = 50;
         makeWalls(offset);
     }
-
 
 
     public void makeWalls(int offset) {
@@ -113,54 +113,55 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         BufferedImage stoneRight = stoneSheet.grabImage(3, 1, s, s);
         BufferedImage stoneLeft = stoneSheet.grabImage(1, 1, s, s);
         int squareSize = 50;
-        for(int i = 50; i < windowWidth-50; i += 50){
-            walls.add(new Wall(i, windowHeight-80, 50, 50, stone));
+        for (int i = 50; i < windowWidth - 50; i += 50) {
+            walls.add(new Wall(i, windowHeight - 80, 50, 50, stone));
 
         }
         int bottomRow = windowHeight - 80;
         //Left endwall
-        walls.add(new Wall(50, bottomRow-50, 50, 50, stone));
+        walls.add(new Wall(50, bottomRow - 50, 50, 50, stone));
 
         //middle walls from left to right
-        walls.add(new Wall(450, bottomRow-50, 50, 50, stone));
+        walls.add(new Wall(450, bottomRow - 50, 50, 50, stone));
 
-        walls.add(new Wall(600, bottomRow-100, 50, 50, stone));
-        walls.add(new Wall(600, bottomRow-50, 50, 50, stone));
+        walls.add(new Wall(600, bottomRow - 100, 50, 50, stone));
+        walls.add(new Wall(600, bottomRow - 50, 50, 50, stone));
 
-        walls.add(new Wall(650, bottomRow-50, squareSize, squareSize, stone));
-        walls.add(new Wall(650, bottomRow-100, squareSize, squareSize, stone));
-        walls.add(new Wall(650, bottomRow-150, squareSize, squareSize, stone));
+        walls.add(new Wall(650, bottomRow - 50, squareSize, squareSize, stone));
+        walls.add(new Wall(650, bottomRow - 100, squareSize, squareSize, stone));
+        walls.add(new Wall(650, bottomRow - 150, squareSize, squareSize, stone));
 
-        walls.add(new Wall(700, bottomRow-100, 50, 50, stone));
-        walls.add(new Wall(700, bottomRow-50, 50, 50, stone));
+        walls.add(new Wall(700, bottomRow - 100, 50, 50, stone));
+        walls.add(new Wall(700, bottomRow - 50, 50, 50, stone));
 
-        walls.add(new Wall(750, bottomRow-50, 50, 50, stone));
+        walls.add(new Wall(750, bottomRow - 50, 50, 50, stone));
 
 
         //right endwall
-        walls.add(new Wall(1850, bottomRow-150, squareSize, squareSize,stoneRight));
-        walls.add(new Wall(1850, bottomRow-100, squareSize, squareSize, stoneRight ));
-        walls.add(new Wall(1850, bottomRow-50, squareSize, squareSize, stoneRight ));
+        walls.add(new Wall(1850, bottomRow - 150, squareSize, squareSize, stoneRight));
+        walls.add(new Wall(1850, bottomRow - 100, squareSize, squareSize, stoneRight));
+        walls.add(new Wall(1850, bottomRow - 50, squareSize, squareSize, stoneRight));
 
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         super.paint(g);
 
         Graphics2D gtd = (Graphics2D) g;
         player.draw(gtd);
         player2.draw(gtd);
 
-        for(Wall wall: walls){
+        for (Wall wall : walls) {
             wall.draw(gtd);
         }
     }
+
     /**
      * Method for opening the Menu
      */
-    public void openMenu(){
+    public void openMenu() {
         MenuFrame menuFrame = new MenuFrame();
-        menuFrame.setSize(300,300);
+        menuFrame.setSize(300, 300);
         menuFrame.setLocationRelativeTo(null);
 
         menuFrame.setResizable(true);
@@ -171,18 +172,16 @@ public class GamePanelPvP extends JPanel implements ActionListener {
     }
 
 
-
-
     public void keyPressed(KeyEvent e) {
         //movement player 1
-        if(e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = true;
-        if(e.getKeyChar() == 'd'|| e.getKeyChar() == 'D') player.keyRight = true;
-        if(e.getKeyChar() == 'w'|| e.getKeyChar() == 'W') player.keyUp = true;
+        if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = true;
+        if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') player.keyRight = true;
+        if (e.getKeyChar() == 'w' || e.getKeyChar() == 'W') player.keyUp = true;
         //movement player 2
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
-        if(e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
-        if(e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = true;
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;
+        if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = true;
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = true;
 
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
 
@@ -190,14 +189,14 @@ public class GamePanelPvP extends JPanel implements ActionListener {
 
     public void keyReleased(KeyEvent e) {
         //stop movement player1
-        if(e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = false;
-        if(e.getKeyChar() == 'd'|| e.getKeyChar() == 'D') player.keyRight = false;
-        if(e.getKeyChar() == 'w' || e.getKeyChar() == 'W') player.keyUp = false;
+        if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = false;
+        if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') player.keyRight = false;
+        if (e.getKeyChar() == 'w' || e.getKeyChar() == 'W') player.keyUp = false;
         //stop movement player2
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = false;
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = false;
-        if(e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = false;
-        if(e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = false;
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = false;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = false;
+        if (e.getKeyCode() == KeyEvent.VK_UP) player2.keyUp = false;
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) player2.keyDown = false;
     }
 
     @Override

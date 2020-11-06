@@ -46,15 +46,15 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     /**
-     *Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
+     * Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
      */
     public GamePanel() {
         this.gameMode = gameMode;
         music();
         //einfügen des Spieler-Objekts
-        if (gameMode == 1){
+        if (gameMode == 1) {
             player = new Player(400, 300, this);
-        } else{
+        } else {
             player = new Player(500, 300, this);
             player2 = new Player(300, 300, this);
         }
@@ -67,10 +67,10 @@ public class GamePanel extends JPanel implements ActionListener {
         gameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                    player.set();
+                player.set();
 
                 //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
-                if (walls.get(walls.size()-1).x < (windowWidth)) {
+                if (walls.get(walls.size() - 1).x < (windowWidth)) {
                     offset += windowWidth;
                     makeWalls();
 
@@ -130,11 +130,12 @@ public class GamePanel extends JPanel implements ActionListener {
         offset = -150;
         makeWalls();
     }
-    public void respawn(){
-            player.x = 400;
-            player.y = 150;
-            player.xspeed = 0;
-            player.yspeed = 0;
+
+    public void respawn() {
+        player.x = 400;
+        player.y = 150;
+        player.xspeed = 0;
+        player.yspeed = 0;
 
     }
 
@@ -175,14 +176,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
     /**
      * Method for painting the tiles on a given location
+     *
      * @param g name for the Graphics to paint the tiles
      */
     public void paint(Graphics g) {
         super.paint(g);
 
         Graphics2D gtd = (Graphics2D) g;
-            player.draw(gtd);
-
+        player.draw(gtd);
 
 
         for (Wall wall : walls) {
@@ -196,51 +197,52 @@ public class GamePanel extends JPanel implements ActionListener {
 
     /**
      * The method for creating the terrain, by subtracting or adding height.
+     *
      * @param height startheight of the terrain
      */
     public void terrainGen(int height) {
-            for (int x = 0; x < 40; x++) {
-                int minHeight = (height) - 50;
-                int maxHeight = (height) + 100;
-                height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
-                int minStoneSpawnDistance = height + 50;
-                int maxStoneSpawnDistance = height + 300;
-                int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
-                for (int y = 1100; y > height; y -= 50) {
-                    if (y > totalSpawnDistance) {
-                        walls.add(new Wall((offset + x * 50), y, s, s, stone));
-                    } else {
-                        walls.add(new Wall((offset + x * 50), y, s, s, dirt));
+        for (int x = 0; x < 40; x++) {
+            int minHeight = (height) - 50;
+            int maxHeight = (height) + 100;
+            height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
+            int minStoneSpawnDistance = height + 50;
+            int maxStoneSpawnDistance = height + 300;
+            int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
+            for (int y = 1100; y > height; y -= 50) {
+                if (y > totalSpawnDistance) {
+                    walls.add(new Wall((offset + x * 50), y, s, s, stone));
+                } else {
+                    walls.add(new Wall((offset + x * 50), y, s, s, dirt));
 
-                    }
                 }
+            }
 
-                topLayer = new int[41];
-                topLayer[x] = height;
+            topLayer = new int[41];
+            topLayer[x] = height;
 
-                if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
-                else {
-                    //Platzhalter
-                    walls.add(new Wall((offset + x * 50), height, s, s, gras));
+            if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
+            else {
+                //Platzhalter
+                walls.add(new Wall((offset + x * 50), height, s, s, gras));
 
-                    //System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
-                    //rules for grass
+                //System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
+                //rules for grass
                 /*
                     if (topLayer[x-1] == height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, gras));
                     else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
 
                     //else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
                     else if (topLayer[x-1] < height && topLayer[x+1] > height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));*/
-                }
             }
         }
+    }
 
     /**
      * Method for opening the Menu
      */
-    public void openMenu(){
+    public void openMenu() {
         MenuFrame menuFrame = new MenuFrame();
-        menuFrame.setSize(300,300);
+        menuFrame.setSize(300, 300);
         menuFrame.setLocationRelativeTo(null);
 
         menuFrame.setResizable(true);
@@ -252,31 +254,32 @@ public class GamePanel extends JPanel implements ActionListener {
 
     /**
      * Checks the KeyPressed inputs and perform the specific actions.
+     *
      * @param e The KeyEvent received from KeyChecker
      */
     public void keyPressed(KeyEvent e) {
-            //movement player 1
-            if (e.getKeyChar() == 'a') player.keyLeft = true;
-            if (e.getKeyChar() == 'd') player.keyRight = true;
-            if (e.getKeyChar() == 'w') player.keyUp = true;
+        //movement player 1
+        if (e.getKeyChar() == 'a') player.keyLeft = true;
+        if (e.getKeyChar() == 'd') player.keyRight = true;
+        if (e.getKeyChar() == 'w') player.keyUp = true;
 
-            //respawn
-            if (e.getKeyChar() == 'r') reset1();
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
-
+        //respawn
+        if (e.getKeyChar() == 'r') reset1();
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
 
 
     }
 
     /**
      * Checks the KeyReleased inputs and perform the specific actions.
+     *
      * @param e The KeyEvent received from KeyChecker
      */
     public void keyReleased(KeyEvent e) {
-            //stop movement player1
-            if (e.getKeyChar() == 'a') player.keyLeft = false;
-            if (e.getKeyChar() == 'd') player.keyRight = false;
-            if (e.getKeyChar() == 'w') player.keyUp = false;
+        //stop movement player1
+        if (e.getKeyChar() == 'a') player.keyLeft = false;
+        if (e.getKeyChar() == 'd') player.keyRight = false;
+        if (e.getKeyChar() == 'w') player.keyUp = false;
 
 
     }
