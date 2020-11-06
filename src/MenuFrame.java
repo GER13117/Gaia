@@ -32,6 +32,7 @@ public class MenuFrame extends JFrame implements Runnable{
         leaveGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO: Stattdessen ins Startmenü zurückkehren
                 System.exit(0);
 
             }
