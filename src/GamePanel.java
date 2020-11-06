@@ -49,7 +49,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
      */
     public GamePanel() {
-        this.gameMode = gameMode;
         music();
         //einfügen des Spieler-Objekts
         if (gameMode == 1) {

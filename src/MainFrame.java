@@ -21,11 +21,12 @@ public class MainFrame extends JFrame {
             panel.setSize(this.getSize());
             Color skyPlaceholder = new Color(78, 147, 202);
             panel.setBackground(skyPlaceholder);
-            panel.setVisible(true);
+
             this.add(panel);
 
             addKeyListener(new KeyChecker(panel));
             panel.addMouseListener(new MouseChecker());
+            panel.setVisible(true);
 
         } else if (gameMode == 2) {
             panelPvP = new GamePanelPvP();
@@ -33,11 +34,13 @@ public class MainFrame extends JFrame {
             panelPvP.setSize(this.getSize());
             Color skyPlaceholder = new Color(78, 147, 202);
             panelPvP.setBackground(skyPlaceholder);
-            panelPvP.setVisible(true);
+
             this.add(panelPvP);
 
             addKeyListener(new KeyCheckerPvP(panelPvP));
             panelPvP.addMouseListener(new MouseChecker());
+
+            panelPvP.setVisible(true);
         }
 
 
