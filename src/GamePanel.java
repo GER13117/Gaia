@@ -42,8 +42,6 @@ public class GamePanel extends JPanel implements ActionListener {
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
     int[] topLayer;
-    int gameMode;
-
 
     /**
      * Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
@@ -51,13 +49,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public GamePanel() {
         music();
         //einfügen des Spieler-Objekts
-        if (gameMode == 1) {
-            player = new Player(400, 300, this);
-        } else {
-            player = new Player(500, 300, this);
-            player2 = new Player(300, 300, this);
-        }
-
+        player = new Player(400, 300, this);
 
         reset1();
 
@@ -98,20 +90,13 @@ public class GamePanel extends JPanel implements ActionListener {
     public static void music() {
         Random rand = new Random();
         int index = rand.nextInt(3);
-        String filepath;
-        switch (index) {
-            case 0:
-                filepath = "res/Music/far-from-the-world.wav";
-                break;
-            case 1:
-                filepath = "res/Music/impavid.wav";
-                break;
-            case 2:
-                filepath = "res/Music/mountains-past.wav";
-                break;
-            default:
-                filepath = "Music/song1.wav"; //Einfach irgendein Path es wird so oder so ein error geschmissen
-        }
+        String filepath = switch (index) {
+            case 0 -> "res/Music/far-from-the-world.wav";
+            case 1 -> "res/Music/impavid.wav";
+            case 2 -> "res/Music/mountains-past.wav";
+//Einfach irgendein Path es wird so oder so ein error geschmissen
+            default -> "Music/song1.wav";
+        };
 
         MusicStuff musicObject;
         musicObject = new MusicStuff();
