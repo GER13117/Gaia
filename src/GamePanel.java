@@ -243,12 +243,12 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void keyPressed(KeyEvent e) {
         //movement player 1
-        if (e.getKeyChar() == 'a') player.keyLeft = true;
-        if (e.getKeyChar() == 'd') player.keyRight = true;
-        if (e.getKeyChar() == 'w') player.keyUp = true;
+        if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = true;
+        if (e.getKeyChar() == 'd'|| e.getKeyChar() == 'D') player.keyRight = true;
+        if (e.getKeyChar() == 'w'|| e.getKeyChar() == 'W') player.keyUp = true;
 
         //respawn
-        if (e.getKeyChar() == 'r') reset1();
+        if (e.getKeyChar() == 'r'|| e.getKeyChar() == 'R') reset1();
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
 
 
