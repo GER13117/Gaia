@@ -15,9 +15,11 @@ public class GamePanelPvP extends JPanel implements ActionListener {
     PlayerPvP player;
     PlayerPvP player2;
     Timer gameTimer;
+    Bullet bullet;
 
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
+    ArrayList<Bullet> bullets = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
     int cameraX;
     int cameraY;
@@ -154,6 +156,9 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         for (Wall wall : walls) {
             wall.draw(gtd);
         }
+        for (Bullet bullet: bullets){
+            bullet.draw(gtd);
+        }
     }
 
     /**
@@ -170,6 +175,11 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         menuFrame.setVisible(true);
         menuFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
+    public void addBullet(){
+        //bullet.ePressed = true;
+        bullets.add(new Bullet(player.x, player.y));
+
+    }
 
 
     public void keyPressed(KeyEvent e) {
@@ -177,6 +187,7 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = true;
         if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') player.keyRight = true;
         if (e.getKeyChar() == 'w' || e.getKeyChar() == 'W') player.keyUp = true;
+        if (e.getKeyCode() == KeyEvent.VK_E) addBullet();
         //movement player 2
         if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;

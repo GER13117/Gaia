@@ -10,7 +10,6 @@ public class Player extends Thread {
     int x;
     int y;
     GamePanel panel;
-    Wall wall;
     int width;
     int height;
     //Velocities of the player

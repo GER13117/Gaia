@@ -104,7 +104,6 @@ public class PlayerPvP {
 
         x += xspeed;
         y += yspeed;
-
         //Death Code
         if (panel.player.y > 1500) panel.reset1();
         if (panel.player2.y > 1500) panel.reset2();
