@@ -15,8 +15,8 @@ import java.util.TimerTask;
 
 public class GamePanel extends JPanel implements ActionListener {
     Player player;
-    Player player2;
     Timer gameTimer;
+    ImprovedNoise improvedNoise;
 
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
@@ -36,12 +36,17 @@ public class GamePanel extends JPanel implements ActionListener {
     BufferedImage grasLeft;
     SpriteSheet ss;
     SpriteSheet stoneSheet;
+    SpriteSheet sandSheet;
     BufferedImageLoader loader;
     int height = 500;
     //Import Images for the different solids
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
+    private BufferedImage spriteSheetSand = null;
     int[] topLayer;
+    private BufferedImage sand;
+    private BufferedImage sandTop;
+    BufferedImage grasTopLeft;
 
     /**
      * Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
@@ -134,14 +139,29 @@ public class GamePanel extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ss = new SpriteSheet(spriteSheet);
-        grasLeft = ss.grabImage(1, 1, s, s);
-        dirt = ss.grabImage(2, 2, s, s);
-        gras = ss.grabImage(2, 1, s, s);
-        BufferedImage dirtLeftDown = ss.grabImage(1, 3, s, s);
-        BufferedImage grasRight = ss.grabImage(3, 1, s, s);
-        BufferedImage dirtRight = ss.grabImage(3, 2, s, s);
-        BufferedImage grasRightDown = ss.grabImage(3, 3, s, s);
+        try {
+            spriteSheetSand = loader.loadImage("textures/sand_sheet.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        sandSheet = new SpriteSheet(spriteSheetSand);
+                //sandSheet = new SpriteSheet(spriteSheetSand);
+                grasTopLeft = sandSheet.grabImage(1, 1, s, s);
+                sand = sandSheet.grabImage(2, 2, s, s);
+                sandTop = sandSheet.grabImage(2, 1, s, s);
+                BufferedImage sandLeftDown = sandSheet.grabImage(1, 3, s, s);
+                BufferedImage sandTopRight = sandSheet.grabImage(3, 1, s, s);
+                BufferedImage sandRight = sandSheet.grabImage(3, 2, s, s);
+                BufferedImage sandRightDown = sandSheet.grabImage(3, 3, s, s);
+
+                ss = new SpriteSheet(spriteSheet);
+                grasLeft = ss.grabImage(1, 1, s, s);
+                dirt = ss.grabImage(2, 2, s, s);
+                gras = ss.grabImage(2, 1, s, s);
+                BufferedImage dirtLeftDown = ss.grabImage(1, 3, s, s);
+                BufferedImage grasRight = ss.grabImage(3, 1, s, s);
+                BufferedImage dirtRight = ss.grabImage(3, 2, s, s);
+                BufferedImage grasRightDown = ss.grabImage(3, 3, s, s);
 
         try {
             spriteSheetStone = loader.loadImage("textures/stone_sprite.png");
@@ -185,6 +205,11 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param height startheight of the terrain
      */
     public void terrainGen(int height) {
+        //TODO: die Perlin Noise dazu nutzen, um zwischen Erd und sandblöcken zu entscheiden. Dabei soll sand gesetz werden, wenn temperature über 0 ist und Erde wenn es drunter ist
+        for (double i = 0; i < 5; i+= 0.02) {
+            double temperature = improvedNoise.noise(i) * 100;
+            //biomes = ((int) terrainHeight) * 25;
+        }
         for (int x = 0; x < 40; x++) {
             int minHeight = (height) - 50;
             int maxHeight = (height) + 100;
