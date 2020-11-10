@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements ActionListener {
     int[] topLayer;
     private BufferedImage sand;
     private BufferedImage sandTop;
-    BufferedImage grasTopLeft;
+    BufferedImage sandTopLeft;
 
     /**
      * Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
@@ -146,13 +146,14 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         sandSheet = new SpriteSheet(spriteSheetSand);
                 //sandSheet = new SpriteSheet(spriteSheetSand);
-                grasTopLeft = sandSheet.grabImage(1, 1, s, s);
+                sandTopLeft = sandSheet.grabImage(1, 1, s, s);
                 sand = sandSheet.grabImage(2, 2, s, s);
                 sandTop = sandSheet.grabImage(2, 1, s, s);
                 BufferedImage sandLeftDown = sandSheet.grabImage(1, 3, s, s);
                 BufferedImage sandTopRight = sandSheet.grabImage(3, 1, s, s);
                 BufferedImage sandRight = sandSheet.grabImage(3, 2, s, s);
                 BufferedImage sandRightDown = sandSheet.grabImage(3, 3, s, s);
+
 
                 ss = new SpriteSheet(spriteSheet);
                 grasLeft = ss.grabImage(1, 1, s, s);
@@ -207,42 +208,60 @@ public class GamePanel extends JPanel implements ActionListener {
     public void terrainGen(int height) {
         //TODO: die Perlin Noise dazu nutzen, um zwischen Erd und sandblöcken zu entscheiden. Dabei soll sand gesetz werden, wenn temperature über 0 ist und Erde wenn es drunter ist
         for (double i = 0; i < 5; i+= 0.02) {
-            double temperature = improvedNoise.noise(i) * 100;
-            //biomes = ((int) terrainHeight) * 25;
+            double temperature = improvedNoise.noise(i) * 50;
+            System.out.println(temperature);
         }
         for (int x = 0; x < 40; x++) {
+            double temperature = improvedNoise.noise(x/10.5);
             int minHeight = (height) - 50;
             int maxHeight = (height) + 100;
             height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
             int minStoneSpawnDistance = height + 50;
             int maxStoneSpawnDistance = height + 300;
             int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
-            for (int y = 1100; y > height; y -= 50) {
-                if (y > totalSpawnDistance) {
-                    walls.add(new Wall((offset + x * 50), y, s, s, stone));
-                } else {
-                    walls.add(new Wall((offset + x * 50), y, s, s, dirt));
 
+            if (temperature<0){
+
+                for (int y = 1100; y > height; y -= 50) {
+                    if (y > totalSpawnDistance) {
+                        walls.add(new Wall((offset + x * 50), y, s, s, stone));
+                    } else {
+                        walls.add(new Wall((offset + x * 50), y, s, s, dirt));
+
+                    }
                 }
-            }
 
-            topLayer = new int[41];
-            topLayer[x] = height;
+                if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
+                else {
+                    //Platzhalter
+                    walls.add(new Wall((offset + x * 50), height, s, s, gras));
 
-            if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
-            else {
-                //Platzhalter
-                walls.add(new Wall((offset + x * 50), height, s, s, gras));
-
-                //System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
-                //rules for grass
+                    //System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
+                    //rules for grass
                 /*
                     if (topLayer[x-1] == height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, gras));
                     else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
 
                     //else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
                     else if (topLayer[x-1] < height && topLayer[x+1] > height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));*/
+                }
+            } else {
+                for (int y = 1100; y > height; y -= 50) {
+                    if (y > totalSpawnDistance) {
+                        walls.add(new Wall((offset + x * 50), y, s, s, stone));
+                    } else {
+                        walls.add(new Wall((offset + x * 50), y, s, s, sand));
+
+                    }
+                }
+
+                if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));
+                else {
+                    //Platzhalter
+                    walls.add(new Wall((offset + x * 50), height, s, s, sandTop));
+                }
             }
+
         }
     }
 

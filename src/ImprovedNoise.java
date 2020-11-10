@@ -18,10 +18,12 @@ public class ImprovedNoise {
         for (int i = 0; i < 256; i++) p[256 + i] = p[i] = permutation[i];
     }
 
+    //TODO: Die Kurven der Perlin-Noise verlängern, damit die Biome größer werden
+
     static public double noise(double x) {
         int X = (int) Math.floor(x) & 255;
         x -= Math.floor(x);
-        double u = fade(x);
+        double u = fade(x/10);
         return lerp(u, grad(p[X], x),
                 grad(p[X + 1], x - 1));
     }
