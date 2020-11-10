@@ -19,7 +19,7 @@ public class Bullet {
 
         this.x = x;
         this.y = y;
-        this.player = player;
+        //this.player = player;
         xSpeed = player.xspeed * 3;
         ySpeed = player.yspeed;
         width = 10;
