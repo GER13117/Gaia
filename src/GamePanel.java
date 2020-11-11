@@ -98,7 +98,7 @@ public class GamePanel extends JPanel implements ActionListener {
         String filepath;
         switch (index) {
             case 0:
-                filepath ="res/Music/far-from-the-world.wav";
+                filepath = "res/Music/far-from-the-world.wav";
                 break;
             case 1:
                 filepath = "res/Music/impavid.wav";
@@ -110,7 +110,8 @@ public class GamePanel extends JPanel implements ActionListener {
             default:
                 filepath = "Music/song1.wav";
                 break;
-        };
+        }
+        ;
 
         MusicStuff musicObject = new MusicStuff();
         musicObject.playMusic(filepath);
@@ -153,24 +154,24 @@ public class GamePanel extends JPanel implements ActionListener {
             e.printStackTrace();
         }
         sandSheet = new SpriteSheet(spriteSheetSand);
-                //sandSheet = new SpriteSheet(spriteSheetSand);
-                sandTopLeft = sandSheet.grabImage(1, 1, s, s);
-                sand = sandSheet.grabImage(2, 2, s, s);
-                sandTop = sandSheet.grabImage(2, 1, s, s);
-                BufferedImage sandLeftDown = sandSheet.grabImage(1, 3, s, s);
-                BufferedImage sandTopRight = sandSheet.grabImage(3, 1, s, s);
-                BufferedImage sandRight = sandSheet.grabImage(3, 2, s, s);
-                BufferedImage sandRightDown = sandSheet.grabImage(3, 3, s, s);
+        //sandSheet = new SpriteSheet(spriteSheetSand);
+        sandTopLeft = sandSheet.grabImage(1, 1, s, s);
+        sand = sandSheet.grabImage(2, 2, s, s);
+        sandTop = sandSheet.grabImage(2, 1, s, s);
+        BufferedImage sandLeftDown = sandSheet.grabImage(1, 3, s, s);
+        BufferedImage sandTopRight = sandSheet.grabImage(3, 1, s, s);
+        BufferedImage sandRight = sandSheet.grabImage(3, 2, s, s);
+        BufferedImage sandRightDown = sandSheet.grabImage(3, 3, s, s);
 
 
-                ss = new SpriteSheet(spriteSheet);
-                grasLeft = ss.grabImage(1, 1, s, s);
-                dirt = ss.grabImage(2, 2, s, s);
-                gras = ss.grabImage(2, 1, s, s);
-                BufferedImage dirtLeftDown = ss.grabImage(1, 3, s, s);
-                BufferedImage grasRight = ss.grabImage(3, 1, s, s);
-                BufferedImage dirtRight = ss.grabImage(3, 2, s, s);
-                BufferedImage grasRightDown = ss.grabImage(3, 3, s, s);
+        ss = new SpriteSheet(spriteSheet);
+        grasLeft = ss.grabImage(1, 1, s, s);
+        dirt = ss.grabImage(2, 2, s, s);
+        gras = ss.grabImage(2, 1, s, s);
+        BufferedImage dirtLeftDown = ss.grabImage(1, 3, s, s);
+        BufferedImage grasRight = ss.grabImage(3, 1, s, s);
+        BufferedImage dirtRight = ss.grabImage(3, 2, s, s);
+        BufferedImage grasRightDown = ss.grabImage(3, 3, s, s);
 
         try {
             spriteSheetStone = loader.loadImage("textures/stone_sprite.png");
@@ -214,7 +215,7 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void terrainGen() {
         for (int x = 0; x < 40; x++) {
-            double temperature = improvedNoise.noise(x/10.5);
+            double temperature = improvedNoise.noise(x / 10.5);
             int minHeight = (height) - 50;
             int maxHeight = (height) + 100;
             height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
@@ -222,7 +223,7 @@ public class GamePanel extends JPanel implements ActionListener {
             int maxStoneSpawnDistance = height + 300;
             int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
 
-            if (temperature<0){
+            if (temperature < 0) {
 
                 for (int y = 1100; y > height; y -= 50) {
                     if (y > totalSpawnDistance) {
@@ -237,15 +238,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 else {
                     //Platzhalter
                     walls.add(new Wall((offset + x * 50), height, s, s, gras));
-
-                    //System.out.println(topLayer[x-1] + " " + height + " " + topLayer[x+1]);//Zum Testen von topLayer[x]
-                    //rules for grass
-                /*
-                    if (topLayer[x-1] == height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, gras));
-                    else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
-
-                    //else if (topLayer[x-1] < height && topLayer[x+1]== height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));
-                    else if (topLayer[x-1] < height && topLayer[x+1] > height) walls.add(new Wall((offset + x*50), height, s, s, grasLeft));*/
                 }
             } else {
                 for (int y = 1100; y > height; y -= 50) {
@@ -290,13 +282,13 @@ public class GamePanel extends JPanel implements ActionListener {
     public void keyPressed(KeyEvent e) {
         //movement player 1
         if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = true;
-        if (e.getKeyChar() == 'd'|| e.getKeyChar() == 'D') player.keyRight = true;
-        if (e.getKeyChar() == 'w'|| e.getKeyChar() == 'W') player.keyUp = true;
+        if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') player.keyRight = true;
+        if (e.getKeyChar() == 'w' || e.getKeyChar() == 'W') player.keyUp = true;
 
         //respawn
-        if (e.getKeyChar() == 'r'|| e.getKeyChar() == 'R') reset1();
+        if (e.getKeyChar() == 'r' || e.getKeyChar() == 'R') reset1();
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) new Thread(()-> openMenu());
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) new Thread(() -> openMenu());
 
 
     }
