@@ -5,8 +5,7 @@ import java.awt.Rectangle;
 /**
  * Player Class
  */
-public class Player extends Thread {
-
+public class Player{
     int x;
     int y;
     GamePanel panel;
@@ -125,4 +124,6 @@ public class Player extends Thread {
         gtd.setColor(Color.BLACK);
         gtd.fillRect(x, y, width, height);
     }
+
+
 }

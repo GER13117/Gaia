@@ -95,16 +95,24 @@ public class GamePanel extends JPanel implements ActionListener {
     public static void music() {
         Random rand = new Random();
         int index = rand.nextInt(3);
-        String filepath = switch (index) {
-            case 0 -> "res/Music/far-from-the-world.wav";
-            case 1 -> "res/Music/impavid.wav";
-            case 2 -> "res/Music/mountains-past.wav";
+        String filepath;
+        switch (index) {
+            case 0:
+                filepath ="res/Music/far-from-the-world.wav";
+                break;
+            case 1:
+                filepath = "res/Music/impavid.wav";
+                break;
+            case 2:
+                filepath = "res/Music/mountains-past.wav";
+                break;
 //Einfach irgendein Path es wird so oder so ein error geschmissen
-            default -> "Music/song1.wav";
+            default:
+                filepath = "Music/song1.wav";
+                break;
         };
 
-        MusicStuff musicObject;
-        musicObject = new MusicStuff();
+        MusicStuff musicObject = new MusicStuff();
         musicObject.playMusic(filepath);
     }
 
@@ -174,7 +182,7 @@ public class GamePanel extends JPanel implements ActionListener {
         BufferedImage stoneRight = stoneSheet.grabImage(3, 1, s, s);
         BufferedImage stoneLeft = stoneSheet.grabImage(1, 1, s, s);
 
-        terrainGen(height);
+        terrainGen();
 
 
     }
@@ -200,17 +208,11 @@ public class GamePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
     }
 
+
     /**
      * The method for creating the terrain, by subtracting or adding height.
-     *
-     * @param height startheight of the terrain
      */
-    public void terrainGen(int height) {
-        //TODO: die Perlin Noise dazu nutzen, um zwischen Erd und sandblöcken zu entscheiden. Dabei soll sand gesetz werden, wenn temperature über 0 ist und Erde wenn es drunter ist
-        for (double i = 0; i < 5; i+= 0.02) {
-            double temperature = improvedNoise.noise(i) * 50;
-            System.out.println(temperature);
-        }
+    public void terrainGen() {
         for (int x = 0; x < 40; x++) {
             double temperature = improvedNoise.noise(x/10.5);
             int minHeight = (height) - 50;
@@ -294,6 +296,7 @@ public class GamePanel extends JPanel implements ActionListener {
         //respawn
         if (e.getKeyChar() == 'r'|| e.getKeyChar() == 'R') reset1();
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) new Thread(()-> openMenu());
 
 
     }
@@ -311,4 +314,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     }
+
+
 }
