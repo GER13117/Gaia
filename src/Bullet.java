@@ -49,7 +49,7 @@ public class Bullet {
      * @param gtd Graphics2D for actually painting the Image
      */
     public void draw(Graphics2D gtd) {
-        for (int i = 0; i<50; i++){
+        for (int i = 0; i<30; i++){
             gtd.setColor(Color.ORANGE);
             gtd.drawRect(x, y, width, height);
             gtd.setColor(Color.WHITE);

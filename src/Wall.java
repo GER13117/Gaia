@@ -54,9 +54,7 @@ public class Wall {
 
     /**
      * method for moving the wall equivalent to the speed of the Player
-     *
      * @param cameraX XPostion of the Camera
-     * @param cameraY YPostion of the Camera (unused)
      * @return new x Postion of the Wall
      */
     public int set(int cameraX) {
