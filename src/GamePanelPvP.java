@@ -15,7 +15,6 @@ public class GamePanelPvP extends JPanel implements ActionListener {
     PlayerPvP player;
     PlayerPvP player2;
     Timer gameTimer;
-    Bullet bullet;
 
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
@@ -37,7 +36,6 @@ public class GamePanelPvP extends JPanel implements ActionListener {
     SpriteSheet ss;
     SpriteSheet stoneSheet;
     BufferedImageLoader loader;
-    int height = 500;
     //Import Images for the different solids
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
@@ -74,6 +72,7 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         player.xspeed = 0;
         player.yspeed = 0;
         walls.clear();
+        bullets.clear();
         int offset = 50;
         makeWalls(offset);
     }
@@ -84,6 +83,7 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         player2.xspeed = 0;
         player2.yspeed = 0;
         walls.clear();
+        bullets.clear();
         int offset = 50;
         makeWalls(offset);
     }
@@ -157,7 +157,7 @@ public class GamePanelPvP extends JPanel implements ActionListener {
             wall.draw(gtd);
         }
         for (Bullet bullet: bullets){
-            bullet.draw(gtd);
+                bullet.draw(gtd);
         }
     }
 
@@ -175,11 +175,6 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         menuFrame.setVisible(true);
         menuFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-    public void addBullet(){
-        //bullet.ePressed = true;
-        bullets.add(new Bullet(player.x, player.y));
-
-    }
 
 
     public void keyPressed(KeyEvent e) {
@@ -187,7 +182,7 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = true;
         if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') player.keyRight = true;
         if (e.getKeyChar() == 'w' || e.getKeyChar() == 'W') player.keyUp = true;
-        if (e.getKeyCode() == KeyEvent.VK_E) addBullet();
+        if (e.getKeyCode() == KeyEvent.VK_E) bullets.add(new Bullet(player.x, player.y, 10, 10));;
         //movement player 2
         if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;

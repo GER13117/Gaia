@@ -1,7 +1,9 @@
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -43,6 +45,8 @@ public class GamePanel extends JPanel implements ActionListener {
      * The Distance in pixel, used to spawn new Blocks(Renderdistance)
      */
     int windowWidth = 2000;
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int screenHeight = ((int) (screenSize.getHeight()/100))*100;
     BufferedImage stone;
     BufferedImage dirt;
     BufferedImage gras;
@@ -211,9 +215,13 @@ public class GamePanel extends JPanel implements ActionListener {
         Graphics2D gtd = (Graphics2D) g;
         player.draw(gtd);
 
-
-        for (Wall wall : walls) {
-            wall.draw(gtd);
+        //TODO: So gehts irgendwie ist aber Suboptimal, da irgendwann die Welt wegglitched
+        try {
+            for (Wall wall : walls) {
+                wall.draw(gtd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -237,7 +245,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
             if (temperature < 0) {
 
-                for (int y = 1100; y > height; y -= 50) {
+                for (int y = screenHeight; y > height; y -= 50) {
                     if (y > totalSpawnDistance) {
                         walls.add(new Wall((offset + x * 50), y, s, s, stone));
                     } else {
@@ -252,7 +260,12 @@ public class GamePanel extends JPanel implements ActionListener {
                     walls.add(new Wall((offset + x * 50), height, s, s, gras));
                 }
             } else {
-                for (int y = 1100; y > height; y -= 50) {
+                for (int y = screenHeight; y > height; y -= 50) {
+                    if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));
+                    else {
+                        //Platzhalter
+                        walls.add(new Wall((offset + x * 50), height, s, s, sandTop));
+                    }
                     if (y > totalSpawnDistance) {
                         walls.add(new Wall((offset + x * 50), y, s, s, stone));
                     } else {
@@ -261,11 +274,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                 }
 
-                if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));
-                else {
-                    //Platzhalter
-                    walls.add(new Wall((offset + x * 50), height, s, s, sandTop));
-                }
+
             }
 
         }

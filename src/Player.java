@@ -80,31 +80,39 @@ public class Player{
         yspeed += 0.5;
         //horizontale Kolllision
         hitBox.x += xspeed;
-        for (Wall wall : panel.walls) {
-            if (hitBox.intersects(wall.hitBox)) {
-                hitBox.x -= xspeed;
-                while (!wall.hitBox.intersects(hitBox)) {
-                    hitBox.x += Math.signum(xspeed);//TODO: Googlen wie signum funktioniert
+        try {
+            for (Wall wall : panel.walls) {
+                if (hitBox.intersects(wall.hitBox)) {
+                    hitBox.x -= xspeed;
+                    while (!wall.hitBox.intersects(hitBox)) {
+                        hitBox.x += Math.signum(xspeed);//TODO: Googlen wie signum funktioniert
+                    }
+                    hitBox.x -= Math.signum(xspeed);
+                    panel.cameraX += x - hitBox.x;
+                    xspeed = 0;
+                    hitBox.x = x;
                 }
-                hitBox.x -= Math.signum(xspeed);
-                panel.cameraX += x - hitBox.x;
-                xspeed = 0;
-                hitBox.x = x;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         //vertikale Kollision
         hitBox.y += yspeed;
-        for (Wall wall : panel.walls) {
-            if (hitBox.intersects(wall.hitBox)) {//Horizontal
-                hitBox.y -= yspeed;
-                while (!wall.hitBox.intersects(hitBox)) {
-                    hitBox.y += Math.signum(yspeed);
+        try {
+            for (Wall wall : panel.walls) {
+                if (hitBox.intersects(wall.hitBox)) {//Horizontal
+                    hitBox.y -= yspeed;
+                    while (!wall.hitBox.intersects(hitBox)) {
+                        hitBox.y += Math.signum(yspeed);
+                    }
+                    hitBox.y -= Math.signum(yspeed);
+                    yspeed = 0;
+                    y = hitBox.y;
                 }
-                hitBox.y -= Math.signum(yspeed);
-                yspeed = 0;
-                y = hitBox.y;
-            }
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
         y += yspeed;
