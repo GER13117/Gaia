@@ -21,15 +21,28 @@ public class GamePanel extends JPanel implements ActionListener {
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
+    /**
+     * x-Position of the camera
+     */
     int cameraX;
+    /**
+     * y-Position of the camera
+     */
     int cameraY;
+    /**
+     * offset of the blocks, needed for placing the correct
+     */
     int offset;
+    /**
+     * standard size of the tiles
+     */
     int s = 50;
 
     // gerundete Fenstergröße für vereinfachte verwendung
-    int windowHeight = 1100;//1100, da bei 1080 immer 20 px verschiebung war
-    int windowWidth = 2000;//die renderdistanz ist damit gemeint
-    int bottomRow = windowHeight - 100;
+    /**
+     * The Distance in pixel, used to spawn new Blocks(Renderdistance)
+     */
+    int windowWidth = 2000;
     BufferedImage stone;
     BufferedImage dirt;
     BufferedImage gras;
@@ -43,10 +56,9 @@ public class GamePanel extends JPanel implements ActionListener {
     private BufferedImage spriteSheet = null;
     private BufferedImage spriteSheetStone = null;
     private BufferedImage spriteSheetSand = null;
-    int[] topLayer;
     private BufferedImage sand;
     private BufferedImage sandTop;
-    BufferedImage sandTopLeft;
+    private BufferedImage sandTopLeft;
 
     /**
      * Constructor of the GamePanel. Starts the music, places the player, starts the gameloop / timer.
