@@ -122,28 +122,20 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         int bottomRow = windowHeight - 80;
         //Left endwall
         walls.add(new Wall(50, bottomRow - 50, 50, 50, stone));
-
         //middle walls from left to right
         walls.add(new Wall(450, bottomRow - 50, 50, 50, stone));
-
         walls.add(new Wall(600, bottomRow - 100, 50, 50, stone));
         walls.add(new Wall(600, bottomRow - 50, 50, 50, stone));
-
         walls.add(new Wall(650, bottomRow - 50, squareSize, squareSize, stone));
         walls.add(new Wall(650, bottomRow - 100, squareSize, squareSize, stone));
         walls.add(new Wall(650, bottomRow - 150, squareSize, squareSize, stone));
-
         walls.add(new Wall(700, bottomRow - 100, 50, 50, stone));
         walls.add(new Wall(700, bottomRow - 50, 50, 50, stone));
-
         walls.add(new Wall(750, bottomRow - 50, 50, 50, stone));
-
-
         //right endwall
         walls.add(new Wall(1850, bottomRow - 150, squareSize, squareSize, stoneRight));
         walls.add(new Wall(1850, bottomRow - 100, squareSize, squareSize, stoneRight));
         walls.add(new Wall(1850, bottomRow - 50, squareSize, squareSize, stoneRight));
-
     }
 
     public void paint(Graphics g) {
@@ -182,7 +174,7 @@ public class GamePanelPvP extends JPanel implements ActionListener {
         if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') player.keyLeft = true;
         if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') player.keyRight = true;
         if (e.getKeyChar() == 'w' || e.getKeyChar() == 'W') player.keyUp = true;
-        if (e.getKeyCode() == KeyEvent.VK_E) bullets.add(new Bullet(player.x, player.y, 10, 10));;
+        if (e.getKeyCode() == KeyEvent.VK_E) bullets.add(new Bullet(player.x, player.y+50, 10, 10));;
         //movement player 2
         if (e.getKeyCode() == KeyEvent.VK_LEFT) player2.keyLeft = true;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) player2.keyRight = true;

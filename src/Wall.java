@@ -59,7 +59,7 @@ public class Wall {
      * @param cameraY YPostion of the Camera (unused)
      * @return new x Postion of the Wall
      */
-    public int set(int cameraX, int cameraY) {
+    public int set(int cameraX) {
         x = startX + cameraX;
         hitBox.x = x;
         /*y = startY + cameraY;

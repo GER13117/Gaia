@@ -48,7 +48,6 @@ public class PlayerPvP {
         if (xspeed < 0 && xspeed > -0.75) {
             xspeed = 0;
         }
-
         if (xspeed > 7) {
             xspeed = 7;
         }
@@ -58,8 +57,6 @@ public class PlayerPvP {
 
         //Gravitation und un Kollision
         if (keyUp) {
-
-
             //check if touching ground
             hitBox.y++;
             for (Wall wall : panel.walls) {
@@ -78,7 +75,7 @@ public class PlayerPvP {
             if (hitBox.intersects(wall.hitBox)) {
                 hitBox.x -= xspeed;
                 while (!wall.hitBox.intersects(hitBox)) {
-                    hitBox.x += Math.signum(xspeed);//TODO: Googlen wie signum funktioniert
+                    hitBox.x += Math.signum(xspeed);
                 }
                 hitBox.x -= Math.signum(xspeed);
                 xspeed = 0;
@@ -100,7 +97,6 @@ public class PlayerPvP {
             }
 
         }
-
 
         x += xspeed;
         y += yspeed;

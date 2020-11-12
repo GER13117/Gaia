@@ -88,7 +88,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
                 }
                 for (Wall wall : walls) {
-                    wall.set(cameraX, cameraY);
+                    wall.set(cameraX);
                 }
                 //entfernt walls außerhalb des Bildschirms
                 for (int i = 0; i < walls.size(); i++) {

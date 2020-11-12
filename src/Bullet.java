@@ -20,6 +20,7 @@ public class Bullet {
     Rectangle hitBox;
     private Image wall;
     PlayerPvP playerPvP;
+    boolean movePositive;
 
     /**
      * Constructor of the Block / Wall
@@ -49,14 +50,13 @@ public class Bullet {
      */
     public void draw(Graphics2D gtd) {
         for (int i = 0; i<50; i++){
-            gtd.setColor(Color.BLACK);
+            gtd.setColor(Color.ORANGE);
             gtd.drawRect(x, y, width, height);
             gtd.setColor(Color.WHITE);
             gtd.fillRect(x+1,y+1,width-2,height-2);
             //gtd.drawImage(wall, x, y, null);
             x++;
         }
-
     }
 
     /**
@@ -67,8 +67,6 @@ public class Bullet {
      * @return new x Postion of the Wall
      */
     public int set(int cameraX, int cameraY) {
-        x = startX + cameraX;
-        hitBox.x = x;
         /*y = startY + cameraY;
         hitBox.y = y;*/
 
