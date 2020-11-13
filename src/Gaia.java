@@ -29,5 +29,4 @@ public class Gaia {
 //TODO: Menü (Möglichkeit die Lautstärke einzustellen)
 //TODO: Schlagen, bauen
 //TODO: Gegner
-//TODO: Waterblock
 //TODO: JavaDoc Kommentare erweitern

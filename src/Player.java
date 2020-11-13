@@ -1,6 +1,10 @@
-import java.awt.Color;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
+
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * Player Class
@@ -9,11 +13,17 @@ public class Player{
     int x;
     int y;
     GamePanel panel;
+    BufferedImageLoader loader;
     int width;
     int height;
     //Velocities of the player
     double xspeed;
     double yspeed;
+
+    private BufferedImage char1 = null;
+    SpriteSheet character1;
+    BufferedImage frame1buf;
+    WritableImage frame1;
 
     Rectangle hitBox;
 
@@ -128,9 +138,23 @@ public class Player{
 
     //Platzhalter für animierten Charakter
     public void draw(Graphics2D gtd) {
+        //ImageIcon iconPlayer = new ImageIcon(frame1);
+        // test = iconPlayer.getImage();
+        //gtd.setColor(Color.BLACK);
+        //gtd.fillRect(x, y, width, height);
+        gtd.drawImage(frame1,x,y,50,100, null);
+    }
+    public void animation(){
+        loader = new BufferedImageLoader();
+        try {
+            char1 = loader.loadImage("Characters/char_male_1_walking.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        character1 = new SpriteSheet(char1);
+        frame1buf = character1.grabImage(1,1,50,100);
+        frame1 = frame1buf;
 
-        gtd.setColor(Color.BLACK);
-        gtd.fillRect(x, y, width, height);
     }
 
 
