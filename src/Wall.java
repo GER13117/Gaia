@@ -1,6 +1,4 @@
-import javax.swing.ImageIcon;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -17,7 +15,7 @@ public class Wall {
     int startX;
     int startY;
     Rectangle hitBox;
-    private Image wall;
+    BufferedImage imageWall;
 
     /**
      * Constructor of the Block / Wall
@@ -36,8 +34,7 @@ public class Wall {
         startY = y;//StartX wird am Anfang einmal festgelegt
         this.width = width;
         this.height = height;
-        ImageIcon iconWall = new ImageIcon(imageWall);
-        wall = iconWall.getImage();
+        this.imageWall = imageWall;
 
         hitBox = new Rectangle(x, y, width, height);
     }
@@ -46,10 +43,10 @@ public class Wall {
     /**
      * Draws 50*50px Image at the Postion of the Tile
      *
-     * @param gtd Graphics2D for actually painting the Image
+     * @param g Graphics2D for actually painting the Image
      */
-    public void draw(Graphics2D gtd) {
-        gtd.drawImage(wall, x, y, null);
+    public void draw(Graphics g) {
+        g.drawImage(imageWall, x, y, null);
     }
 
     /**

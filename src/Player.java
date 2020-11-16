@@ -1,7 +1,9 @@
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.WritableImage;
 
+
+import javax.swing.ImageIcon;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class Player{
     private BufferedImage char1 = null;
     SpriteSheet character1;
     BufferedImage frame1buf;
-    WritableImage frame1;
+    private Image characterf1;
 
     Rectangle hitBox;
 
@@ -137,15 +139,14 @@ public class Player{
     }
 
     //Platzhalter für animierten Charakter
-    public void draw(Graphics2D gtd) {
+    public void draw(Graphics gtd) {
         //ImageIcon iconPlayer = new ImageIcon(frame1);
         // test = iconPlayer.getImage();
         //gtd.setColor(Color.BLACK);
         //gtd.fillRect(x, y, width, height);
-        gtd.drawImage(frame1,x,y,50,100, null);
+        gtd.drawImage(characterf1,x,y, null);
     }
     public void animation(){
-        loader = new BufferedImageLoader();
         try {
             char1 = loader.loadImage("Characters/char_male_1_walking.png");
         } catch (IOException e) {
@@ -153,7 +154,6 @@ public class Player{
         }
         character1 = new SpriteSheet(char1);
         frame1buf = character1.grabImage(1,1,50,100);
-        frame1 = frame1buf;
 
     }
 
