@@ -24,7 +24,11 @@ public class Player{
 
     private BufferedImage char1 = null;
     SpriteSheet character1;
-    BufferedImage frame1buf;
+    private BufferedImage frame1buf;
+    private BufferedImage frame2buf;
+    private BufferedImage frame3buf;
+    private BufferedImage frame4buf;
+    private BufferedImage frame5buf;
     Rectangle hitBox;
 
     //Keys
@@ -143,10 +147,42 @@ public class Player{
         // test = iconPlayer.getImage();
         //gtd.setColor(Color.BLACK);
         //gtd.fillRect(x, y, width, height);
+        animation(gtd);
         new Thread(()->{
-            animation(gtd);
+            while(true){
+                gtd.drawImage(frame1buf,x,y, null);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                gtd.drawImage(frame2buf,x,y, null);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                gtd.drawImage(frame3buf,x,y, null);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                gtd.drawImage(frame4buf,x,y, null);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                gtd.drawImage(frame5buf,x,y, null);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }).start();
-        gtd.drawImage(frame1buf,x,y, null);
     }
     public void animation(Graphics g){
         loader = new BufferedImageLoader();
@@ -157,6 +193,11 @@ public class Player{
         }
         character1 = new SpriteSheet(char1);
         frame1buf = character1.grabImage(1,1,50,100);
+        frame2buf = character1.grabImage(2,1,50,100);
+        frame3buf = character1.grabImage(3,1,50,100);
+        frame4buf = character1.grabImage(4,1,50,100);
+        frame5buf = character1.grabImage(5,1,50,100);
+
         g.drawImage(frame1buf,x,y, null);
     }
 }
