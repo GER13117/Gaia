@@ -170,7 +170,6 @@ public class GamePanel extends JPanel implements ActionListener {
             e.printStackTrace();
         }
         sandSheet = new SpriteSheet(spriteSheetSand);
-        //sandSheet = new SpriteSheet(spriteSheetSand);
         sandTopLeft = sandSheet.grabImage(1, 1, s, s);
         sand = sandSheet.grabImage(2, 2, s, s);
         sandTop = sandSheet.grabImage(2, 1, s, s);

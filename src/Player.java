@@ -25,8 +25,6 @@ public class Player{
     private BufferedImage char1 = null;
     SpriteSheet character1;
     BufferedImage frame1buf;
-    private Image characterf1;
-
     Rectangle hitBox;
 
     //Keys
@@ -49,6 +47,7 @@ public class Player{
         width = 50;
         height = 100;
         hitBox = new Rectangle(x, y, width, height);
+        loader = new BufferedImageLoader();
     }
 
     /**
@@ -144,9 +143,13 @@ public class Player{
         // test = iconPlayer.getImage();
         //gtd.setColor(Color.BLACK);
         //gtd.fillRect(x, y, width, height);
-        gtd.drawImage(characterf1,x,y, null);
+        new Thread(()->{
+            animation(gtd);
+        }).start();
+        gtd.drawImage(frame1buf,x,y, null);
     }
-    public void animation(){
+    public void animation(Graphics g){
+        loader = new BufferedImageLoader();
         try {
             char1 = loader.loadImage("Characters/char_male_1_walking.png");
         } catch (IOException e) {
@@ -154,8 +157,6 @@ public class Player{
         }
         character1 = new SpriteSheet(char1);
         frame1buf = character1.grabImage(1,1,50,100);
-
+        g.drawImage(frame1buf,x,y, null);
     }
-
-
 }
