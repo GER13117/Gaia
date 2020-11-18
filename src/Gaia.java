@@ -23,10 +23,8 @@ public class Gaia {
 
 //TODO: Texturen und Animationen
 //TODO: weitere Blöcke / Materialien hinzufügen
-//TODO: Terrain: Fix chunk loading??
-//TODO: Variable für temperaturen
 //TODO: Regeln zum auswählen der texturen, (fix von topLayer[x])
 //TODO: Menü (Möglichkeit die Lautstärke einzustellen)
-//TODO: Schlagen, bauen
+//TODO: Schlagen
 //TODO: Gegner
 //TODO: JavaDoc Kommentare erweitern

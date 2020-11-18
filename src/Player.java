@@ -144,7 +144,7 @@ public class Player{
         // test = iconPlayer.getImage();
         //gtd.setColor(Color.BLACK);
         //gtd.fillRect(x, y, width, height);
-        animation(gtd);
+        getImages(gtd);
         gtd.drawImage(frame1buf,x,y, null);
         /*new Thread(()->{
             while(true){
@@ -182,7 +182,7 @@ public class Player{
 
         }).start();*/
     }
-    public void animation(Graphics g){
+    public void getImages(Graphics g){
         loader = new BufferedImageLoader();
         try {
             char1 = loader.loadImage("Characters/char_male_1_walking.png");
