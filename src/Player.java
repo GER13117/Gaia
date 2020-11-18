@@ -1,9 +1,6 @@
 
 
-import javax.swing.ImageIcon;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -148,7 +145,8 @@ public class Player{
         //gtd.setColor(Color.BLACK);
         //gtd.fillRect(x, y, width, height);
         animation(gtd);
-        new Thread(()->{
+        gtd.drawImage(frame1buf,x,y, null);
+        /*new Thread(()->{
             while(true){
                 gtd.drawImage(frame1buf,x,y, null);
                 try {
@@ -182,7 +180,7 @@ public class Player{
                 }
             }
 
-        }).start();
+        }).start();*/
     }
     public void animation(Graphics g){
         loader = new BufferedImageLoader();

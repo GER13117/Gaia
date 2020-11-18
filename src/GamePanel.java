@@ -2,17 +2,13 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -46,7 +42,8 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     int windowWidth = 2000;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int screenHeight = ((int) (screenSize.getHeight()/100))*100;
+    //int screenHeight = ((int) (screenSize.getHeight()/100))*100;
+    int screenHeight = 1000;
     BufferedImage stone;
     BufferedImage dirt;
     BufferedImage gras;
@@ -91,14 +88,16 @@ public class GamePanel extends JPanel implements ActionListener {
                     wall.set(cameraX);
                 }
                 //entfernt walls außerhalb des Bildschirms
+                
+                
+                List<Integer> toRemove = new ArrayList<>();
                 for (int i = 0; i < walls.size(); i++) {
                     if (walls.get(i).x < -windowWidth) {
-                        walls.remove(i);
+                        toRemove.add(i);
                     }
                 }
-
+                walls.removeAll(toRemove);
                 repaint();
-
             }
         }, 0, 17);
 
@@ -211,16 +210,12 @@ public class GamePanel extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         super.paint(g);
 
-        Graphics2D gtd = (Graphics2D) g;
-        player.draw(gtd);
+        //Graphics gtd = (Graphics) g;
+        player.draw(g);
 
-        //TODO: So gehts irgendwie ist aber Suboptimal, da irgendwann die Welt wegglitched
-        try {
-            for (Wall wall : walls) {
-                wall.draw(gtd);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        //TODO: So gehts irgendwie ist aber Suboptimal, da irgendwann die Welt wegglitched auch ohne tzry catch glitched die welt weg
+        for (Wall wall : walls) {
+            wall.draw(g);
         }
     }
 
