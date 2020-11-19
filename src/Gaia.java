@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
  * MainMethod
  */
 public class Gaia {
-
+    public static SocketConnection socketConnection;
     public static void main(String[] args) {
         StartMenu startMenu = new StartMenu();
         startMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -17,6 +17,7 @@ public class Gaia {
         startMenu.setTitle("Gaia");
         startMenu.setVisible(true);
         startMenu.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        socketConnection = new SocketConnection("localhost", 1337);
     }
 }
 

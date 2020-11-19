@@ -88,16 +88,15 @@ public class GamePanel extends JPanel implements ActionListener {
                     wall.set(cameraX);
                 }
                 //entfernt walls außerhalb des Bildschirms
-                
-                
-                List<Integer> toRemove = new ArrayList<>();
+
+
                 for (int i = 0; i < walls.size(); i++) {
                     if (walls.get(i).x < -windowWidth) {
                         //toRemove.add(i);
                         walls.remove(i);
                     }
                 }
-                //walls.removeAll(toRemove);
+                System.out.println(offset);
                 repaint();
             }
         }, 0, 17);
@@ -141,7 +140,7 @@ public class GamePanel extends JPanel implements ActionListener {
         cameraX = 150;
         cameraY = 500;
         walls.clear();
-        offset = -150;
+        offset = 0;
         terrainGen();
     }
 
@@ -275,10 +274,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
                     }
                 }
-
-
             }
-
         }
     }
 

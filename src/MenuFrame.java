@@ -21,7 +21,6 @@ public class MenuFrame extends JFrame implements Runnable {
         pane.setLayout(new FlowLayout());
         MenuBar();
         Buttons();
-
     }
 
     public void MenuBar() {
@@ -37,9 +36,9 @@ public class MenuFrame extends JFrame implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 //TODO: Stattdessen ins Startmenü zurückkehren
                 System.exit(0);
-
             }
         });
+
         pane.add(backToGame);
         backToGame.addActionListener(new ActionListener() {
             @Override
@@ -47,6 +46,5 @@ public class MenuFrame extends JFrame implements Runnable {
                 dispose();
             }
         });
-
     }
 }

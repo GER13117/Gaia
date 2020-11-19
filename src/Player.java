@@ -1,10 +1,10 @@
-
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
+import java.net.Socket;
 import java.util.ArrayList;
 
 /**
@@ -31,6 +31,8 @@ public class Player{
     boolean keyRight;
     boolean keyUp;
     boolean keyDown;
+
+
 
     /**
      * @param x     xPosition of a specific Player
@@ -75,6 +77,7 @@ public class Player{
         if (xspeed < -8) {
             xspeed = -8;
         }
+
 
         //Gravitation und un Kollision
         if (keyUp) {
@@ -138,10 +141,6 @@ public class Player{
 
     //Platzhalter für animierten Charakter
     public void draw(Graphics gtd) {
-        //ImageIcon iconPlayer = new ImageIcon(frame1);
-        // test = iconPlayer.getImage();
-        //gtd.setColor(Color.BLACK);
-        //gtd.fillRect(x, y, width, height);
         getImages();
         gtd.drawImage(frames[0],x,y, null);
     }
