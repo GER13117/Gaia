@@ -1,16 +1,15 @@
 
 
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * Player Class
  */
-public class Player{
+public class Enemy{
     public static BufferedImage[] frames = new BufferedImage[5];
     int x;
     int y;
@@ -30,15 +29,13 @@ public class Player{
     boolean keyLeft;
     boolean keyRight;
     boolean keyUp;
-    boolean keyDown;
 
     /**
      * @param x     xPosition of a specific Player
      * @param y     yPosition of a specific Player
      * @param panel the panel where the Player ist drawn on
      */
-    public Player(int x, int y, GamePanel panel) {
-
+    public Enemy(int x, int y, GamePanel panel) {
         this.panel = panel;
         this.x = x;
         this.y = y;
@@ -54,6 +51,9 @@ public class Player{
      * Also sets the "Camera Movement" the same as the Player Movement (Player ist always in the center)
      */
     public void set() {
+        //zu Test-zwecken. Final kommen die vom Server
+        keyRight = true;
+        keyUp = true;
 
         //Bedingungen und einschränkungen vertikal
         if (keyLeft && keyRight || !keyLeft && !keyRight) {
@@ -124,12 +124,9 @@ public class Player{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
-        y += yspeed;
 
-
-        //Death Code
-        if (y > 1500) panel.reset1();
+        x+= xspeed - MainFrame.panel.player.xspeed;
+        y+= yspeed;
 
         //bewegt die Hitbox mit dem Spieler
         hitBox.x = x;
@@ -138,25 +135,12 @@ public class Player{
 
     //Platzhalter für animierten Charakter
     public void draw(Graphics gtd) {
-        //ImageIcon iconPlayer = new ImageIcon(frame1);
-        // test = iconPlayer.getImage();
-        //gtd.setColor(Color.BLACK);
-        //gtd.fillRect(x, y, width, height);
+        gtd.setColor(Color.BLACK);
+        gtd.fillRect(x, y, width, height);
         getImages();
-        gtd.drawImage(frames[0],x,y, null);
+        //gtd.drawImage(frames[0],x,y, null);
     }
     public void getImages(){
-        loader = new BufferedImageLoader();
-        try {
-            char1 = loader.loadImage("Characters/char_male_1_walking.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        character1 = new SpriteSheet(char1);
-        frames[0] = character1.grabImage(1,1,50,100);
-        frames[1] = character1.grabImage(2,1,50,100);
-        frames[2] = character1.grabImage(3,1,50,100);
-        frames[3] = character1.grabImage(4,1,50,100);
-        frames[4] = character1.grabImage(5,1,50,100);
+
     }
 }

@@ -15,6 +15,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Player player;
     Timer gameTimer;
     ImprovedNoise improvedNoise;
+    Enemy enemy;
 
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
@@ -41,8 +42,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * The Distance in pixel, used to spawn new Blocks(Renderdistance)
      */
     int windowWidth = 2000;
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    //int screenHeight = ((int) (screenSize.getHeight()/100))*100;
     int screenHeight = 1000;
     BufferedImage stone;
     BufferedImage dirt;
@@ -66,9 +65,9 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public GamePanel() {
         music();
-        //einfügen des Spieler-Objekts
         player = new Player(400, 300, this);
-
+        enemy = new Enemy(0, 0, this);
+        makeWalls();
         reset1();
 
         //Timer um Spiel laufen zu lassen.
@@ -77,11 +76,12 @@ public class GamePanel extends JPanel implements ActionListener {
             @Override
             public void run() {
                 player.set();
+                enemy.set();
 
                 //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
                 if (walls.get(walls.size() - 1).x < (windowWidth)) {
                     offset += windowWidth;
-                    makeWalls();
+                    terrainGen();
 
                 }
                 for (Wall wall : walls) {
@@ -93,10 +93,11 @@ public class GamePanel extends JPanel implements ActionListener {
                 List<Integer> toRemove = new ArrayList<>();
                 for (int i = 0; i < walls.size(); i++) {
                     if (walls.get(i).x < -windowWidth) {
-                        toRemove.add(i);
+                        //toRemove.add(i);
+                        walls.remove(i);
                     }
                 }
-                walls.removeAll(toRemove);
+                //walls.removeAll(toRemove);
                 repaint();
             }
         }, 0, 17);
@@ -141,7 +142,7 @@ public class GamePanel extends JPanel implements ActionListener {
         cameraY = 500;
         walls.clear();
         offset = -150;
-        makeWalls();
+        terrainGen();
     }
 
     public void respawn() {
@@ -149,6 +150,10 @@ public class GamePanel extends JPanel implements ActionListener {
         player.y = 150;
         player.xspeed = 0;
         player.yspeed = 0;
+        enemy.x = 300;
+        enemy.y = 0;
+        enemy.yspeed = 0;
+        enemy.xspeed = 0;
 
     }
 
@@ -157,6 +162,9 @@ public class GamePanel extends JPanel implements ActionListener {
      * It defines the different Tiles from the sprites. The Generation is happening some where else
      */
     public void makeWalls() {
+        int counter = 0;
+        counter++;
+        System.out.println(counter);
         loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("textures/gras_dirt_sprite.png");
@@ -209,11 +217,11 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void paint(Graphics g) {
         super.paint(g);
-
-        //Graphics gtd = (Graphics) g;
         player.draw(g);
+        enemy.draw(g);
 
         //TODO: So gehts irgendwie ist aber Suboptimal, da irgendwann die Welt wegglitched auch ohne tzry catch glitched die welt weg
+        //TODO: In Normaldeutsch: FIX DEN SCHEIß
         for (Wall wall : walls) {
             wall.draw(g);
         }
@@ -304,8 +312,6 @@ public class GamePanel extends JPanel implements ActionListener {
         if (e.getKeyChar() == 'r' || e.getKeyChar() == 'R') reset1();
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) openMenu();
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) new Thread(() -> openMenu());
-
-
     }
 
     /**
@@ -318,8 +324,6 @@ public class GamePanel extends JPanel implements ActionListener {
         if (e.getKeyChar() == 'a') player.keyLeft = false;
         if (e.getKeyChar() == 'd') player.keyRight = false;
         if (e.getKeyChar() == 'w') player.keyUp = false;
-
-
     }
 
 

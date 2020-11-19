@@ -6,7 +6,6 @@ import java.awt.Color;
  */
 public class MainFrame extends JFrame {
     public static GamePanel panel;
-    public static GamePanelPvP panelPvP;
     public static int gameMode;
 
     public MainFrame(int gameMode) {
@@ -29,18 +28,7 @@ public class MainFrame extends JFrame {
             panel.setVisible(true);
 
         } else if (gameMode == 2) {
-            panelPvP = new GamePanelPvP();
-            panelPvP.setLocation(0, 0);
-            panelPvP.setSize(this.getSize());
-            Color skyPlaceholder = new Color(78, 147, 202);
-            panelPvP.setBackground(skyPlaceholder);
-
-            this.add(panelPvP);
-
-            addKeyListener(new KeyCheckerPvP(panelPvP));
-            panelPvP.addMouseListener(new MouseChecker());
-
-            panelPvP.setVisible(true);
+            System.out.println("HA Verkackt den den gibts nicht mehr");
         }
 
 

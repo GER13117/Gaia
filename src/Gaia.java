@@ -24,7 +24,8 @@ public class Gaia {
 //TODO: Texturen und Animationen
 //TODO: weitere Blöcke / Materialien hinzufügen
 //TODO: Regeln zum auswählen der texturen, (fix von topLayer[x])
-//TODO: Menü (Möglichkeit die Lautstärke einzustellen)
-//TODO: Schlagen
-//TODO: Gegner
+//TODO: Menü (Möglichkeit die IP des Servers einzustellen)
+//TODO: Gegner von Server Steuern lassen
+//TODO: TerrainGen auf Server
+//TODO: X und Y Position zum Server senden und empfangen
 //TODO: JavaDoc Kommentare erweitern
