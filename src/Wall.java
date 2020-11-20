@@ -51,6 +51,7 @@ public class Wall {
 
     /**
      * method for moving the wall equivalent to the speed of the Player
+     *
      * @param cameraX XPostion of the Camera
      * @return new x Postion of the Wall
      */

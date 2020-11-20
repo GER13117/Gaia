@@ -1,16 +1,17 @@
 
 
-
-import java.awt.Color;
+import javax.swing.ImageIcon;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * Player Class
  */
-public class Enemy{
-    public static BufferedImage[] frames = new BufferedImage[5];
+public class Runner {
     int x;
     int y;
     GamePanel panel;
@@ -23,19 +24,26 @@ public class Enemy{
 
     private BufferedImage char1 = null;
     SpriteSheet character1;
+    private BufferedImage frame1buf;
+    private BufferedImage frame2buf;
+    private BufferedImage frame3buf;
+    private BufferedImage frame4buf;
+    private BufferedImage frame5buf;
     Rectangle hitBox;
 
     //Keys
     boolean keyLeft;
     boolean keyRight;
     boolean keyUp;
+    boolean keyDown;
 
     /**
      * @param x     xPosition of a specific Player
      * @param y     yPosition of a specific Player
      * @param panel the panel where the Player ist drawn on
      */
-    public Enemy(int x, int y, GamePanel panel) {
+    public Runner(int x, int y, GamePanel panel) {
+
         this.panel = panel;
         this.x = x;
         this.y = y;
@@ -51,9 +59,6 @@ public class Enemy{
      * Also sets the "Camera Movement" the same as the Player Movement (Player ist always in the center)
      */
     public void set() {
-        //zu Test-zwecken. Final kommen die vom Server
-        keyRight = true;
-        keyUp = true;
 
         //Bedingungen und einschränkungen vertikal
         if (keyLeft && keyRight || !keyLeft && !keyRight) {
@@ -69,11 +74,11 @@ public class Enemy{
         if (xspeed < 0 && xspeed > -0.75) {
             xspeed = 0;
         }
-        if (xspeed > 8) {
-            xspeed = 8;
+        if (xspeed > 9) {
+            xspeed = 9;
         }
-        if (xspeed < -8) {
-            xspeed = -8;
+        if (xspeed < -9) {
+            xspeed = -9;
         }
 
         //Gravitation und un Kollision
@@ -95,7 +100,7 @@ public class Enemy{
                 if (hitBox.intersects(wall.hitBox)) {
                     hitBox.x -= xspeed;
                     while (!wall.hitBox.intersects(hitBox)) {
-                        hitBox.x += Math.signum(xspeed);//TODO: Googlen wie signum funktioniert
+                        hitBox.x += Math.signum(xspeed);
                     }
                     hitBox.x -= Math.signum(xspeed);
                     panel.cameraX += x - hitBox.x;
@@ -124,9 +129,12 @@ public class Enemy{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        x += xspeed - MainFrame.panel.hunter.xspeed;
+        y += yspeed;
 
-        x+= xspeed - MainFrame.panel.player.xspeed;
-        y+= yspeed;
+
+        //Death Code
+        if (y > 1500) panel.reset1();
 
         //bewegt die Hitbox mit dem Spieler
         hitBox.x = x;
@@ -135,12 +143,26 @@ public class Enemy{
 
     //Platzhalter für animierten Charakter
     public void draw(Graphics gtd) {
-        gtd.setColor(Color.BLACK);
-        gtd.fillRect(x, y, width, height);
-        getImages();
-        //gtd.drawImage(frames[0],x,y, null);
+        //ImageIcon iconPlayer = new ImageIcon(frame1);
+        // test = iconPlayer.getImage();
+        //gtd.setColor(Color.BLACK);
+        //gtd.fillRect(x, y, width, height);
+        loadImages();
+        gtd.drawImage(frame1buf, x, y, null);
     }
-    public void getImages(){
 
+    public void loadImages() {
+        loader = new BufferedImageLoader();
+        try {
+            char1 = loader.loadImage("Characters/char_male_1_walking.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        character1 = new SpriteSheet(char1);
+        frame1buf = character1.grabImage(1, 1, 50, 100);
+        frame2buf = character1.grabImage(2, 1, 50, 100);
+        frame3buf = character1.grabImage(3, 1, 50, 100);
+        frame4buf = character1.grabImage(4, 1, 50, 100);
+        frame5buf = character1.grabImage(5, 1, 50, 100);
     }
 }
