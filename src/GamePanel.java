@@ -1,14 +1,16 @@
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -16,6 +18,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Runner runner;
     Timer gameTimer;
     ImprovedNoise improvedNoise;
+    EndScreen endScreen;
 
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
@@ -70,6 +73,7 @@ public class GamePanel extends JPanel implements ActionListener {
         makeWalls();
         reset1();
 
+
         //Timer um Spiel laufen zu lassen.
         gameTimer = new Timer();
         gameTimer.schedule(new TimerTask() {
@@ -84,8 +88,8 @@ public class GamePanel extends JPanel implements ActionListener {
                     terrainGen();
 
                 }
-                for (Wall wall : walls) {
-                    wall.set(cameraX);
+                for (int i = 0; i < walls.size(); i++) {
+                    walls.get(i).set(cameraX);
                 }
                 //entfernt walls außerhalb des Bildschirms
 
@@ -95,11 +99,35 @@ public class GamePanel extends JPanel implements ActionListener {
                         walls.remove(i);
                     }
                 }
+                checkWinner();
                 repaint();
             }
         }, 0, 17);
 
 
+    }
+
+    public void checkWinner(){
+        if (runner.x - hunter.x > 1800 || hunter.x - runner.x > 1800){
+            if (runner.x > hunter.x){
+                System.out.println("runner wins");
+                openEndScreen();
+            } else if (hunter.x > runner.x){
+                System.out.println("hunter wins");
+                openEndScreen();
+            }
+        }
+    }
+    public void openEndScreen(){
+        endScreen = new EndScreen();
+        endScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        endScreen.setLocationRelativeTo(null);
+
+        endScreen.setResizable(true);
+
+        endScreen.setTitle("Gaia");
+        endScreen.setVisible(true);
+        endScreen.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -137,7 +165,7 @@ public class GamePanel extends JPanel implements ActionListener {
         cameraX = 150;
         cameraY = 500;
         walls.clear();
-        offset = 0;
+        offset = -150;
         terrainGen();
     }
 
@@ -158,9 +186,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * It defines the different Tiles from the sprites. The Generation is happening some where else
      */
     public void makeWalls() {
-        int counter = 0;
-        counter++;
-        System.out.println(counter);
         loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("textures/gras_dirt_sprite.png");
@@ -239,7 +264,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
             if (temperature < 0) {
 
-                for (int y = screenHeight; y > height; y -= 50) {
+                for (int y = 1000; y > height; y -= 50) {
                     if (y > totalSpawnDistance) {
                         walls.add(new Wall((offset + x * 50), y, s, s, stone));
                     } else {
@@ -254,7 +279,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     walls.add(new Wall((offset + x * 50), height, s, s, gras));
                 }
             } else {
-                for (int y = screenHeight; y > height; y -= 50) {
+                for (int y = 1000; y > height; y -= 50) {
                     if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));
                     else {
                         //Platzhalter
@@ -293,14 +318,14 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void keyPressed(KeyEvent e) {
         //movement hunter
-        if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') hunter.keyLeft = true;
-        if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') hunter.keyRight = true;
-        if (e.getKeyChar() == 'w' || e.getKeyChar() == 'W') hunter.keyUp = true;
+        if (e.getKeyCode() == KeyEvent.VK_A) runner.keyLeft = true;
+        if (e.getKeyCode() == KeyEvent.VK_D) runner.keyRight = true;
+        if (e.getKeyCode() == KeyEvent.VK_W) runner.keyUp = true;
 
         //movement runner
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) runner.keyLeft = true;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) runner.keyRight = true;
-        if (e.getKeyCode() == KeyEvent.VK_UP) runner.keyUp = true;
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) hunter.keyLeft = true;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) hunter.keyRight = true;
+        if (e.getKeyCode() == KeyEvent.VK_UP) hunter.keyUp = true;
 
         //respawn
         if (e.getKeyChar() == 'r' || e.getKeyChar() == 'R') reset1();
@@ -314,13 +339,13 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void keyReleased(KeyEvent e) {
         //stop movement player1
-        if (e.getKeyChar() == 'a') hunter.keyLeft = false;
-        if (e.getKeyChar() == 'd') hunter.keyRight = false;
-        if (e.getKeyChar() == 'w') hunter.keyUp = false;
+        if (e.getKeyCode() == KeyEvent.VK_A) runner.keyLeft = false;
+        if (e.getKeyCode() == KeyEvent.VK_D) runner.keyRight = false;
+        if (e.getKeyCode() == KeyEvent.VK_W) runner.keyUp = false;
 
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) runner.keyLeft = false;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) runner.keyRight = false;
-        if (e.getKeyCode() == KeyEvent.VK_UP) runner.keyUp = false;
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) hunter.keyLeft = false;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) hunter.keyRight = false;
+        if (e.getKeyCode() == KeyEvent.VK_UP) hunter.keyUp = false;
     }
 
 

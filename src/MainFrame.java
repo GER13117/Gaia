@@ -6,30 +6,24 @@ import java.awt.Color;
  */
 public class MainFrame extends JFrame {
     public static GamePanel panel;
-    public static int gameMode;
 
-    public MainFrame(int gameMode) {
-        this.gameMode = gameMode;
-        initUI(gameMode);
+    public MainFrame() {
+        initUI();
     }
 
-    private void initUI(int gameMode) {
-        if (gameMode == 1) {
-            panel = new GamePanel();
-            panel.setLocation(0, 0);
-            panel.setSize(this.getSize());
-            Color skyPlaceholder = new Color(78, 147, 202);
-            panel.setBackground(skyPlaceholder);
+    private void initUI() {
 
-            this.add(panel);
+        panel = new GamePanel();
+        panel.setLocation(0, 0);
+        panel.setSize(this.getSize());
+        Color skyPlaceholder = new Color(78, 147, 202);
+        panel.setBackground(skyPlaceholder);
 
-            addKeyListener(new KeyChecker(panel));
-            panel.addMouseListener(new MouseChecker());
-            panel.setVisible(true);
+        this.add(panel);
 
-        } else if (gameMode == 2) {
-            System.out.println("HA Verkackt den den gibts nicht mehr");
-        }
+        addKeyListener(new KeyChecker(panel));
+        panel.addMouseListener(new MouseChecker());
+        panel.setVisible(true);
 
 
     }

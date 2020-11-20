@@ -7,15 +7,14 @@ import java.awt.event.ActionListener;
 
 public class StartMenu extends JFrame implements Runnable {
     Container pane = getContentPane();
-    JButton pvp = new JButton("PVP");
-    JButton story = new JButton("Jump 'n' run");
+    JButton story = new JButton("Hunter");
 
     public StartMenu() {
         run();
     }
 
-    public void openGame(int gameMode) {
-        MainFrame frame = new MainFrame(gameMode);
+    public void openGame() {
+        MainFrame frame = new MainFrame();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
 
@@ -26,24 +25,12 @@ public class StartMenu extends JFrame implements Runnable {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    //gamemode 2 = PVP
-    //gamemode 1 = story / jump and run
+
     public void buttons() {
         pane.add(story);
-        story.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openGame(1);
-                dispose();
-            }
-        });
-        pane.add(pvp);
-        pvp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openGame(2);
-                dispose();
-            }
+        story.addActionListener(e -> {
+            openGame();
+            dispose();
         });
 
     }

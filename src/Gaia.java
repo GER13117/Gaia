@@ -20,8 +20,8 @@ public class Gaia {
 }
 
 
-//TODO: Texturen und Animationen
+//TODO: Animationen
 //TODO: weitere Blöcke / Materialien hinzufügen
 //TODO: Regeln zum auswählen der texturen, (fix von topLayer[x])
-//TODO: Menü (Möglichkeit die IP des Servers einzustellen
 //TODO: JavaDoc Kommentare erweitern
+//TODO: Wenn ein Spieler außer halb des Bildschirms ist hat der Vordere gewonnen
