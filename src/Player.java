@@ -76,6 +76,8 @@ public class Player {
 		if (xspeed < -8) {
 			xspeed = -8;
 		}
+		String speedX = Double.toString(xspeed);
+		Gaia.socketConnection.send("ServerPlayer:Double:xspeed:"+speedX);
 
 
 		//Gravitation und un Kollision
@@ -129,6 +131,8 @@ public class Player {
 		}
 		panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
 		y += yspeed;
+		String yString = Integer.toString(y);
+		Gaia.socketConnection.send("ServerPlayer:Integer:y:" + yString);
 
 
 		//Death Code

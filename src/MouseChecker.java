@@ -18,7 +18,9 @@ public class MouseChecker implements MouseListener {
             float y = e.getY() / 50f;
             int yPos = ((int) y) * 50;
             MainFrame.panel.walls.add(new Wall(xPos, yPos, MainFrame.panel.s, MainFrame.panel.s, MainFrame.panel.stone));
-            Gaia.socketConnection.send("Wall:");
+            String stringXPos = Integer.toString(xPos);
+            String stringYPos = Integer.toString(yPos);
+            Gaia.socketConnection.send("Wall:Integer:xPos:" + stringXPos + "Wall:Integer:yPos:" + stringYPos);
         }
     }
 
