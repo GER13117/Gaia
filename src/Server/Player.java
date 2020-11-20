@@ -28,7 +28,6 @@ public class Player extends Thread {
         }
 
 
-
     }
 
     @Override
@@ -36,7 +35,7 @@ public class Player extends Thread {
         while (true) {
             try {
                 String received = inputStream.readLine();
-                if (received == null){
+                if (received == null) {
                     throw new SocketException("Received is null");
                 }
                 System.out.println(uuid + " : " + received);
@@ -46,7 +45,7 @@ public class Player extends Thread {
                 String datatype = splitter[1];
                 String varName = splitter[2];
                 String value = splitter[3];
-                Class<?> c = Class.forName(getClass().getPackage()+object);
+                Class<?> c = Class.forName(getClass().getPackage() + object);
                 switch (datatype) {
                     case "Integer":
                         c.getField(varName).setInt(this, Integer.parseInt(value));
@@ -57,7 +56,7 @@ public class Player extends Thread {
                     case "Double":
                         c.getField(varName).setDouble(this, Double.parseDouble(value));
                 }
-            } catch (SocketException socketException){
+            } catch (SocketException socketException) {
                 ServerMain.players.remove(uuid);
 
             } catch (IOException | IllegalAccessException | NoSuchFieldException | ClassNotFoundException e) {

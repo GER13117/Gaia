@@ -96,7 +96,6 @@ public class GamePanel extends JPanel implements ActionListener {
                         walls.remove(i);
                     }
                 }
-                System.out.println(offset);
                 repaint();
             }
         }, 0, 17);

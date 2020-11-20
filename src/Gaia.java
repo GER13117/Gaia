@@ -7,6 +7,7 @@ import javax.swing.WindowConstants;
  */
 public class Gaia {
     public static SocketConnection socketConnection;
+
     public static void main(String[] args) {
         StartMenu startMenu = new StartMenu();
         startMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);

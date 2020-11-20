@@ -26,10 +26,9 @@ public class ServerMain {
         new Thread(() -> {
             try {
                 PrintWriter writer = new PrintWriter(client.getOutputStream());
+//                writer.println("init");
                 writer.write("init");
                 writer.flush();
-                writer.close();
-
                 BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
                 System.out.println(3);
 

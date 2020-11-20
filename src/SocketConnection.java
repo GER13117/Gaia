@@ -13,7 +13,7 @@ public class SocketConnection {
     UUID uuid;
 
 
-    public SocketConnection(String host, int port){
+    public SocketConnection(String host, int port) {
         try {
             uuid = UUID.randomUUID();
             client = new Socket(host, port);
@@ -25,21 +25,20 @@ public class SocketConnection {
             System.out.println(2);
 
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void send(String str){
-        output.write(str);
-        output.flush();
+    public void send(String str) {
+        output.println(str);
+//        output.write(str);
+//        output.flush();
     }
 
 
-    public static class Receiver extends Thread{
+    public static class Receiver extends Thread {
         SocketConnection parent;
 
         public Receiver(SocketConnection parent) {
@@ -51,8 +50,9 @@ public class SocketConnection {
             while (true) {
                 try {
                     String received = parent.input.readLine();
-                    if (received.equals("init")){
-                        parent.send("init:" + parent.uuid.toString());
+                    //String received = "init";
+                    if (received.equals("init")) {
+                        parent.send("Init:" + parent.uuid.toString());
                         continue;
                     }
                     String[] splitter = received.split(":"); // ["Integer", "x", "421412"]
@@ -62,7 +62,7 @@ public class SocketConnection {
                     String datatype = splitter[1];
                     String varName = splitter[2];
                     String value = splitter[3];
-                    Class<?> c = Class.forName(getClass().getPackage()+object);
+                    Class<?> c = Class.forName(getClass().getPackage() + object);
                     switch (datatype) {
                         case "Integer":
                             c.getField(varName).setInt(this, Integer.parseInt(value));
