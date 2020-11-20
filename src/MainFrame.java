@@ -11,6 +11,9 @@ public class MainFrame extends JFrame {
         initUI();
     }
 
+    /**
+     * initializes UI
+     */
     private void initUI() {
 
         panel = new GamePanel();

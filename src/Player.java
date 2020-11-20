@@ -129,13 +129,17 @@ public class Player {
 
 
         //Death Code
-        if (y > 1500) panel.reset1();
+        if (y > 1180) panel.reset1();
 
-        //bewegt die Hitbox mit dem Spieler
+        //moves Hibox with the Player
         hitBox.x = x;
         hitBox.y = y;
     }
 
+    /**
+     * method for drawing the character
+     * @param gtd draws the pictures
+     */
     //Platzhalter für animierten Charakter
     public void draw(Graphics gtd) {
         //ImageIcon iconPlayer = new ImageIcon(frame1);
@@ -146,6 +150,9 @@ public class Player {
         gtd.drawImage(frame1buf, x, y, null);
     }
 
+    /**
+     * Method for loading the Images from the SpriteSheet using the BufferedImageLoader and SpriteSheet class
+     */
     public void loadImages() {
         loader = new BufferedImageLoader();
         try {

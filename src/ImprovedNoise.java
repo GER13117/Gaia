@@ -1,3 +1,6 @@
+/**
+ * 1 dimensional Perlin-Noise (from StackOverflow)
+ */
 public class ImprovedNoise {
     static final int[] p = new int[512];
     static final int[] permutation = {151, 160, 137, 91, 90, 15,

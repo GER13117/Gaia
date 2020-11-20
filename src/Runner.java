@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Player Class
+ * Runner Class
  */
 public class Runner {
     int x;

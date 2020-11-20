@@ -107,6 +107,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Checks if one of the both Players has won
+     */
     public void checkWinner(){
         if (runner.x - hunter.x > 1800 || hunter.x - runner.x > 1800){
             if (runner.x > hunter.x){
@@ -118,6 +121,10 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         }
     }
+
+    /**
+     * Method for opening the Endscreen
+     */
     public void openEndScreen(){
         endScreen = new EndScreen();
         endScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -158,7 +165,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Method for resetting hunter / runner and the world.
+     * Method for resetting the world.
      */
     public void reset1() {
         respawn();
@@ -169,6 +176,9 @@ public class GamePanel extends JPanel implements ActionListener {
         terrainGen();
     }
 
+    /**
+     * Method for respawnung the Players
+     */
     public void respawn() {
         hunter.x = 400;
         hunter.y = 150;
@@ -244,6 +254,10 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * unused Method
+     * @param ae Unused ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
     }
@@ -278,6 +292,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     //Platzhalter
                     walls.add(new Wall((offset + x * 50), height, s, s, gras));
                 }
+
             } else {
                 for (int y = 1000; y > height; y -= 50) {
                     if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));

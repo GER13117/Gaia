@@ -20,8 +20,8 @@ public class Gaia {
 }
 
 
-//TODO: Animationen
-//TODO: weitere Blöcke / Materialien hinzufügen
-//TODO: Regeln zum auswählen der texturen, (fix von topLayer[x])
+//TODO: Animationen und 2. Charakter
+//TODO: randomiser, um zwischen verschiedenen Steinen zu wählen
+//TODO: EndScreen öffnet sich nur einmal und noch designen
 //TODO: JavaDoc Kommentare erweitern
-//TODO: Wenn ein Spieler außer halb des Bildschirms ist hat der Vordere gewonnen
+//TODO: TerrainGen fixen!!!!!

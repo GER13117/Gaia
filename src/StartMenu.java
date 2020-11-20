@@ -5,14 +5,23 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Start-Menu
+ */
 public class StartMenu extends JFrame implements Runnable {
     Container pane = getContentPane();
     JButton story = new JButton("Hunter");
 
+    /**
+     * Constructor of Start-Menu
+     */
     public StartMenu() {
         run();
     }
 
+    /**
+     * Opens the MainFrame on which the GamePanel is placed
+     */
     public void openGame() {
         MainFrame frame = new MainFrame();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -26,6 +35,9 @@ public class StartMenu extends JFrame implements Runnable {
     }
 
 
+    /**
+     * Method adding Buttons
+     */
     public void buttons() {
         pane.add(story);
         story.addActionListener(e -> {
@@ -35,6 +47,9 @@ public class StartMenu extends JFrame implements Runnable {
 
     }
 
+    /**
+     * run method
+     */
     @Override
     public void run() {
         buttons();

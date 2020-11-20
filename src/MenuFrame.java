@@ -1,10 +1,15 @@
-import javax.swing.*;
-import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Menu which opens ingame
+ */
 public class MenuFrame extends JFrame implements Runnable {
     //Member
     JMenuBar menuBar = new JMenuBar();
@@ -23,12 +28,18 @@ public class MenuFrame extends JFrame implements Runnable {
         Buttons();
     }
 
+    /**
+     * Menubar: Usage unknown
+     */
     public void MenuBar() {
         JMenu test = new JMenu("test");
         setJMenuBar(menuBar);
         menuBar.add(test);
     }
 
+    /**
+     * buttons for leaving or continuing the game
+     */
     public void Buttons() {
         pane.add(leaveGame);
         leaveGame.addActionListener(new ActionListener() {

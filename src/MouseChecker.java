@@ -1,6 +1,9 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * checks if the Mouse is pressed
+ */
 public class MouseChecker implements MouseListener {
 
     @Override
@@ -8,6 +11,9 @@ public class MouseChecker implements MouseListener {
 
     }
 
+    /**
+     * @param e MouseEvent for detecting Mouse-Press
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         int offset = MainFrame.panel.cameraX;
