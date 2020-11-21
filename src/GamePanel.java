@@ -64,6 +64,8 @@ public class GamePanel extends JPanel implements ActionListener {
     private BufferedImage sandTop;
     private BufferedImage sandTopLeft;
 
+    String winnerString;
+
     /**
      * Constructor of the GamePanel. Starts the music, places the hunter, starts the gameloop / timer.
      */
@@ -111,10 +113,10 @@ public class GamePanel extends JPanel implements ActionListener {
         if (runner.x - hunter.x > 1800 || hunter.x - runner.x > 1800) {
             if (runner.x > hunter.x) {
                 isRunning = false;
-                System.out.println("runner wins");
+                winnerString = "runner wins";
                 openEndScreen();
             } else if (hunter.x > runner.x) {
-                System.out.println("hunter wins");
+                winnerString = "hunter wins";
                 isRunning = false;
                 openEndScreen();
             }
@@ -125,7 +127,7 @@ public class GamePanel extends JPanel implements ActionListener {
      * Method for opening the Endscreen
      */
     public void openEndScreen() {
-        endScreen = new EndScreen();
+        endScreen = new EndScreen(winnerString);
         endScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
         endScreen.setLocationRelativeTo(null);
 
