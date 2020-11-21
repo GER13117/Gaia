@@ -21,7 +21,8 @@ public class Gaia {
 
 
 //TODO: Animationen und 2. Charakter
+//TODO: bessere Musik
 //TODO: randomiser, um zwischen verschiedenen Steinen zu wählen
-//TODO: EndScreen öffnet sich nur einmal und noch designen
+//TODO: EndScreen designen
 //TODO: JavaDoc Kommentare erweitern
 //TODO: TerrainGen fixen!!!!!

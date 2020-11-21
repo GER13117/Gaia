@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     int windowWidth = 2000;
     int screenHeight = 1000;
+    boolean isRunning = true;
     BufferedImage stone;
     BufferedImage dirt;
     BufferedImage gras;
@@ -72,8 +73,6 @@ public class GamePanel extends JPanel implements ActionListener {
         runner = new Runner(400, 300, this);
         makeWalls();
         reset1();
-
-
         //Timer um Spiel laufen zu lassen.
         gameTimer = new Timer();
         gameTimer.schedule(new TimerTask() {
@@ -81,25 +80,23 @@ public class GamePanel extends JPanel implements ActionListener {
             public void run() {
                 hunter.set();
                 runner.set();
-
                 //zeichnet walls wenn sie  kurz davor sind ins sichtfeld zu kommen
                 if (walls.get(walls.size() - 1).x < (windowWidth)) {
                     offset += windowWidth;
                     terrainGen();
-
                 }
                 for (int i = 0; i < walls.size(); i++) {
                     walls.get(i).set(cameraX);
                 }
-                //entfernt walls außerhalb des Bildschirms
 
+                //removes Walls outside of the Window
                 for (int i = walls.size() - 1; i >= 0; i--) {
-                    if (walls.get(i).x < -windowWidth) {
-                        //toRemove.add(i);
+                    if (walls.get(i).x < -windowWidth ){
                         walls.remove(i);
                     }
                 }
                 checkWinner();
+                if (!isRunning) gameTimer.cancel();
                 repaint();
             }
         }, 0, 17);
@@ -110,13 +107,15 @@ public class GamePanel extends JPanel implements ActionListener {
     /**
      * Checks if one of the both Players has won
      */
-    public void checkWinner(){
-        if (runner.x - hunter.x > 1800 || hunter.x - runner.x > 1800){
-            if (runner.x > hunter.x){
+    public void checkWinner() {
+        if (runner.x - hunter.x > 1800 || hunter.x - runner.x > 1800) {
+            if (runner.x > hunter.x) {
+                isRunning = false;
                 System.out.println("runner wins");
                 openEndScreen();
-            } else if (hunter.x > runner.x){
+            } else if (hunter.x > runner.x) {
                 System.out.println("hunter wins");
+                isRunning = false;
                 openEndScreen();
             }
         }
@@ -125,7 +124,7 @@ public class GamePanel extends JPanel implements ActionListener {
     /**
      * Method for opening the Endscreen
      */
-    public void openEndScreen(){
+    public void openEndScreen() {
         endScreen = new EndScreen();
         endScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
         endScreen.setLocationRelativeTo(null);
@@ -235,6 +234,7 @@ public class GamePanel extends JPanel implements ActionListener {
         stone = stoneSheet.grabImage(2, 1, s, s);
         BufferedImage stoneRight = stoneSheet.grabImage(3, 1, s, s);
         BufferedImage stoneLeft = stoneSheet.grabImage(1, 1, s, s);
+        for (int i = 0; i < 40; i++) walls.add(new Wall(i, 1050, s, s, stone));
 
         terrainGen();
     }
@@ -256,6 +256,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     /**
      * unused Method
+     *
      * @param ae Unused ActionEvent
      */
     @Override
@@ -278,7 +279,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
             if (temperature < 0) {
 
-                for (int y = 1000; y > height; y -= 50) {
+                for (int y = 1100; y > height; y -= 50) {
                     if (y > totalSpawnDistance) {
                         walls.add(new Wall((offset + x * 50), y, s, s, stone));
                     } else {
@@ -294,7 +295,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
             } else {
-                for (int y = 1000; y > height; y -= 50) {
+                for (int y = 1100; y > height; y -= 50) {
                     if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));
                     else {
                         //Platzhalter
