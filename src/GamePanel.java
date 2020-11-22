@@ -128,14 +128,6 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void openEndScreen() {
         endScreen = new EndScreen(winnerString);
-        endScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        endScreen.setLocationRelativeTo(null);
-
-        endScreen.setResizable(true);
-
-        endScreen.setTitle("Gaia");
-        endScreen.setVisible(true);
-        endScreen.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -182,11 +174,11 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void respawn() {
         hunter.x = 400;
-        hunter.y = 150;
+        hunter.y = height - 150;
         hunter.xspeed = 0;
         hunter.yspeed = 0;
         runner.x = 300;
-        runner.y = 0;
+        runner.y = height - 150;
         runner.yspeed = 0;
         runner.xspeed = 0;
 
@@ -344,6 +336,11 @@ public class GamePanel extends JPanel implements ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) hunter.keyLeft = true;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) hunter.keyRight = true;
         if (e.getKeyCode() == KeyEvent.VK_UP) hunter.keyUp = true;
+        if (e.getKeyCode() == KeyEvent.VK_E){
+            System.out.println("hüpfstein");
+            //TODO: STein unter runner platzieren
+            walls.add(new Wall((offset + runner.x), runner.y+150, s, s, stone)); //funktionier somehow nicht
+        }
 
         //respawn
         if (e.getKeyChar() == 'r' || e.getKeyChar() == 'R') reset1();

@@ -7,15 +7,15 @@ import javax.swing.WindowConstants;
  */
 public class Gaia {
     public static void main(String[] args) {
-        StartMenu startMenu = new StartMenu();
-        startMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        startMenu.setLocationRelativeTo(null);
+        MainFrame mainFrame = new MainFrame();
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setLocationRelativeTo(null);
 
-        startMenu.setResizable(true);
+        mainFrame.setResizable(true);
 
-        startMenu.setTitle("Gaia");
-        startMenu.setVisible(true);
-        startMenu.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        mainFrame.setTitle("Gaia");
+        mainFrame.setVisible(true);
+        mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 }
 

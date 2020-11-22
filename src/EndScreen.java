@@ -1,12 +1,11 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
 
 
 /**
  * EndScreen Displaying the Winner. And adding the possibility to restart the game
  */
-public class EndScreen extends JFrame implements Runnable {
-    Container pane = getContentPane();
+public class EndScreen extends JPanel implements Runnable {
     String winner;
 
     /**

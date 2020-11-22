@@ -129,6 +129,7 @@ public class Runner {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //x += xspeed - StartMenu.panel.hunter.xspeed;
         x += xspeed - MainFrame.panel.hunter.xspeed;
         y += yspeed;
 
