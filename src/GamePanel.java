@@ -45,7 +45,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * The Distance in pixel, used to spawn new Blocks(Renderdistance)
      */
     int windowWidth = 2000;
-    int screenHeight = 1000;
     boolean isRunning = true;
     BufferedImage stone;
     BufferedImage dirt;
