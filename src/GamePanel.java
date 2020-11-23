@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer gameTimer;
     ImprovedNoise improvedNoise;
     EndScreen endScreen;
+    MainFrame mainFrame;
 
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
@@ -92,7 +93,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
                 //removes Walls outside of the Window
                 for (int i = walls.size() - 1; i >= 0; i--) {
-                    if (walls.get(i).x < -windowWidth ){
+                    if (walls.get(i).x < -windowWidth) {
                         walls.remove(i);
                     }
                 }
@@ -113,10 +114,14 @@ public class GamePanel extends JPanel implements ActionListener {
             if (runner.x > hunter.x) {
                 isRunning = false;
                 winnerString = "runner wins";
+                Music music = new Music();
+                music.playMusic("res/Music/winningSound.wav");
                 openEndScreen();
             } else if (hunter.x > runner.x) {
                 winnerString = "hunter wins";
                 isRunning = false;
+                Music music = new Music();
+                music.playMusic("res/Music/winningSound.wav");
                 openEndScreen();
             }
         }
@@ -134,7 +139,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         endScreen.setTitle("Gaia");
         endScreen.setVisible(true);
-        endScreen.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        endScreen.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
 
@@ -157,12 +162,12 @@ public class GamePanel extends JPanel implements ActionListener {
                 break;
             //Einfach irgendein Path es wird so oder so ein error geschmissen
             default:
-                filepath = "Music/song1.wav";
+                filepath = "EasterEgg lol";
                 break;
         }
 
-        MusicStuff musicObject = new MusicStuff();
-        musicObject.playMusic(filepath);
+        Music musicObject = new Music();
+        //musicObject.playMusic(filepath);
     }
 
     /**
@@ -344,10 +349,10 @@ public class GamePanel extends JPanel implements ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) hunter.keyLeft = true;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) hunter.keyRight = true;
         if (e.getKeyCode() == KeyEvent.VK_UP) hunter.keyUp = true;
-        if (e.getKeyCode() == KeyEvent.VK_E){
+        if (e.getKeyCode() == KeyEvent.VK_E) {
             System.out.println("hüpfstein");
             //TODO: STein unter runner platzieren
-            walls.add(new Wall((offset + runner.x), runner.y+150, s, s, stone)); //funktionier somehow nicht
+            walls.add(new Wall((offset + runner.x), runner.y + 150, s, s, stone)); //funktionier somehow nicht
         }
 
         //respawn
@@ -370,6 +375,4 @@ public class GamePanel extends JPanel implements ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) hunter.keyRight = false;
         if (e.getKeyCode() == KeyEvent.VK_UP) hunter.keyUp = false;
     }
-
-
 }

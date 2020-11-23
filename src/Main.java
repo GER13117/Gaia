@@ -5,9 +5,9 @@ import javax.swing.WindowConstants;
 /**
  * MainMethod
  */
-public class Gaia {
+public class Main {
     public static void main(String[] args) {
-        MainFrame mainFrame = new MainFrame();
+        StartMenu mainFrame = new StartMenu();
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainFrame.setLocationRelativeTo(null);
 

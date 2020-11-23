@@ -1,20 +1,21 @@
 import javax.swing.JButton;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Start-Menu
  */
-public class StartMenu extends Panel implements Runnable {
+public class StartMenu extends JFrame implements Runnable {
+    Container pane = getContentPane();
     JButton story = new JButton("Hunter");
-    public static GamePanel panel;
-    boolean panelVisible = false;
-    MainFrame mainFrame;
 
     /**
      * Constructor of Start-Menu
      */
     public StartMenu() {
-        add(story);
         run();
     }
 
@@ -22,23 +23,15 @@ public class StartMenu extends Panel implements Runnable {
      * Opens the MainFrame on which the GamePanel is placed
      */
     public void openGame() {
-        mainFrame = new MainFrame();
+        MainFrame frame = new MainFrame();
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setLocationRelativeTo(null);
 
-        panel = new GamePanel();
-        panel.setLocation(0, 0);
-        panel.setSize(this.getSize());
-        Color skyPlaceholder = new Color(78, 147, 202); //TODO: IMG oder Umbenennen
-        panel.setBackground(skyPlaceholder);
+        frame.setResizable(true);
 
-        mainFrame.add(panel);
-        mainFrame.validate();
-        mainFrame.repaint();
-
-        addKeyListener(new KeyChecker(panel));
-        panel.addMouseListener(new MouseChecker());
-        panel.setVisible(true);
-
-
+        frame.setTitle("Gaia");
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
 
@@ -46,8 +39,10 @@ public class StartMenu extends Panel implements Runnable {
      * Method adding Buttons
      */
     public void buttons() {
+        pane.add(story);
         story.addActionListener(e -> {
-            panelVisible = true;
+            openGame();
+            dispose();
         });
 
     }
@@ -58,6 +53,6 @@ public class StartMenu extends Panel implements Runnable {
     @Override
     public void run() {
         buttons();
-        setLayout(new GridLayout(3, 3, 10, 10));
+        pane.setLayout(new GridLayout(3, 3, 10, 10));
     }
 }

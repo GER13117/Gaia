@@ -1,22 +1,30 @@
 import javax.swing.JFrame;
+import java.awt.Container;
+import java.awt.Graphics;
 
-public class EndScreen extends JFrame {
 
+/**
+ * EndScreen Displaying the Winner. And adding the possibility to restart the game
+ */
+public class EndScreen extends JFrame implements Runnable {
+    Container pane = getContentPane();
     String winner;
+
     /**
-     * EndScreen Displaying the Winner. And adding the possibility to restart the game
+     * Constructor of Endscreen
      */
     public EndScreen(String winner) {
         this.winner = winner;
         run();
     }
 
-    /**
-     * Constructor of Endscreen
-     */
+    public void paint(Graphics g) {
+        g.drawString(winner, 500, 500);
 
+    }
+
+    @Override
     public void run() {
 
     }
 }
-

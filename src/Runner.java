@@ -87,7 +87,9 @@ public class Runner {
             hitBox.y++;
             for (Wall wall : panel.walls) {
                 if (wall.hitBox.intersects(hitBox)) {
+                    Music music = new Music();
                     yspeed = -15;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
+                    music.playMusic("res/Music/jumpSound.wav");
                 }
             }
             hitBox.y--;
