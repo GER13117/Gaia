@@ -74,11 +74,11 @@ public class Runner {
         if (xspeed < 0 && xspeed > -0.75) {
             xspeed = 0;
         }
-        if (xspeed > 10) {
-            xspeed = 10;
+        if (xspeed > 9) {
+            xspeed = 9;
         }
-        if (xspeed < -10) {
-            xspeed = -10;
+        if (xspeed < -9) {
+            xspeed = -9;
         }
 
         //Gravitation und un Kollision
@@ -87,7 +87,7 @@ public class Runner {
             hitBox.y++;
             for (Wall wall : panel.walls) {
                 if (wall.hitBox.intersects(hitBox)) {
-                    yspeed = -15;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
+                    yspeed = -11;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
                 }
             }
             hitBox.y--;

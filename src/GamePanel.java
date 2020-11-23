@@ -128,6 +128,15 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void openEndScreen() {
         endScreen = new EndScreen(winnerString);
+        endScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        endScreen.setLocationRelativeTo(null);
+
+        endScreen.setResizable(true);
+
+        endScreen.setTitle("Gaia");
+        endScreen.setVisible(true);
+        endScreen.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**

@@ -15,7 +15,7 @@ public class Gaia {
 
         mainFrame.setTitle("Gaia");
         mainFrame.setVisible(true);
-        mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
 
