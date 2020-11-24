@@ -157,7 +157,7 @@ public class Runner {
     public void loadImages() {
         loader = new BufferedImageLoader();
         try {
-            char1 = loader.loadImage("Characters/char_male_1_walking.png");
+            char1 = loader.loadImage("Characters/hunterForward.png");
         } catch (IOException e) {
             e.printStackTrace();
         }

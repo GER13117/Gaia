@@ -252,7 +252,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param g name for the Graphics to paint the tiles
      */
     public void paint(Graphics g) {
-        super.paint(g);
         hunter.draw(g);
         runner.draw(g);
 
