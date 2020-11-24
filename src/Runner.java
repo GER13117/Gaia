@@ -22,20 +22,28 @@ public class Runner {
     double xspeed;
     double yspeed;
 
+    int frame = 1;
+
     private BufferedImage char1 = null;
-    SpriteSheet character1;
-    private BufferedImage frame1buf;
-    private BufferedImage frame2buf;
-    private BufferedImage frame3buf;
-    private BufferedImage frame4buf;
-    private BufferedImage frame5buf;
+    SpriteSheet characterForward;
+    private BufferedImage frame1Forward;
+    private BufferedImage frame2Forward;
+    private BufferedImage frame3Forward;
+    private BufferedImage frame4Forward;
+    private BufferedImage frame5Forward;
+
+    SpriteSheet characterBackward;
+    private BufferedImage frame1Backward;
+    private BufferedImage frame2Backward;
+    private BufferedImage frame3Backward;
+    private BufferedImage frame4Backward;
+    private BufferedImage frame5Backward;
     Rectangle hitBox;
 
     //Keys
     boolean keyLeft;
     boolean keyRight;
     boolean keyUp;
-    boolean keyDown;
 
     /**
      * @param x     xPosition of a specific Player
@@ -48,10 +56,11 @@ public class Runner {
         this.x = x;
         this.y = y;
 
-        width = 50;
+        width = 46;
         height = 100;
         hitBox = new Rectangle(x, y, width, height);
         loader = new BufferedImageLoader();
+        loadImages();
     }
 
     /**
@@ -145,27 +154,71 @@ public class Runner {
     }
 
     //Platzhalter für animierten Charakter
-    public void draw(Graphics gtd) {
-        //ImageIcon iconPlayer = new ImageIcon(frame1);
-        // test = iconPlayer.getImage();
-        //gtd.setColor(Color.BLACK);
-        //gtd.fillRect(x, y, width, height);
-        loadImages();
-        gtd.drawImage(frame1buf, x, y, null);
+    public void draw(Graphics g) {
+        if (frame <= 6&&keyRight){
+            g.drawImage(frame1Forward,x,y,null);
+        } else if (frame <= 12 && keyRight) {
+            g.drawImage(frame2Forward, x, y, null);
+
+        } else if (frame <= 18 && keyRight){
+            g.drawImage(frame3Forward,x,y,null);
+
+        } else if (frame <= 24 && keyRight){
+            g.drawImage(frame4Forward,x,y,null);
+
+        } else if (frame <= 30 && keyRight){
+            g.drawImage(frame5Forward,x,y,null);
+        }
+        else if (frame <= 6&&keyLeft){
+            g.drawImage(frame1Backward,x,y,null);
+        } else if (frame <= 12 && keyLeft) {
+            g.drawImage(frame2Backward, x, y, null);
+
+        } else if (frame <= 18 && keyLeft){
+            g.drawImage(frame3Backward,x,y,null);
+
+        } else if (frame <= 24 && keyLeft){
+            g.drawImage(frame4Backward,x,y,null);
+
+        } else if (frame <= 30 && keyLeft){
+            g.drawImage(frame5Backward,x,y,null);
+        }
+
+        else g.drawImage(frame1Forward,x,y,null); //default if nothing is pressed
+        frame%=30;
+        frame++;
     }
 
+    /**
+     * Method for loading the Images from the SpriteSheet using the BufferedImageLoader and SpriteSheet class
+     */
     public void loadImages() {
         loader = new BufferedImageLoader();
         try {
-            char1 = loader.loadImage("Characters/hunterForward.png");
+            char1 = loader.loadImage("Characters/GreenRunnerForward.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        character1 = new SpriteSheet(char1);
-        frame1buf = character1.grabImage(1, 1, 50, 100);
-        frame2buf = character1.grabImage(2, 1, 50, 100);
-        frame3buf = character1.grabImage(3, 1, 50, 100);
-        frame4buf = character1.grabImage(4, 1, 50, 100);
-        frame5buf = character1.grabImage(5, 1, 50, 100);
+        characterForward = new SpriteSheet(char1);
+        frame1Forward = characterForward.grabImage(1, 1, 50, 100);
+        frame2Forward = characterForward.grabImage(2, 1, 50, 100);
+        frame3Forward = characterForward.grabImage(3, 1, 50, 100);
+        frame4Forward = characterForward.grabImage(4, 1, 50, 100);
+        frame5Forward = characterForward.grabImage(5, 1, 50, 100);
+
+        try {
+            char1 = loader.loadImage("Characters/GreenRunnerBackward.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        characterBackward = new SpriteSheet(char1);
+        frame1Backward = characterBackward.grabImage(5, 1, 50, 100);
+        frame2Backward = characterBackward.grabImage(4, 1, 50, 100);
+        frame3Backward = characterBackward.grabImage(3, 1, 50, 100);
+        frame4Backward = characterBackward.grabImage(2, 1, 50, 100);
+        frame5Backward = characterBackward.grabImage(1, 1, 50, 100);
+
+
     }
 }

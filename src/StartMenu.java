@@ -1,11 +1,15 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.util.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.util.TimerTask;
 
 /**
  * Start-Menu
@@ -47,11 +51,12 @@ public class StartMenu extends JFrame implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openGame();
+                dispose();
             }
         });
     }
     /**
-     * run method
+     * run method, adds buttons and sets layout to null
      */
     @Override
     public void run() {
@@ -68,6 +73,9 @@ public class StartMenu extends JFrame implements Runnable {
 
     }
 
+    /**
+     * @param g Graphics for painting images
+     */
     public void paint(Graphics g){
         super.paint(g);
         g.drawImage(bg,0,0,null);

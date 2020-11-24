@@ -43,8 +43,6 @@ public class Player {
     boolean keyLeft;
     boolean keyRight;
     boolean keyUp;
-    boolean keyDown;
-
     /**
      * @param x     xPosition of a specific Player
      * @param y     yPosition of a specific Player
@@ -56,7 +54,7 @@ public class Player {
         this.x = x;
         this.y = y;
 
-        width = 50;
+        width = 46;
         height = 100;
         hitBox = new Rectangle(x, y, width, height);
         loader = new BufferedImageLoader();
