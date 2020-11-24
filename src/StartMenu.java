@@ -1,21 +1,27 @@
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import java.awt.Container;
-import java.awt.GridLayout;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Start-Menu
  */
 public class StartMenu extends JFrame implements Runnable {
     Container pane = getContentPane();
-    JButton story = new JButton("Hunter");
+    private BufferedImage bg = null;
+    private BufferedImage button = null;
+    JButton startButton;
 
     /**
      * Constructor of Start-Menu
      */
     public StartMenu() {
+        buttons();
+        loadImages();
         run();
     }
 
@@ -34,25 +40,37 @@ public class StartMenu extends JFrame implements Runnable {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-
-    /**
-     * Method adding Buttons
-     */
-    public void buttons() {
-        pane.add(story);
-        story.addActionListener(e -> {
-            openGame();
-            dispose();
+    public void buttons(){
+        startButton = new JButton((Icon) button);
+        startButton.setBounds(804,568, 312,80);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openGame();
+            }
         });
-
     }
-
     /**
      * run method
      */
     @Override
     public void run() {
-        buttons();
-        pane.setLayout(new GridLayout(3, 3, 10, 10));
+        this.add(startButton);
+        pane.setLayout(null);
+    }
+    public void loadImages(){
+        try {
+            bg = ImageIO.read(getClass().getResource("Backgrounds/StartMenu.png"));
+            button = ImageIO.read(getClass().getResource("Backgrounds/StartButton.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void paint(Graphics g){
+        super.paint(g);
+        g.drawImage(bg,0,0,null);
+
     }
 }
