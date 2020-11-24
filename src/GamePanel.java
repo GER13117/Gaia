@@ -14,13 +14,11 @@ import java.util.TimerTask;
 
 
 public class GamePanel extends JPanel implements ActionListener {
-    Player hunter;
+    Hunter hunter;
     Runner runner;
     Timer gameTimer;
     ImprovedNoise improvedNoise;
     EndScreen endScreen;
-    MainFrame mainFrame;
-
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
@@ -67,11 +65,10 @@ public class GamePanel extends JPanel implements ActionListener {
     String winnerString;
 
     /**
-     * Constructor of the GamePanel. Starts the music, places the hunter, starts the gameloop / timer.
+     * Constructor of the GamePanel. Starts the music, places the hunter, runner and the walls starts the gameloop / timer.
      */
     public GamePanel() {
-        music();
-        hunter = new Player(400, 300, this);
+        hunter = new Hunter(400, 300, this);
         runner = new Runner(400, 300, this);
         makeWalls();
         reset1();
@@ -87,7 +84,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     offset += windowWidth;
                     terrainGen();
                 }
-                for (int i = 0; i < walls.size(); i++) {
+                for (int i = 0; i < walls.size(); i++) { //has be done like this to prevent concurrentModificationException
                     walls.get(i).set(cameraX);
                 }
 
@@ -144,33 +141,6 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Plays random chosen music.
-     */
-    public static void music() {
-        Random rand = new Random();
-        int index = rand.nextInt(3);
-        String filepath;
-        switch (index) {
-            case 0:
-                filepath = "res/Music/far-from-the-world.wav";
-                break;
-            case 1:
-                filepath = "res/Music/impavid.wav";
-                break;
-            case 2:
-                filepath = "res/Music/mountains-past.wav";
-                break;
-            //Einfach irgendein Path es wird so oder so ein error geschmissen
-            default:
-                filepath = "EasterEgg lol";
-                break;
-        }
-
-        Music musicObject = new Music();
-        //musicObject.playMusic(filepath);
-    }
-
-    /**
      * Method for resetting the world.
      */
     public void reset1() {
@@ -183,13 +153,13 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Method for respawnung the Players
+     * Method for respawn of the Players
      */
     public void respawn() {
         hunter.x = 400;
         hunter.y = height - 150;
-        hunter.xspeed = 0;
-        hunter.yspeed = 0;
+        hunter.xSpeed = 0;
+        hunter.ySpeed = 0;
         runner.x = 300;
         runner.y = height - 150;
         runner.yspeed = 0;

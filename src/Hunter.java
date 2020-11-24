@@ -2,53 +2,127 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Player Class
  */
-public class Player {
+public class Hunter {
+    /**
+     * x-position of the player
+     */
     int x;
+    /**
+     * y-postion of the player
+     */
     int y;
+    /**
+     * instance of the panel, mainly used to paint the player
+     */
     GamePanel panel;
+    /**
+     * instance of loader to load the images
+     */
     BufferedImageLoader loader;
+    /**
+     * width of the player and hunter-hitbox
+     */
     int width;
+    /**
+     * height of the player and hunter-hitbox
+     */
     int height;
     //Velocities of the player
-    double xspeed;
-    double yspeed;
+    /**
+     * speed in x-Direction of the hunter
+     */
+    double xSpeed;
+    /**
+     * speed in y-Direction of the hunter
+     */
+    double ySpeed;
+    /**
+     * counter of the frames. Start-value is 1 it goes up to 30, where it gets "reset" by modulo
+     */
     int frame = 1;
 
+    /**
+     * BufferedImage where all positions of the character are saved
+     */
     private BufferedImage char1 = null;
+    /**
+     * instance of {@link SpriteSheet}for splitting the BufferedImage into subimages, for forward-movement
+     */
     SpriteSheet characterForward;
+    /**
+     * position of the Hunter when moving forward at frame / position 1
+     */
     private BufferedImage frame1Forward;
+    /**
+     * position of the Hunter when moving forward at frame / position 2
+     */
     private BufferedImage frame2Forward;
+    /**
+     * position of the Hunter when moving forward at frame / position 3
+     */
     private BufferedImage frame3Forward;
+    /**
+     * position of the Hunter when moving forward at frame / position 4
+     */
     private BufferedImage frame4Forward;
+    /**
+     * position of the Hunter when moving forward at frame / position 5
+     */
     private BufferedImage frame5Forward;
 
+    /**
+     * instance of {@link SpriteSheet}for splitting the BufferedImage into subimages, for backward-movement
+     */
     SpriteSheet characterBackward;
+    /**
+     * position of the Hunter when moving backward at frame / position 1
+     */
     private BufferedImage frame1Backward;
+    /**
+     * position of the Hunter when moving backward at frame / position 2
+     */
     private BufferedImage frame2Backward;
+    /**
+     * position of the Hunter when moving backward at frame / position 3
+     */
     private BufferedImage frame3Backward;
+    /**
+     * position of the Hunter when moving backward at frame / position 4
+     */
     private BufferedImage frame4Backward;
+    /**
+     * position of the Hunter when moving backward at frame / position 5
+     */
     private BufferedImage frame5Backward;
 
-
-
+    /**
+     * the hitbox of the player
+     */
     Rectangle hitBox;
 
     //Keys
+    /**
+     * boolean which turns to true when key-left is pressed, to walk to the left
+     */
     boolean keyLeft;
+    /**
+     * boolean which turns to true when right-left is pressed, to walk to the right
+     */
     boolean keyRight;
+    /**
+     * boolean which turns to true when up-left is pressed, to jump
+     */
     boolean keyUp;
     /**
      * @param x     xPosition of a specific Player
      * @param y     yPosition of a specific Player
-     * @param panel the panel where the Player ist drawn on
+     * @param panel the panel where the Player is drawn on
      */
-    public Player(int x, int y, GamePanel panel) {
+    public Hunter(int x, int y, GamePanel panel) {
 
         this.panel = panel;
         this.x = x;
@@ -69,23 +143,23 @@ public class Player {
 
         //Bedingungen und einschränkungen vertikal
         if (keyLeft && keyRight || !keyLeft && !keyRight) {
-            xspeed *= 0.8;
+            xSpeed *= 0.8;
         } else if (keyLeft && !keyRight) {
-            xspeed--;
+            xSpeed--;
         } else if (keyRight && !keyLeft) {
-            xspeed++;
+            xSpeed++;
         }
-        if (xspeed > 0 && xspeed < 0.75) {
-            xspeed = 0;
+        if (xSpeed > 0 && xSpeed < 0.75) {
+            xSpeed = 0;
         }
-        if (xspeed < 0 && xspeed > -0.75) {
-            xspeed = 0;
+        if (xSpeed < 0 && xSpeed > -0.75) {
+            xSpeed = 0;
         }
-        if (xspeed > 8) {
-            xspeed = 8;
+        if (xSpeed > 8) {
+            xSpeed = 8;
         }
-        if (xspeed < -8) {
-            xspeed = -8;
+        if (xSpeed < -8) {
+            xSpeed = -8;
         }
 
         //Gravitation und un Kollision
@@ -95,29 +169,29 @@ public class Player {
             for (Wall wall : panel.walls) {
                 if (wall.hitBox.intersects(hitBox)) {
                     Music music = new Music();
-                    int i = 0;
+                    int i;
                     for (i = 0; i < 1; i++){
                         music.playMusic("res/Music/jumpSound.wav");
                     }
-                    yspeed = -11;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
+                    ySpeed = -11;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
                     i = 0;
                 }
             }
             hitBox.y--;
         }
-        yspeed += 0.5;
+        ySpeed += 0.5;
         //horizontale Kolllision
-        hitBox.x += xspeed;
+        hitBox.x += xSpeed;
         try {
             for (Wall wall : panel.walls) {
                 if (hitBox.intersects(wall.hitBox)) {
-                    hitBox.x -= xspeed;
+                    hitBox.x -= xSpeed;
                     while (!wall.hitBox.intersects(hitBox)) {
-                        hitBox.x += Math.signum(xspeed);
+                        hitBox.x += Math.signum(xSpeed);
                     }
-                    hitBox.x -= Math.signum(xspeed);
+                    hitBox.x -= Math.signum(xSpeed);
                     panel.cameraX += x - hitBox.x;
-                    xspeed = 0;
+                    xSpeed = 0;
                     hitBox.x = x;
                 }
             }
@@ -125,16 +199,16 @@ public class Player {
             e.printStackTrace();
         }
         //vertikale Kollision
-        hitBox.y += yspeed;
+        hitBox.y += ySpeed;
         try {
             for (Wall wall : panel.walls) {
                 if (hitBox.intersects(wall.hitBox)) {//Horizontal
-                    hitBox.y -= yspeed;
+                    hitBox.y -= ySpeed;
                     while (!wall.hitBox.intersects(hitBox)) {
-                        hitBox.y += Math.signum(yspeed);
+                        hitBox.y += Math.signum(ySpeed);
                     }
-                    hitBox.y -= Math.signum(yspeed);
-                    yspeed = 0;
+                    hitBox.y -= Math.signum(ySpeed);
+                    ySpeed = 0;
                     y = hitBox.y;
                 }
 
@@ -142,20 +216,21 @@ public class Player {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        panel.cameraX -= xspeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
-        y += yspeed;
+        panel.cameraX -= xSpeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
+        y += ySpeed;
 
 
         //Death Code
         if (y > 1180) panel.reset1();
 
-        //moves Hibox with the Player
+        //moves hitbox with the Player
         hitBox.x = x;
         hitBox.y = y;
     }
 
     /**
      * method for drawing the character
+     * it loops through number between 1 and 30 on which are specific frames are painted
      *
      * @param g draws the pictures
      */
@@ -198,7 +273,7 @@ public class Player {
     }
 
     /**
-     * Method for loading the Images from the SpriteSheet using the BufferedImageLoader and SpriteSheet class
+     * Method for loading the Images from the SpriteSheet using the {@link BufferedImageLoader} and {@link SpriteSheet} class
      */
     public void loadImages() {
         loader = new BufferedImageLoader();
