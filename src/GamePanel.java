@@ -110,17 +110,14 @@ public class GamePanel extends JPanel implements ActionListener {
         if (runner.x - hunter.x > 1800 || hunter.x - runner.x > 1800) {
             if (runner.x > hunter.x) {
                 isRunning = false;
-                winnerString = "runner wins";
-                Music music = new Music();
-                music.playMusic("res/Music/winningSound.wav");
-                openEndScreen();
+                winnerString = "runner";
             } else if (hunter.x > runner.x) {
-                winnerString = "hunter wins";
+                winnerString = "hunter";
                 isRunning = false;
-                Music music = new Music();
-                music.playMusic("res/Music/winningSound.wav");
-                openEndScreen();
             }
+            Music music = new Music();
+            music.playMusic("res/Music/winningSound.wav");
+            openEndScreen();
         }
     }
 

@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+//TODO: Add Image Headline that show "Runner won" or "Hunter won"
+
 
 /**
  * EndScreen Displaying the Winner. And adding the possibility to restart the game
@@ -17,21 +19,23 @@ public class EndScreen extends JFrame implements Runnable {
     private BufferedImage bg = null;
     private BufferedImage button = null;
     JButton restartButton;
+    ImageIcon iconButton;
 
     /**
      * Constructor of Endscreen
      */
     public EndScreen(String winner) {
-        buttons();
         loadImages();
+        buttons();
         this.winner = winner;
         run();
     }
 
     public void loadImages(){
         try {
-            bg = ImageIO.read(getClass().getResource("Backgrounds/StartMenu.png"));
-            button = ImageIO.read(getClass().getResource("Backgrounds/StartButtonEmpty.png"));
+            bg = ImageIO.read(getClass().getResource("Backgrounds/EndScreen.png"));
+            button = ImageIO.read(getClass().getResource("Backgrounds/StartButtonText.png"));
+            iconButton = new ImageIcon(button);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +43,7 @@ public class EndScreen extends JFrame implements Runnable {
     }
 
     public void buttons(){
-        restartButton = new JButton((Icon) button);
+        restartButton = new JButton(iconButton);
         restartButton.setBounds(804,568, 312,80);
         restartButton.addActionListener(new ActionListener() {
             @Override
@@ -73,8 +77,8 @@ public class EndScreen extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        this.add(restartButton);
         pane.setLayout(null);
+        this.add(restartButton);
 
     }
 }

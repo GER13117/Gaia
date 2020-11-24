@@ -1,7 +1,5 @@
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -17,6 +15,7 @@ public class StartMenu extends JFrame implements Runnable {
     private BufferedImage bg = null;
     private BufferedImage button = null;
     JButton startButton;
+    ImageIcon iconButton;
 
     /**
      * Constructor of Start-Menu
@@ -43,7 +42,7 @@ public class StartMenu extends JFrame implements Runnable {
     }
 
     public void buttons(){
-        startButton = new JButton((Icon) button);
+        startButton = new JButton(iconButton);
         startButton.setBounds(804,568, 312,80);
         startButton.addActionListener(new ActionListener() {
             @Override
@@ -65,6 +64,7 @@ public class StartMenu extends JFrame implements Runnable {
         try {
             bg = ImageIO.read(getClass().getResource("Backgrounds/StartMenu.png"));
             button = ImageIO.read(getClass().getResource("Backgrounds/StartButtonEmpty.png"));
+            iconButton = new ImageIcon(button);
         } catch (IOException e) {
             e.printStackTrace();
         }
