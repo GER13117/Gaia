@@ -4,12 +4,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Graphics;
-import java.util.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.TimerTask;
 
 /**
  * Start-Menu
@@ -66,7 +64,7 @@ public class StartMenu extends JFrame implements Runnable {
     public void loadImages(){
         try {
             bg = ImageIO.read(getClass().getResource("Backgrounds/StartMenu.png"));
-            button = ImageIO.read(getClass().getResource("Backgrounds/StartButton.png"));
+            button = ImageIO.read(getClass().getResource("Backgrounds/StartButtonEmpty.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
