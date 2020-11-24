@@ -85,8 +85,8 @@ public class Runner {
         if (keyUp) {
             //check if touching ground
             hitBox.y++;
-            for (Wall wall : panel.walls) {
-                if (wall.hitBox.intersects(hitBox)) {
+            for (int i = 0; i < panel.walls.size(); i++) {
+                if (panel.walls.get(i).hitBox.intersects(hitBox)) {
                     Music music = new Music();
                     yspeed = -15;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
                     music.playMusic("res/Music/jumpSound.wav");
