@@ -138,7 +138,7 @@ public class Runner {
             e.printStackTrace();
         }
         //x += xspeed - StartMenu.panel.hunter.xspeed;
-        x += xspeed - MainFrame.panel.hunter.xspeed;
+        x += xspeed - MainFrame.panel.hunter.xSpeed;
         y += yspeed;
 
 

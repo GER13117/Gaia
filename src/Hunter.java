@@ -169,12 +169,10 @@ public class Hunter {
             for (Wall wall : panel.walls) {
                 if (wall.hitBox.intersects(hitBox)) {
                     Music music = new Music();
-                    int i;
-                    for (i = 0; i < 1; i++){
-                        music.playMusic("res/Music/jumpSound.wav");
+                    for (int i = 0; i < 1; i++){
+                        music.playMusic("res/Music/jumpSound.wav"); //TODO: provide that the jumping sound plays only once
                     }
                     ySpeed = -11;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
-                    i = 0;
                 }
             }
             hitBox.y--;
