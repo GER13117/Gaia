@@ -23,7 +23,7 @@ public class Runner {
 
     private BufferedImage char1 = null;
     SpriteSheet characterForward;
-    private BufferedImage frame1Forward;
+    BufferedImage frame1Forward;
     private BufferedImage frame2Forward;
     private BufferedImage frame3Forward;
     private BufferedImage frame4Forward;

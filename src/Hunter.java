@@ -55,8 +55,9 @@ public class Hunter {
     SpriteSheet characterForward;
     /**
      * position of the Hunter when moving forward at frame / position 1
+     * Is not private because it's used as the only Image in another class
      */
-    private BufferedImage frame1Forward;
+    BufferedImage frame1Forward;
     /**
      * position of the Hunter when moving forward at frame / position 2
      */

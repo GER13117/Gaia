@@ -76,6 +76,11 @@ public class EndScreen extends JFrame implements Runnable {
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(bg, 0, 0, null);
+        if (winner == "runner"){
+            g.drawImage(MainFrame.panel.runner.frame1Forward, 1200, 730, null);
+        } else if (winner == "hunter"){
+            g.drawImage(MainFrame.panel.hunter.frame1Forward, 1200, 730, null);
+        }
     }
 
 
