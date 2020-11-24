@@ -20,10 +20,7 @@ public class Main {
 }
 
 
-//TODO: Animationen und 2. Charakter
-//TODO: bessere Musik
 //TODO: randomiser, um zwischen verschiedenen Steinen zu wählen
-//TODO: EndScreen designen
+//TODO: EndScreen: IMG für den jeweiligen Gewinner und Charakter
 //TODO: JavaDoc Kommentare erweitern
 //TODO: TerrainGen fixen!!!!!
-//TODO: Musik entfernen
