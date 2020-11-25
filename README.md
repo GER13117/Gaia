@@ -15,7 +15,7 @@ In order to install and run the project. You can download and compile the source
 
 
 ### Known problems
-1. Terrain sometimes goes into the void. The only fix at the moment is to restart the game.
+1. Terrain sometimes goes into the void. Press "R" if you have this problem.
 2. Depending on your monitor and your os the Buttons to start and restart the game, might be offset.
 3. If the startMenu is blank-white, resize your window to fix it. The same goes with the end-screen.
 4. Sometimes the jumping sound might play a few times at once. I'm sorry for your ears. I'm working to fix this problem
