@@ -208,6 +208,7 @@ public class GamePanel extends JPanel implements ActionListener {
         cameraY = 500;
         walls.clear();
         offset = -150;
+        height = 500;
         terrainGen();
     }
 
