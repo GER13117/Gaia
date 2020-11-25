@@ -1,4 +1,4 @@
 # Project exclude paths
 /.idea
 /Gaia.iml
-/META-INF
+/src/META-INF/MANIFEST.MF
