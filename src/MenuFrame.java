@@ -38,7 +38,6 @@ public class MenuFrame extends JFrame implements Runnable {
      * Menubar: Usage unknown
      */
     public void menuBar() {
-
         JMenu rules = new JMenu("Rules");
         setJMenuBar(menuBar);
         menuBar.add(rules);
