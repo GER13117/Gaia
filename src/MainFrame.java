@@ -9,6 +9,9 @@ public class MainFrame extends JFrame {
      * Instance of the GamePanel to create it
      */
     public static GamePanel panel;
+    /**
+     * Constructor of the MainFrame. Creates a new GamePanel on it. Adds a key and mouse-listener and sets the JPanel visible.
+     */
     public MainFrame() {
         panel = new GamePanel();
         panel.setLocation(0, 0);

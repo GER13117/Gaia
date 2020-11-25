@@ -21,12 +21,22 @@ public class GamePanel extends JPanel implements ActionListener {
      * instance of the runner-class
      */
     Runner runner;
+    /**
+     * Times the repaint and recalculation of the game.
+     */
     Timer gameTimer;
+    /**
+     * Instance of Perlin-Noise to control parts of the terrain-generation.
+     */
     ImprovedNoise improvedNoise;
+    /**
+     * Instance of the end-screen, which is shown when a player won
+     */
     EndScreen endScreen;
-    //Biomes biomes;
+    /**
+     * ArrayList to store the walls / blocks.
+     */
     ArrayList<Wall> walls = new ArrayList<>();
-    //Variablen zum Definieren der Kamerposition
     /**
      * x-Position of the camera
      */
@@ -68,18 +78,6 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     BufferedImage grasLeft;
     /**
-     * BufferedImage with the sand-tile
-     */
-    private BufferedImage sand;
-    /**
-     * BufferedImage of the sand-tile at the top of the Terrain
-     */
-    private BufferedImage sandTop;
-    /**
-     * BufferedImage of the sand-tile at the top-left of the Terrain
-     */
-    private BufferedImage sandTopLeft;
-    /**
      * Instance of SpriteSheet in order to split the SpriteSheet of gras and dirt into pieces.
      */
     SpriteSheet grasSheet;
@@ -99,7 +97,23 @@ public class GamePanel extends JPanel implements ActionListener {
      * The height of the Terrain. At the beginning it's set to 500. By the TerrainGen the value is changed over time.
      */
     int height = 500;
+    /**
+     * String where then name of the winner-character is stored. Used in {@link EndScreen}.
+     */
+    String winnerString;
+    /**
+     * BufferedImage with the sand-tile
+     */
+    private BufferedImage sand;
+    /**
+     * BufferedImage of the sand-tile at the top of the Terrain
+     */
+    private BufferedImage sandTop;
     //Import Images for the different solids
+    /**
+     * BufferedImage of the sand-tile at the top-left of the Terrain
+     */
+    private BufferedImage sandTopLeft;
     /**
      * BufferedImage containing the whole dirt / gras-SpriteSheet.
      */
@@ -112,8 +126,6 @@ public class GamePanel extends JPanel implements ActionListener {
      * BufferedImage containing the whole sand-SpriteSheet
      */
     private BufferedImage spriteSheetSand = null;
-
-    String winnerString;
 
     /**
      * Constructor of the GamePanel. Starts the music, places the hunter, runner and the walls starts the gameloop / timer.

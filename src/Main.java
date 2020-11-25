@@ -3,7 +3,7 @@ import javax.swing.WindowConstants;
 
 
 /**
- * MainMethod. Opens {@link StartMenu}.
+ * Main-Method. Opens {@link StartMenu}.
  */
 public class Main {
     public static void main(String[] args) {

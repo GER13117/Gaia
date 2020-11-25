@@ -15,8 +15,8 @@ import java.io.IOException;
  */
 public class EndScreen extends JFrame implements Runnable {
     /**
-     *
-     *///TODO: Was ist der Nutze eines Containers
+     * Container for structuring the Contents.
+     */
     Container pane = getContentPane();
     /**
      * String where the name of the Winner is saved in. It is used to Display specific images, to show who won.
@@ -26,10 +26,6 @@ public class EndScreen extends JFrame implements Runnable {
      * BufferedImage of the Background
      */
     private BufferedImage bg = null;
-    /**
-     * BufferedImage of the Button.
-     */
-    private BufferedImage button = null;
     /**
      * the JButton you can press to restart the game
      */
@@ -55,7 +51,10 @@ public class EndScreen extends JFrame implements Runnable {
     public void loadImages() {
         try {
             bg = ImageIO.read(getClass().getResource("Backgrounds/EndScreen.png"));
-            button = ImageIO.read(getClass().getResource("Backgrounds/StartButtonEmpty.png"));
+            /**
+             * BufferedImage of the Button.
+             */
+            BufferedImage button = ImageIO.read(getClass().getResource("Backgrounds/StartButtonEmpty.png"));
             iconButton = new ImageIcon(button);
         } catch (IOException e) {
             e.printStackTrace();

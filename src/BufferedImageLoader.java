@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Loads provided Images as Buffered Image for further use
+ * Loads provided Images / Files as Buffered Image for further use
  */
 public class BufferedImageLoader {
 

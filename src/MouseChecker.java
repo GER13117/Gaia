@@ -16,15 +16,6 @@ public class MouseChecker implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        /*int offset = StartMenu.panel.cameraX;
-
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            float x = (e.getX() - offset) / 50f;
-            int xPos = ((int) x) * 50;
-            float y = e.getY() / 50f;
-            int yPos = ((int) y) * 50;
-            StartMenu.panel.walls.add(new Wall(xPos, yPos, StartMenu.panel.s, StartMenu.panel.s, StartMenu.panel.stone));
-        }*/
         int offset = MainFrame.panel.cameraX;
 
         if (e.getButton() == MouseEvent.BUTTON1) {
@@ -36,16 +27,28 @@ public class MouseChecker implements MouseListener {
         }
     }
 
+    /**
+     * unused method
+     * @param e unused
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
 
+    /**
+     * unused method
+     * @param e unused
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
 
     }
 
+    /**
+     * unused
+     * @param e unused
+     */
     @Override
     public void mouseExited(MouseEvent e) {
 

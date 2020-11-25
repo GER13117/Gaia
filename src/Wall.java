@@ -43,7 +43,7 @@ public class Wall {
     /**
      * Draws 50*50px Image at the Postion of the Tile
      *
-     * @param g Graphics2D for actually painting the Image
+     * @param g Graphics for actually painting the Image
      */
     public void draw(Graphics g) {
         g.drawImage(imageWall, x, y, null);

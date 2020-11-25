@@ -44,11 +44,6 @@ public class Hunter {
      * counter of the frames. Start-value is 1 it goes up to 30, where it gets "reset" by modulo
      */
     int frame = 1;
-
-    /**
-     * BufferedImage where all positions of the character are saved
-     */
-    private BufferedImage char1 = null;
     /**
      * instance of {@link SpriteSheet}for splitting the BufferedImage into subimages, for forward-movement
      */
@@ -58,6 +53,30 @@ public class Hunter {
      * Is not private because it's used as the only Image in another class
      */
     BufferedImage frame1Forward;
+    /**
+     * instance of {@link SpriteSheet}for splitting the BufferedImage into subimages, for backward-movement
+     */
+    SpriteSheet characterBackward;
+    /**
+     * the hitbox of the player
+     */
+    Rectangle hitBox;
+    /**
+     * boolean which turns to true when key-left is pressed, to walk to the left
+     */
+    boolean keyLeft;
+    /**
+     * boolean which turns to true when right-left is pressed, to walk to the right
+     */
+    boolean keyRight;
+    /**
+     * boolean which turns to true when up-left is pressed, to jump
+     */
+    boolean keyUp;
+    /**
+     * BufferedImage where all positions of the character are saved
+     */
+    private BufferedImage char1 = null;
     /**
      * position of the Hunter when moving forward at frame / position 2
      */
@@ -74,11 +93,6 @@ public class Hunter {
      * position of the Hunter when moving forward at frame / position 5
      */
     private BufferedImage frame5Forward;
-
-    /**
-     * instance of {@link SpriteSheet}for splitting the BufferedImage into subimages, for backward-movement
-     */
-    SpriteSheet characterBackward;
     /**
      * position of the Hunter when moving backward at frame / position 1
      */
@@ -87,6 +101,8 @@ public class Hunter {
      * position of the Hunter when moving backward at frame / position 2
      */
     private BufferedImage frame2Backward;
+
+    //Keys
     /**
      * position of the Hunter when moving backward at frame / position 3
      */
@@ -100,24 +116,6 @@ public class Hunter {
      */
     private BufferedImage frame5Backward;
 
-    /**
-     * the hitbox of the player
-     */
-    Rectangle hitBox;
-
-    //Keys
-    /**
-     * boolean which turns to true when key-left is pressed, to walk to the left
-     */
-    boolean keyLeft;
-    /**
-     * boolean which turns to true when right-left is pressed, to walk to the right
-     */
-    boolean keyRight;
-    /**
-     * boolean which turns to true when up-left is pressed, to jump
-     */
-    boolean keyUp;
     /**
      * @param x     xPosition of a specific Player
      * @param y     yPosition of a specific Player
@@ -138,7 +136,7 @@ public class Hunter {
 
     /**
      * Sets the maximum Velocity, Gravitation and Collision detection.
-     * Also sets the "Camera Movement" the same as the Player Movement (Player ist always in the center)
+     * Also sets the "Camera Movement" the same as the Hunter-Movement (Player ist always in the center)
      */
     public void set() {
 
@@ -170,7 +168,7 @@ public class Hunter {
             for (int xy = 0; xy < panel.walls.size(); xy++) {
                 if (panel.walls.get(xy).hitBox.intersects(hitBox)) {
                     Music music = new Music();
-                    for (int i = 0; i < 1; i++){
+                    for (int i = 0; i < 1; i++) {
                         music.playMusic("res/Music/jumpSound.wav"); //TODO: provide that the jumping sound plays only once
                     }
                     ySpeed = -11;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
@@ -183,7 +181,7 @@ public class Hunter {
         hitBox.x += xSpeed;
         try {
             for (int i = 0; i < panel.walls.size(); i++) {
-                if (hitBox.intersects(panel.walls.get(i).hitBox)){
+                if (hitBox.intersects(panel.walls.get(i).hitBox)) {
                     hitBox.x -= xSpeed;
                     while (!panel.walls.get(i).hitBox.intersects(hitBox)) {
                         hitBox.x += Math.signum(xSpeed);
@@ -215,7 +213,7 @@ public class Hunter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        panel.cameraX -= xSpeed; //bindet Kamerageschwindigkeit an Spielergeschwindigkeit
+        panel.cameraX -= xSpeed; //binds the camera-Velocity to the Hunter-Velocity
         y += ySpeed;
 
 
@@ -233,41 +231,33 @@ public class Hunter {
      *
      * @param g draws the pictures
      */
-    //Platzhalter für animierten Charakter
     public void draw(Graphics g) {
-        if (frame <= 6&&keyRight){
-            g.drawImage(frame1Forward,x,y,null);
+        if (frame <= 6 && keyRight) {
+            g.drawImage(frame1Forward, x, y, null);
         } else if (frame <= 12 && keyRight) {
             g.drawImage(frame2Forward, x, y, null);
-
-        } else if (frame <= 18 && keyRight){
-            g.drawImage(frame3Forward,x,y,null);
-
-        } else if (frame <= 24 && keyRight){
-            g.drawImage(frame4Forward,x,y,null);
-
-        } else if (frame <= 30 && keyRight){
-            g.drawImage(frame5Forward,x,y,null);
+        } else if (frame <= 18 && keyRight) {
+            g.drawImage(frame3Forward, x, y, null);
+        } else if (frame <= 24 && keyRight) {
+            g.drawImage(frame4Forward, x, y, null);
+        } else if (frame <= 30 && keyRight) {
+            g.drawImage(frame5Forward, x, y, null);
         }
-        else if (frame <= 6&&keyLeft){
-            g.drawImage(frame1Backward,x,y,null);
+
+        else if (frame <= 6 && keyLeft) {
+            g.drawImage(frame1Backward, x, y, null);
         } else if (frame <= 12 && keyLeft) {
             g.drawImage(frame2Backward, x, y, null);
-
-        } else if (frame <= 18 && keyLeft){
-            g.drawImage(frame3Backward,x,y,null);
-
-        } else if (frame <= 24 && keyLeft){
-            g.drawImage(frame4Backward,x,y,null);
-
-        } else if (frame <= 30 && keyLeft){
-            g.drawImage(frame5Backward,x,y,null);
+        } else if (frame <= 18 && keyLeft) {
+            g.drawImage(frame3Backward, x, y, null);
+        } else if (frame <= 24 && keyLeft) {
+            g.drawImage(frame4Backward, x, y, null);
+        } else if (frame <= 30 && keyLeft) {
+            g.drawImage(frame5Backward, x, y, null);
         }
 
-
-
-        else g.drawImage(frame1Forward,x,y,null); //default if nothing is pressed
-        frame%=30;
+        else g.drawImage(frame1Forward, x, y, null); //default if nothing is pressed
+        frame %= 30;
         frame++;
     }
 
@@ -300,7 +290,5 @@ public class Hunter {
         frame3Backward = characterBackward.grabImage(3, 1, 50, 100);
         frame4Backward = characterBackward.grabImage(2, 1, 50, 100);
         frame5Backward = characterBackward.grabImage(1, 1, 50, 100);
-
-
     }
 }

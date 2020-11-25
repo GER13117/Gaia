@@ -5,13 +5,17 @@ import java.awt.image.BufferedImage;
  */
 public class SpriteSheet {
 
-    private BufferedImage image;
+    /**
+     * The BufferedImage of the whole SpriteSheet
+     */
+    private final BufferedImage image;
 
     public SpriteSheet(BufferedImage image) {
         this.image = image;
     }
 
     /**
+     * loads and returns the Subimage
      * @param col Number of colons
      * @param row Number of tows
      * @param width width of the subimages
@@ -19,7 +23,6 @@ public class SpriteSheet {
      * @return returns subimage in specific location as BufferedImage
      */
     public BufferedImage grabImage(int col, int row, int width, int height) {
-        BufferedImage img = image.getSubimage((col * width) - width, (row * height) - height, width, height);
-        return img;
+        return image.getSubimage((col * width) - width, (row * height) - height, width, height);
     }
 }

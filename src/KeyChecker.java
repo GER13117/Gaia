@@ -14,11 +14,17 @@ public class KeyChecker extends KeyAdapter {
         this.panel = panel;
     }
 
+    /**
+     * @param e checks if a Key was pressed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         panel.keyPressed(e);
     }
 
+    /**
+     * @param e checks if a pressed-Key got released
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         panel.keyReleased(e);

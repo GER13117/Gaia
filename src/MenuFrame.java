@@ -21,18 +21,21 @@ public class MenuFrame extends JFrame implements Runnable {
         run();
     }
 
+    /**
+     * sets the Layout to FlowLayout and adds the MenuBar and the buttons method.
+     */
     @Override
     public void run() {
         pane.setLayout(new FlowLayout());
-        MenuBar();
-        Buttons();
+        menuBar();
+        buttons();
     }
 
     /**
      * Menubar: Usage unknown
      */
-    public void MenuBar() {
-        JMenu test = new JMenu("test");
+    public void menuBar() {
+        JMenu test = new JMenu("test"); //TODO: Add text with the rules and the purpose of the game
         setJMenuBar(menuBar);
         menuBar.add(test);
     }
@@ -40,7 +43,7 @@ public class MenuFrame extends JFrame implements Runnable {
     /**
      * buttons for leaving or continuing the game
      */
-    public void Buttons() {
+    public void buttons() {
         pane.add(leaveGame);
         leaveGame.addActionListener(new ActionListener() {
             @Override
@@ -49,7 +52,6 @@ public class MenuFrame extends JFrame implements Runnable {
                 System.exit(0);
             }
         });
-
         pane.add(backToGame);
         backToGame.addActionListener(new ActionListener() {
             @Override

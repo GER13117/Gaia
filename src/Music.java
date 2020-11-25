@@ -7,6 +7,10 @@ import java.io.File;
  * Class for loading the Music / Sounds
  */
 public class Music {
+    /**
+     * loads and starts the Music with {@link Clip}.
+     * @param MusicLocation String with the location of the music.
+     */
     void playMusic(String MusicLocation) {
         try {
             File musicPath = new File(MusicLocation);

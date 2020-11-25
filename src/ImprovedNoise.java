@@ -1,5 +1,5 @@
 /**
- * 1 dimensional Perlin-Noise (got from StackOverflow)
+ * 1 dimensional Perlin-Noise (got from StackOverflow). Creates a long random-looking curve. Used in {@link GamePanel} for terrain-generation.
  */
 public class ImprovedNoise {
     static final int[] p = new int[512];
