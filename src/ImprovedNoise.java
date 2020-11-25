@@ -1,5 +1,5 @@
 /**
- * 1 dimensional Perlin-Noise (from StackOverflow)
+ * 1 dimensional Perlin-Noise (got from StackOverflow)
  */
 public class ImprovedNoise {
     static final int[] p = new int[512];
@@ -21,8 +21,6 @@ public class ImprovedNoise {
     static {
         for (int i = 0; i < 256; i++) p[256 + i] = p[i] = permutation[i];
     }
-
-    //TODO: Die Kurven der Perlin-Noise verlängern, damit die Biome größer werden
 
     static public double noise(double x) {
         int X = (int) Math.floor(x) & 255;

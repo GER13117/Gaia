@@ -3,19 +3,19 @@ import javax.swing.WindowConstants;
 
 
 /**
- * MainMethod
+ * MainMethod. Opens {@link StartMenu}.
  */
 public class Main {
     public static void main(String[] args) {
-        StartMenu mainFrame = new StartMenu();
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        mainFrame.setLocationRelativeTo(null);
+        StartMenu startMenu = new StartMenu();
+        startMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        startMenu.setLocationRelativeTo(null);
 
-        mainFrame.setResizable(true);
+        startMenu.setResizable(true);
 
-        mainFrame.setTitle("Gaia");
-        mainFrame.setVisible(true);
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        startMenu.setTitle("Gaia");
+        startMenu.setVisible(true);
+        startMenu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
 

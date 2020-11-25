@@ -1,7 +1,13 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * KeyChecker to check which keys are pressed. The methods are found in {@link GamePanel}
+ */
 public class KeyChecker extends KeyAdapter {
+    /**
+     * Instance of the GamePanel
+     */
     GamePanel panel;
 
     public KeyChecker(GamePanel panel) {

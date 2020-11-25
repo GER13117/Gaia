@@ -8,18 +8,22 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class GamePanel extends JPanel implements ActionListener {
+    /**
+     * Instance of the hunter-class
+     */
     Hunter hunter;
+    /**
+     * instance of the runner-class
+     */
     Runner runner;
     Timer gameTimer;
     ImprovedNoise improvedNoise;
     EndScreen endScreen;
-    StartMenu startMenuInstance;
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
@@ -39,29 +43,75 @@ public class GamePanel extends JPanel implements ActionListener {
      * standard size of the tiles
      */
     int s = 50;
-
-    // gerundete Fenstergröße für vereinfachte verwendung
     /**
      * The Distance in pixel, used to spawn new Blocks(Renderdistance)
      */
     int windowWidth = 2000;
+    /**
+     * boolean to check if the game should run. By default it's true and is only set to false if somebody won.
+     */
     boolean isRunning = true;
+    /**
+     * BufferedImage of the stone-texture.
+     */
     BufferedImage stone;
+    /**
+     * BufferedImage of the dirt-texture
+     */
     BufferedImage dirt;
+    /**
+     * BufferedImage of the gras-texture
+     */
     BufferedImage gras;
+    /**
+     * BufferedImage of the gras-texture at a left end of a plateau
+     */
     BufferedImage grasLeft;
-    SpriteSheet ss;
+    /**
+     * BufferedImage with the sand-tile
+     */
+    private BufferedImage sand;
+    /**
+     * BufferedImage of the sand-tile at the top of the Terrain
+     */
+    private BufferedImage sandTop;
+    /**
+     * BufferedImage of the sand-tile at the top-left of the Terrain
+     */
+    private BufferedImage sandTopLeft;
+    /**
+     * Instance of SpriteSheet in order to split the SpriteSheet of gras and dirt into pieces.
+     */
+    SpriteSheet grasSheet;
+    /**
+     * Instance of SpriteSheet in order to split the SpriteSheet of the stone into pieces
+     */
     SpriteSheet stoneSheet;
+    /**
+     * Instance of SpriteSheet in order to split the SpriteSheet of the sand into pieces
+     */
     SpriteSheet sandSheet;
+    /**
+     * Instance of loader, to load BufferedImages (the SpriteSheets)
+     */
     BufferedImageLoader loader;
+    /**
+     * The height of the Terrain. At the beginning it's set to 500. By the TerrainGen the value is changed over time.
+     */
     int height = 500;
     //Import Images for the different solids
+    /**
+     * BufferedImage containing the whole dirt / gras-SpriteSheet.
+     */
     private BufferedImage spriteSheet = null;
+    /**
+     * BufferedImage containing the whole stone-SpriteSheet
+     */
     private BufferedImage spriteSheetStone = null;
+    /**
+     * BufferedImage containing the whole sand-SpriteSheet
+     */
     private BufferedImage spriteSheetSand = null;
-    private BufferedImage sand;
-    private BufferedImage sandTop;
-    private BufferedImage sandTopLeft;
 
     String winnerString;
 
@@ -71,7 +121,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public GamePanel() {
         hunter = new Hunter(400, 300, this);
         runner = new Runner(400, 300, this);
-        makeWalls();
+        loadWallImages();
         reset1();
         //Timer um Spiel laufen zu lassen.
         gameTimer = new Timer();
@@ -105,7 +155,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Checks if one of the both Players has won
+     * Checks if one of the both Players has won. If true it sets isRunning false and starts a winning fanfare.
      */
     public void checkWinner() {
         if (runner.x - hunter.x > 1800 || hunter.x - runner.x > 1800) {
@@ -116,8 +166,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 winnerString = "hunter";
                 isRunning = false;
             }
-            startMenuInstance = new StartMenu(); //TODO: Still not working
-            startMenuInstance.getJFrame().dispose();
             Music music = new Music();
             music.playMusic("res/Music/winningSound.wav");
             openEndScreen();
@@ -125,7 +173,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Method for opening the Endscreen
+     * Method for opening {@link EndScreen}.
      */
     public void openEndScreen() {
         endScreen = new EndScreen(winnerString);
@@ -137,11 +185,10 @@ public class GamePanel extends JPanel implements ActionListener {
         endScreen.setTitle("Gaia");
         endScreen.setVisible(true);
         endScreen.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
     }
 
     /**
-     * Method for resetting the world.
+     * Method for resetting the world and the camera to starting position.
      */
     public void reset1() {
         respawn();
@@ -153,7 +200,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Method for respawn of the Players
+     * Method for respawning the Players
      */
     public void respawn() {
         hunter.x = 400;
@@ -168,10 +215,10 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Method to make the walls / blocks.
+     * Method to loads the walls / blocks.
      * It defines the different Tiles from the sprites. The Generation is happening some where else
      */
-    public void makeWalls() {
+    public void loadWallImages() {
         loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("textures/gras_dirt_sprite.png");
@@ -187,20 +234,12 @@ public class GamePanel extends JPanel implements ActionListener {
         sandTopLeft = sandSheet.grabImage(1, 1, s, s);
         sand = sandSheet.grabImage(2, 2, s, s);
         sandTop = sandSheet.grabImage(2, 1, s, s);
-        BufferedImage sandLeftDown = sandSheet.grabImage(1, 3, s, s);
-        BufferedImage sandTopRight = sandSheet.grabImage(3, 1, s, s);
-        BufferedImage sandRight = sandSheet.grabImage(3, 2, s, s);
-        BufferedImage sandRightDown = sandSheet.grabImage(3, 3, s, s);
 
 
-        ss = new SpriteSheet(spriteSheet);
-        grasLeft = ss.grabImage(1, 1, s, s);
-        dirt = ss.grabImage(2, 2, s, s);
-        gras = ss.grabImage(2, 1, s, s);
-        BufferedImage dirtLeftDown = ss.grabImage(1, 3, s, s);
-        BufferedImage grasRight = ss.grabImage(3, 1, s, s);
-        BufferedImage dirtRight = ss.grabImage(3, 2, s, s);
-        BufferedImage grasRightDown = ss.grabImage(3, 3, s, s);
+        grasSheet = new SpriteSheet(spriteSheet);
+        grasLeft = grasSheet.grabImage(1, 1, s, s);
+        dirt = grasSheet.grabImage(2, 2, s, s);
+        gras = grasSheet.grabImage(2, 1, s, s);
 
         try {
             spriteSheetStone = loader.loadImage("textures/stone_sprite.png");
@@ -209,8 +248,6 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         stoneSheet = new SpriteSheet(spriteSheetStone);
         stone = stoneSheet.grabImage(2, 1, s, s);
-        BufferedImage stoneRight = stoneSheet.grabImage(3, 1, s, s);
-        BufferedImage stoneLeft = stoneSheet.grabImage(1, 1, s, s);
         for (int i = 0; i < 40; i++) walls.add(new Wall(i, 1050, s, s, stone));
 
         terrainGen();
@@ -222,6 +259,7 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param g name for the Graphics to paint the tiles
      */
     public void paint(Graphics g) {
+        super.paint(g);
         hunter.draw(g);
         runner.draw(g);
 
@@ -241,7 +279,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     /**
-     * The method for creating the terrain, by subtracting or adding height.
+     * The method for generating the terrain, by subtracting or adding height.
+     * It chooses between deserts and meadows by a 1-Dimensional Perlin-Noise. {@link ImprovedNoise}
      */
     public void terrainGen() {
         for (int x = 0; x < 40; x++) {
@@ -289,7 +328,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Method for opening the Menu
+     * Method for opening the {@link MenuFrame}, the ingame-Menu
      */
     public void openMenu() {
         MenuFrame menuFrame = new MenuFrame();

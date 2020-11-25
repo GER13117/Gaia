@@ -2,20 +2,14 @@ import javax.swing.JFrame;
 import java.awt.Color;
 
 /**
- * Creates MainFrame
+ * Creates GameFrame where the {@link GamePanel} is created on.
  */
 public class MainFrame extends JFrame {
-    public static GamePanel panel;
-
-    public MainFrame() {
-        initUI();
-    }
-
     /**
-     * initializes UI
+     * Instance of the GamePanel to create it
      */
-    private void initUI() {
-
+    public static GamePanel panel;
+    public MainFrame() {
         panel = new GamePanel();
         panel.setLocation(0, 0);
         panel.setSize(this.getSize());
@@ -27,13 +21,5 @@ public class MainFrame extends JFrame {
         addKeyListener(new KeyChecker(panel));
         panel.addMouseListener(new MouseChecker());
         panel.setVisible(true);
-
-
     }
-
-    public void disposeIt(){
-        dispose();
-    }
-
-
 }

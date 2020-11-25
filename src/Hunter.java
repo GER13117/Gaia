@@ -167,8 +167,8 @@ public class Hunter {
         if (keyUp) {
             //check if touching ground
             hitBox.y++;
-            for (Wall wall : panel.walls) {
-                if (wall.hitBox.intersects(hitBox)) {
+            for (int xy = 0; xy < panel.walls.size(); xy++) {
+                if (panel.walls.get(xy).hitBox.intersects(hitBox)) {
                     Music music = new Music();
                     for (int i = 0; i < 1; i++){
                         music.playMusic("res/Music/jumpSound.wav"); //TODO: provide that the jumping sound plays only once
@@ -182,10 +182,10 @@ public class Hunter {
         //horizontale Kolllision
         hitBox.x += xSpeed;
         try {
-            for (Wall wall : panel.walls) {
-                if (hitBox.intersects(wall.hitBox)) {
+            for (int i = 0; i < panel.walls.size(); i++) {
+                if (hitBox.intersects(panel.walls.get(i).hitBox)){
                     hitBox.x -= xSpeed;
-                    while (!wall.hitBox.intersects(hitBox)) {
+                    while (!panel.walls.get(i).hitBox.intersects(hitBox)) {
                         hitBox.x += Math.signum(xSpeed);
                     }
                     hitBox.x -= Math.signum(xSpeed);
@@ -200,10 +200,10 @@ public class Hunter {
         //vertikale Kollision
         hitBox.y += ySpeed;
         try {
-            for (Wall wall : panel.walls) {
-                if (hitBox.intersects(wall.hitBox)) {//Horizontal
+            for (int i = 0; i < panel.walls.size(); i++) {
+                if (hitBox.intersects(panel.walls.get(i).hitBox)) {//Horizontal
                     hitBox.y -= ySpeed;
-                    while (!wall.hitBox.intersects(hitBox)) {
+                    while (!panel.walls.get(i).hitBox.intersects(hitBox)) {
                         hitBox.y += Math.signum(ySpeed);
                     }
                     hitBox.y -= Math.signum(ySpeed);
