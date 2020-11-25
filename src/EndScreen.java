@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -23,9 +24,14 @@ public class EndScreen extends JFrame implements Runnable {
      */
     String winner;
     /**
-     * BufferedImage of the Background
+     * BufferedImage of the Background when Hunter won
      */
-    private BufferedImage bg = null;
+    private BufferedImage bgHunter = null;
+
+    /**
+     * BufferedImage of the Background when Runner won
+     */
+    private BufferedImage bgRunner = null;
     /**
      * the JButton you can press to restart the game
      */
@@ -50,7 +56,8 @@ public class EndScreen extends JFrame implements Runnable {
      */
     public void loadImages() {
         try {
-            bg = ImageIO.read(getClass().getResource("Backgrounds/EndScreen.png"));
+            bgHunter = ImageIO.read(getClass().getResource("Backgrounds/EndScreenHunter.png"));
+            bgRunner = ImageIO.read(getClass().getResource("Backgrounds/EndScreenRunner.png"));
             BufferedImage button = ImageIO.read(getClass().getResource("Backgrounds/StartButtonEmpty.png"));
             iconButton = new ImageIcon(button);
         } catch (IOException e) {
@@ -103,10 +110,11 @@ public class EndScreen extends JFrame implements Runnable {
      */
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(bg, 0, 0, null);
         if (winner == "runner"){
+            g.drawImage(bgRunner,0,0,null);
             g.drawImage(MainFrame.panel.runner.frame1Forward, 1200, 730, null);
         } else if (winner == "hunter"){
+            g.drawImage(bgHunter,0,0,null);
             g.drawImage(MainFrame.panel.hunter.frame1Forward, 1200, 730, null);
         }
     }
