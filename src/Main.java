@@ -18,6 +18,3 @@ public class Main {
         startMenu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
-
-
-//TODO: DEN JAR SCHEiß gerade machen
