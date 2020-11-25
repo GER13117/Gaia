@@ -20,7 +20,5 @@ public class Main {
 }
 
 
-//TODO: randomiser, um zwischen verschiedenen Steinen zu wählen
 //TODO: EndScreen: IMG für den jeweiligen Gewinner
-//TODO: JavaDoc Kommentare erweitern
-//TODO: TerrainGen fixen!!!!!
+//TODO: DEN JAR SCHEiß gerade machen
