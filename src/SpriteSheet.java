@@ -10,6 +10,9 @@ public class SpriteSheet {
      */
     private final BufferedImage image;
 
+    /**
+     * @param image the BufferedImage that will be split
+     */
     public SpriteSheet(BufferedImage image) {
         this.image = image;
     }

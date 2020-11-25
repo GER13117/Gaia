@@ -12,6 +12,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+/**
+ * Panel where the whole game is displayed except the beginning and the ending
+ */
 public class GamePanel extends JPanel implements ActionListener {
     /**
      * Instance of the hunter-class

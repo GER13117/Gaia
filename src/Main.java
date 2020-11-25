@@ -8,6 +8,9 @@ import javax.swing.WindowConstants;
  * Main-Method. Opens {@link StartMenu}.
  */
 public class Main {
+    /**
+     * @param args commandline-arguments
+     */
     public static void main(String[] args) {
         StartMenu startMenu = new StartMenu();
         startMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);

@@ -7,6 +7,11 @@ import java.io.IOException;
  */
 public class BufferedImageLoader {
 
+    /**
+     * @param path String to the BufferedImage of the SpriteSheet
+     * @return Image of the SpriteSheet
+     * @throws IOException if Image isn't available
+     */
     public BufferedImage loadImage(String path) throws IOException {
         return ImageIO.read(getClass().getResource(path));
     }

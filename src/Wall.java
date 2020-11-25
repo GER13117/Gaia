@@ -7,14 +7,37 @@ import java.awt.image.BufferedImage;
  * Class for creating the solid Body Tiles
  */
 public class Wall {
+    /**
+     * x-Position of the wall
+     */
     int x;
+    /**
+     * y-Position of the wall
+     */
     int y;
+    /**
+     * width of the wall
+     */
     int width;
+    /**
+     * height of the wall
+     */
     int height;
-    //sichert Postion zu den anderen Blöcken
+    /**
+     * to save the distance relative to the other blocks to ensure, that all blocks are moving in the same speed
+     */
     int startX;
+    /**
+     * to save the distance relative to the other blocks to ensure, that all blocks are moving in the same speed
+     */
     int startY;
+    /**
+     * rectangle to create a hitbox
+     */
     Rectangle hitBox;
+    /**
+     * BufferedImage of a single block
+     */
     BufferedImage imageWall;
 
     /**

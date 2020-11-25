@@ -18,12 +18,26 @@ import java.net.URL;
  */
 public class MenuFrame extends JFrame implements Runnable {
     //Member
+    /**
+     * Menubar to open the Readme / Rules
+     */
     JMenuBar menuBar = new JMenuBar();
+    /**
+     * container to structure the objects
+     */
     Container pane = getContentPane();
+    /**
+     * JButton to leave the game
+     */
     JButton leaveGame = new JButton("Leave Game");
+    /**
+     * JButton to continue the game
+     */
     JButton backToGame = new JButton("Continue");
-    Desktop desktop;
 
+    /**
+     * Constructor of the Menu
+     */
     public MenuFrame() {
         run();
     }

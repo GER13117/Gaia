@@ -10,6 +10,9 @@ public class KeyChecker extends KeyAdapter {
      */
     GamePanel panel;
 
+    /**
+     * @param panel panel, where the needed methods are
+     */
     public KeyChecker(GamePanel panel) {
         this.panel = panel;
     }
