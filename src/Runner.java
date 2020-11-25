@@ -180,10 +180,10 @@ public class Runner {
         //horizontal collision
         hitBox.x += xSpeed;
         try {
-            for (Wall wall : panel.walls) {
-                if (hitBox.intersects(wall.hitBox)) {
+            for (int i = 0; i < panel.walls.size(); i++) {
+                if (hitBox.intersects(panel.walls.get(i).hitBox)) {
                     hitBox.x -= xSpeed;
-                    while (!wall.hitBox.intersects(hitBox)) {
+                    while (!panel.walls.get(i).hitBox.intersects(hitBox)) {
                         hitBox.x += Math.signum(xSpeed);
                     }
                     hitBox.x -= Math.signum(xSpeed);
@@ -198,10 +198,10 @@ public class Runner {
         //vertical collision
         hitBox.y += ySpeed;
         try {
-            for (Wall wall : panel.walls) {
-                if (hitBox.intersects(wall.hitBox)) {
+            for (int i = 0; i < panel.walls.size(); i++) {
+                if (hitBox.intersects(panel.walls.get(i).hitBox)) {
                     hitBox.y -= ySpeed;
-                    while (!wall.hitBox.intersects(hitBox)) {
+                    while (!panel.walls.get(i).hitBox.intersects(hitBox)) {
                         hitBox.y += Math.signum(ySpeed);
                     }
                     hitBox.y -= Math.signum(ySpeed);
