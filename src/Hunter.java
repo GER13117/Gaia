@@ -8,15 +8,15 @@ import java.io.IOException;
  */
 public class Hunter {
     /**
-     * x-position of the player
+     * x-position of the hunter
      */
     int x;
     /**
-     * y-postion of the player
+     * y-postion of the hunter
      */
     int y;
     /**
-     * instance of the panel, mainly used to paint the player
+     * instance of the panel, mainly used to paint the hunter
      */
     GamePanel panel;
     /**
@@ -31,7 +31,6 @@ public class Hunter {
      * height of the player and hunter-hitbox
      */
     int height;
-    //Velocities of the player
     /**
      * speed in x-Direction of the hunter
      */
@@ -58,19 +57,19 @@ public class Hunter {
      */
     SpriteSheet characterBackward;
     /**
-     * the hitbox of the player
+     * the hitbox of the hunter
      */
     Rectangle hitBox;
     /**
-     * boolean which turns to true when key-left is pressed, to walk to the left
+     * boolean which turns to true when the left-arrow-key is pressed, to walk to the left
      */
     boolean keyLeft;
     /**
-     * boolean which turns to true when right-left is pressed, to walk to the right
+     * boolean which turns to true when the right-arrow-key is pressed, to walk to the right
      */
     boolean keyRight;
     /**
-     * boolean which turns to true when up-left is pressed, to jump
+     * boolean which turns to true when up-arrow-key is pressed, to jump
      */
     boolean keyUp;
     /**
@@ -102,7 +101,6 @@ public class Hunter {
      */
     private BufferedImage frame2Backward;
 
-    //Keys
     /**
      * position of the Hunter when moving backward at frame / position 3
      */
@@ -117,9 +115,9 @@ public class Hunter {
     private BufferedImage frame5Backward;
 
     /**
-     * @param x     xPosition of a specific Player
-     * @param y     yPosition of a specific Player
-     * @param panel the panel where the Player is drawn on
+     * @param x     xPosition of the hunter
+     * @param y     yPosition of the hunter
+     * @param panel the panel where the hunter is drawn on
      */
     public Hunter(int x, int y, GamePanel panel) {
 
@@ -140,7 +138,7 @@ public class Hunter {
      */
     public void set() {
 
-        //Bedingungen und einschränkungen vertikal
+        //limitations and requirements of the movement
         if (keyLeft && keyRight || !keyLeft && !keyRight) {
             xSpeed *= 0.8;
         } else if (keyLeft && !keyRight) {

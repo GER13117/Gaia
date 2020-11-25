@@ -9,43 +9,120 @@ import java.io.IOException;
  * Runner Class
  */
 public class Runner {
+    /**
+     * x-position of the runner
+     */
     int x;
+    /**
+     * y-postion of the runner
+     */
     int y;
+    /**
+     * instance of the panel, mainly used to paint the runner
+     */
     GamePanel panel;
+    /**
+     * instance of loader to load the images
+     */
     BufferedImageLoader loader;
+    /**
+     * width of the runner and runner-hitbox
+     */
     int width;
+    /**
+     * height of the runner and runner-hitbox
+     */
     int height;
-    //Velocities of the player
-    double xspeed;
-    double yspeed;
+    /**
+     * speed in x-direction of the runner
+     */
+    double xSpeed;
+    /**
+     * speed in x-direction of the runner
+     */
+    double ySpeed;
 
+    /**
+     * counter of the frames. Start-value is 1 it goes up to 30, where it gets "reset" by modulo
+     */
     int frame = 1;
 
+    /**
+     * BufferedImage to load the Sprite-Sheets on.
+     */
     private BufferedImage char1 = null;
+    /**
+     *  instance of {@link SpriteSheet}for splitting the BufferedImage into subimages, for forward-movement
+     */
     SpriteSheet characterForward;
+    /**
+     * position of the runner when moving forward at frame / position 1
+     * It is not private because it's used as the only Image in another class
+     */
     BufferedImage frame1Forward;
+    /**
+     * position of the runner when moving forward at frame / position 2
+     */
     private BufferedImage frame2Forward;
+    /**
+     * position of the runner when moving forward at frame / position 3
+     */
     private BufferedImage frame3Forward;
+    /**
+     * position of the runner when moving forward at frame / position 4
+     */
     private BufferedImage frame4Forward;
+    /**
+     * position of the runner when moving forward at frame / position 5
+     */
     private BufferedImage frame5Forward;
 
+    /**
+     * instance of {@link SpriteSheet}for splitting the BufferedImage into subimages, for backward-movement
+     */
     SpriteSheet characterBackward;
+    /**
+     * position of the runner when moving "backward" at frame / position 1
+     */
     private BufferedImage frame1Backward;
+    /**
+     * position of the runner when moving "backward" at frame / position 2
+     */
     private BufferedImage frame2Backward;
+    /**
+     * position of the runner when moving "backward" at frame / position 3
+     */
     private BufferedImage frame3Backward;
+    /**
+     * position of the runner when moving "backward" at frame / position 4
+     */
     private BufferedImage frame4Backward;
+    /**
+     * position of the runner when moving "backward" at frame / position 5
+     */
     private BufferedImage frame5Backward;
+    /**
+     * the hitbox of the runner
+     */
     Rectangle hitBox;
 
-    //Keys
+    /**
+     * boolean which turns to true when the left-arrow-key is pressed, to walk to the left
+     */
     boolean keyLeft;
+    /**
+     * boolean which turns to true when the right-arrow-key is pressed, to walk to the right
+     */
     boolean keyRight;
+    /**
+     * boolean which turns to true when up-arrow-key is pressed, to jump
+     */
     boolean keyUp;
 
     /**
-     * @param x     xPosition of a specific Player
-     * @param y     yPosition of a specific Player
-     * @param panel the panel where the Player ist drawn on
+     * @param x     xPosition of the runner
+     * @param y     yPosition of the runner
+     * @param panel the panel where the runner ist drawn on
      */
     public Runner(int x, int y, GamePanel panel) {
 
@@ -61,75 +138,74 @@ public class Runner {
     }
 
     /**
-     * Sets the maximum Velocity, Gravitation and Collision detection.
-     * Also sets the "Camera Movement" the same as the Player Movement (Player ist always in the center)
+     * Sets the maximum Velocity, gravitation and collision-detection.
+     * The Camera isn't fixed on this character.
      */
     public void set() {
 
-        //Bedingungen und einschränkungen vertikal
+        //limitations and requirements of the movement
         if (keyLeft && keyRight || !keyLeft && !keyRight) {
-            xspeed *= 0.8;
+            xSpeed *= 0.8;
         } else if (keyLeft && !keyRight) {
-            xspeed--;
+            xSpeed--;
         } else if (keyRight && !keyLeft) {
-            xspeed++;
+            xSpeed++;
         }
-        if (xspeed > 0 && xspeed < 0.75) {
-            xspeed = 0;
+        if (xSpeed > 0 && xSpeed < 0.75) {
+            xSpeed = 0;
         }
-        if (xspeed < 0 && xspeed > -0.75) {
-            xspeed = 0;
+        if (xSpeed < 0 && xSpeed > -0.75) {
+            xSpeed = 0;
         }
-        if (xspeed > 10) {
-            xspeed = 10;
+        if (xSpeed > 10) {
+            xSpeed = 10;
         }
-        if (xspeed < -10) {
-            xspeed = -10;
+        if (xSpeed < -10) {
+            xSpeed = -10;
         }
 
-        //Gravitation und un Kollision
         if (keyUp) {
             //check if touching ground
             hitBox.y++;
             for (int i = 0; i < panel.walls.size(); i++) {
                 if (panel.walls.get(i).hitBox.intersects(hitBox)) {
                     Music music = new Music();
-                    yspeed = -15;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
+                    ySpeed = -15;//hier deaktiviert es fliegen bewegt den Spieler mit einer Geschwindigkeit von 11 nach oben
                     music.playMusic("res/Music/jumpSound.wav");
                 }
             }
             hitBox.y--;
         }
-        yspeed += 0.5;
-        //horizontale Kolllision
-        hitBox.x += xspeed;
+        ySpeed += 0.5;
+        //horizontal collision
+        hitBox.x += xSpeed;
         try {
             for (Wall wall : panel.walls) {
                 if (hitBox.intersects(wall.hitBox)) {
-                    hitBox.x -= xspeed;
+                    hitBox.x -= xSpeed;
                     while (!wall.hitBox.intersects(hitBox)) {
-                        hitBox.x += Math.signum(xspeed);
+                        hitBox.x += Math.signum(xSpeed);
                     }
-                    hitBox.x -= Math.signum(xspeed);
+                    hitBox.x -= Math.signum(xSpeed);
                     panel.cameraX += x - hitBox.x;
-                    xspeed = 0;
+                    xSpeed = 0;
                     hitBox.x = x;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //vertikale Kollision
-        hitBox.y += yspeed;
+        //vertical collision
+        hitBox.y += ySpeed;
         try {
             for (Wall wall : panel.walls) {
-                if (hitBox.intersects(wall.hitBox)) {//Horizontal
-                    hitBox.y -= yspeed;
+                if (hitBox.intersects(wall.hitBox)) {
+                    hitBox.y -= ySpeed;
                     while (!wall.hitBox.intersects(hitBox)) {
-                        hitBox.y += Math.signum(yspeed);
+                        hitBox.y += Math.signum(ySpeed);
                     }
-                    hitBox.y -= Math.signum(yspeed);
-                    yspeed = 0;
+                    hitBox.y -= Math.signum(ySpeed);
+                    ySpeed = 0;
                     y = hitBox.y;
                 }
 
@@ -137,9 +213,9 @@ public class Runner {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //x += xspeed - StartMenu.panel.hunter.xspeed;
-        x += xspeed - MainFrame.panel.hunter.xSpeed;
-        y += yspeed;
+
+        x += xSpeed - MainFrame.panel.hunter.xSpeed; //Subtracts the xSpeed of the Hunter to limit the speed
+        y += ySpeed;
 
 
         //Death Code
@@ -150,7 +226,11 @@ public class Runner {
         hitBox.y = y;
     }
 
-    //Platzhalter für animierten Charakter
+
+    /**
+     * method for drawing the character it loops through number between 1 and 30 on which are specific frames are painter
+     * @param g draws the pictures
+     */
     public void draw(Graphics g) {
         if (frame <= 6&&keyRight){
             g.drawImage(frame1Forward,x,y,null);
@@ -187,7 +267,7 @@ public class Runner {
     }
 
     /**
-     * Method for loading the Images from the SpriteSheet using the BufferedImageLoader and SpriteSheet class
+     * Method for loading the Images from the SpriteSheet using the {@link BufferedImageLoader} and {@link SpriteSheet} class.
      */
     public void loadImages() {
         loader = new BufferedImageLoader();

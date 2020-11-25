@@ -221,8 +221,8 @@ public class GamePanel extends JPanel implements ActionListener {
         hunter.ySpeed = 0;
         runner.x = 300;
         runner.y = height - 150;
-        runner.yspeed = 0;
-        runner.xspeed = 0;
+        runner.ySpeed = 0;
+        runner.xSpeed = 0;
 
     }
 
