@@ -31,5 +31,9 @@ public class MainFrame extends JFrame {
 
     }
 
+    public void disposeIt(){
+        dispose();
+    }
+
 
 }

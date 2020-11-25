@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer gameTimer;
     ImprovedNoise improvedNoise;
     EndScreen endScreen;
+    StartMenu startMenuInstance;
     //Biomes biomes;
     ArrayList<Wall> walls = new ArrayList<>();
     //Variablen zum Definieren der Kamerposition
@@ -115,6 +116,8 @@ public class GamePanel extends JPanel implements ActionListener {
                 winnerString = "hunter";
                 isRunning = false;
             }
+            startMenuInstance = new StartMenu(); //TODO: Still not working
+            startMenuInstance.getJFrame().dispose();
             Music music = new Music();
             music.playMusic("res/Music/winningSound.wav");
             openEndScreen();

@@ -16,6 +16,7 @@ public class StartMenu extends JFrame implements Runnable {
     private BufferedImage button = null;
     JButton startButton;
     ImageIcon iconButton;
+    private MainFrame frame;
 
     /**
      * Constructor of Start-Menu
@@ -24,13 +25,13 @@ public class StartMenu extends JFrame implements Runnable {
         buttons();
         loadImages();
         run();
+        frame = new MainFrame();
     }
 
     /**
      * Opens the MainFrame on which the GamePanel is placed
      */
     public void openGame() {
-        MainFrame frame = new MainFrame();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
 
@@ -78,5 +79,8 @@ public class StartMenu extends JFrame implements Runnable {
         super.paint(g);
         g.drawImage(bg,0,0,null);
 
+    }
+    public final JFrame getJFrame(){
+        return frame;
     }
 }
