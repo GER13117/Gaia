@@ -39,7 +39,7 @@ public class MenuFrame extends JFrame implements Runnable {
      */
     public void menuBar() {
 
-        JMenu rules = new JMenu("Rules"); //TODO: Add text with the rules and the purpose of the game
+        JMenu rules = new JMenu("Rules");
         setJMenuBar(menuBar);
         menuBar.add(rules);
         JMenuItem rulesItem = new JMenuItem("Readme");

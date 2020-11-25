@@ -369,11 +369,6 @@ public class GamePanel extends JPanel implements ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) hunter.keyLeft = true;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) hunter.keyRight = true;
         if (e.getKeyCode() == KeyEvent.VK_UP) hunter.keyUp = true;
-        if (e.getKeyCode() == KeyEvent.VK_E) {
-            System.out.println("hüpfstein");
-            //TODO: STein unter runner platzieren
-            walls.add(new Wall((offset + runner.x), runner.y + 150, s, s, stone)); //funktionier somehow nicht
-        }
 
         //respawn
         if (e.getKeyChar() == 'r' || e.getKeyChar() == 'R') reset1();
