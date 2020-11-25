@@ -10,11 +10,11 @@ The Project is created with: <br/>
 Java version: 1.8
 
 
-###Setup
+### Setup
 In order to install and run the project. You can download and compile the source-code or download the provided .jar-file.
 
 
-###Known problems
+### Known problems
 1. Terrain sometimes goes into the void. The only fix at the moment is to restart the game.
 2. Depending on your monitor and your os the Buttons to start and restart the game, might be offset.
 3. If the startMenu is blank-white, resize your window to fix it. The same goes with the end-screen.
