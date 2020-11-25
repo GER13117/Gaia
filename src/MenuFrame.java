@@ -1,11 +1,13 @@
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
+import javax.swing.*;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * Menu which opens ingame
@@ -16,6 +18,7 @@ public class MenuFrame extends JFrame implements Runnable {
     Container pane = getContentPane();
     JButton leaveGame = new JButton("Leave Game");
     JButton backToGame = new JButton("Continue");
+    Desktop desktop;
 
     public MenuFrame() {
         run();
@@ -35,9 +38,30 @@ public class MenuFrame extends JFrame implements Runnable {
      * Menubar: Usage unknown
      */
     public void menuBar() {
-        JMenu test = new JMenu("test"); //TODO: Add text with the rules and the purpose of the game
+
+        JMenu rules = new JMenu("Rules"); //TODO: Add text with the rules and the purpose of the game
         setJMenuBar(menuBar);
-        menuBar.add(test);
+        menuBar.add(rules);
+        JMenuItem rulesItem = new JMenuItem("Readme");
+        rules.add(rulesItem);
+        rulesItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                URL url = null;
+
+                try {
+                    url = new URL("https://github.com/GER13117/Gaia/blob/master/README.md");
+                } catch (MalformedURLException malformedURLException) {
+                    malformedURLException.printStackTrace();
+                }
+                try {
+                    Desktop.getDesktop().browse(url.toURI());
+                } catch (IOException | URISyntaxException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
