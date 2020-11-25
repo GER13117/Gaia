@@ -11,7 +11,7 @@ Java version: 1.8
 
 
 ### Setup
-In order to install and run the project. You can download and compile the source-code or download the provided .jar-file.
+In order to install and run the project. You can download and compile the source-code or download the provided .jar-file. To load the Images properly you have to set the res-folder as resource root.
 
 
 ### Known problems
