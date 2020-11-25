@@ -1,15 +1,13 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
-//TODO: Add Image Headline that show "Runner won" or "Hunter won"
 
 /**
  * EndScreen Displaying the Winner. And adding the possibility to restart the game

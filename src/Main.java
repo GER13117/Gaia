@@ -20,5 +20,4 @@ public class Main {
 }
 
 
-//TODO: EndScreen: IMG für den jeweiligen Gewinner
 //TODO: DEN JAR SCHEiß gerade machen
