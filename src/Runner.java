@@ -272,7 +272,7 @@ public class Runner {
     public void loadImages() {
         loader = new BufferedImageLoader();
         try {
-            char1 = loader.loadImage("Characters/GreenRunnerForward.png");
+            char1 = loader.loadImage("characters/GreenRunnerForward.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -284,7 +284,7 @@ public class Runner {
         frame5Forward = characterForward.grabImage(5, 1, 50, 100);
 
         try {
-            char1 = loader.loadImage("Characters/GreenRunnerBackward.png");
+            char1 = loader.loadImage("characters/GreenRunnerBackward.png");
         } catch (IOException e) {
             e.printStackTrace();
         }

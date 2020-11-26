@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -265,7 +266,7 @@ public class Hunter {
     public void loadImages() {
         loader = new BufferedImageLoader();
         try {
-            char1 = loader.loadImage("Characters/hunterForward.png");
+            char1 = ImageIO.read(getClass().getResource("characters/hunterForward.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -277,7 +278,7 @@ public class Hunter {
         frame5Forward = characterForward.grabImage(5, 1, 50, 100);
 
         try {
-            char1 = loader.loadImage("Characters/hunterBackward.png");
+            char1 = ImageIO.read(getClass().getResource("characters/hunterBackward.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
