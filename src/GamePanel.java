@@ -93,6 +93,10 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     SpriteSheet sandSheet;
     /**
+     * Instance of SpriteSheet in order to split the SpriteSheet of the snow into pieces
+     */
+    SpriteSheet snowSheet;
+    /**
      * Instance of loader, to load BufferedImages (the SpriteSheets)
      */
     BufferedImageLoader loader;
@@ -117,6 +121,8 @@ public class GamePanel extends JPanel implements ActionListener {
      * BufferedImage of the sand-tile at the top-left of the Terrain
      */
     private BufferedImage sandTopLeft;
+    private BufferedImage snowLeft;
+    private BufferedImage snow;
     /**
      * BufferedImage containing the whole dirt / gras-SpriteSheet.
      */
@@ -129,11 +135,17 @@ public class GamePanel extends JPanel implements ActionListener {
      * BufferedImage containing the whole sand-SpriteSheet
      */
     private BufferedImage spriteSheetSand = null;
+    /**
+     * BufferedImage containing the whole snow-SpriteSheet
+     */
+    private BufferedImage spriteSheetSnow = null;
+    private Boolean summer;
 
     /**
      * Constructor of the GamePanel. Starts the music, places the hunter, runner and the walls starts the gameloop / timer.
      */
     public GamePanel() {
+        summer = false;
         hunter = new Hunter(400, 300, this);
         runner = new Runner(400, 300, this);
         loadWallImages();
@@ -246,6 +258,11 @@ public class GamePanel extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            spriteSheetSnow = loader.loadImage("textures/SpriteSheetSnow.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         sandSheet = new SpriteSheet(spriteSheetSand);
         sandTopLeft = sandSheet.grabImage(1, 1, s, s);
         sand = sandSheet.grabImage(2, 2, s, s);
@@ -256,6 +273,11 @@ public class GamePanel extends JPanel implements ActionListener {
         grasLeft = grasSheet.grabImage(1, 1, s, s);
         dirt = grasSheet.grabImage(2, 2, s, s);
         gras = grasSheet.grabImage(2, 1, s, s);
+
+        snowSheet = new SpriteSheet(spriteSheetSnow);
+        snowLeft = snowSheet.grabImage(1, 1, s, s);
+        snow = snowSheet.grabImage(2, 1, s, s);
+
 
         try {
             spriteSheetStone = loader.loadImage("textures/stone_sprite.png");
@@ -299,18 +321,62 @@ public class GamePanel extends JPanel implements ActionListener {
      * It chooses between deserts and meadows by a 1-Dimensional Perlin-Noise. {@link ImprovedNoise}
      */
     public void terrainGen() {
-        for (int x = 0; x < 40; x++) {
-            double temperature = improvedNoise.noise(x / 10.5);
-            int minHeight = (height) - 50;
-            int maxHeight = (height) + 100;
-            height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
-            int minStoneSpawnDistance = height + 50;
-            int maxStoneSpawnDistance = height + 300;
-            int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
+        if (summer) {
+            for (int x = 0; x < 40; x++) {
+                double temperature = improvedNoise.noise(x / 10.5);
+                int minHeight = (height) - 50;
+                int maxHeight = (height) + 100;
+                height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
+                int minStoneSpawnDistance = height + 50;
+                int maxStoneSpawnDistance = height + 300;
+                int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
 
-            if (temperature < 0) {
+                if (temperature < 0) {
 
+                    for (int y = 1100; y > height; y -= 50) {
+                        if (y > totalSpawnDistance) {
+                            walls.add(new Wall((offset + x * 50), y, s, s, stone));
+                        } else {
+                            walls.add(new Wall((offset + x * 50), y, s, s, dirt));
+
+                        }
+                    }
+
+                    if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
+                    else {
+                        //Platzhalter
+                        walls.add(new Wall((offset + x * 50), height, s, s, gras));
+                    }
+
+                } else {
+                    for (int y = 1100; y > height; y -= 50) {
+                        if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));
+                        else {
+                            //Platzhalter
+                            walls.add(new Wall((offset + x * 50), height, s, s, sandTop));
+                        }
+                        if (y > totalSpawnDistance) {
+                            walls.add(new Wall((offset + x * 50), y, s, s, stone));
+                        } else {
+                            walls.add(new Wall((offset + x * 50), y, s, s, sand));
+
+                        }
+                    }
+                }
+            }
+        } else {
+            for (int x = 0; x < 40; x++) {
+                int minHeight = (height) - 50;
+                int maxHeight = (height) + 100;
+                height = ((int) (Math.random() * (maxHeight - minHeight) + minHeight) / 50) * 50;
+                int minStoneSpawnDistance = height + 50;
+                int maxStoneSpawnDistance = height + 300;
+                int totalSpawnDistance = ((int) (Math.random() * (maxStoneSpawnDistance - minStoneSpawnDistance) + minStoneSpawnDistance) / 50) * 50;
                 for (int y = 1100; y > height; y -= 50) {
+                    if (x == 0) walls.add(new Wall((offset), height, s, s, snowLeft));
+                    else {
+                        walls.add(new Wall((offset + x * 50), height, s, s, snow));
+                    }
                     if (y > totalSpawnDistance) {
                         walls.add(new Wall((offset + x * 50), y, s, s, stone));
                     } else {
@@ -318,29 +384,10 @@ public class GamePanel extends JPanel implements ActionListener {
 
                     }
                 }
-
-                if (x == 0) walls.add(new Wall((offset), height, s, s, grasLeft));
-                else {
-                    //Platzhalter
-                    walls.add(new Wall((offset + x * 50), height, s, s, gras));
-                }
-
-            } else {
-                for (int y = 1100; y > height; y -= 50) {
-                    if (x == 0) walls.add(new Wall((offset), height, s, s, sandTopLeft));
-                    else {
-                        //Platzhalter
-                        walls.add(new Wall((offset + x * 50), height, s, s, sandTop));
-                    }
-                    if (y > totalSpawnDistance) {
-                        walls.add(new Wall((offset + x * 50), y, s, s, stone));
-                    } else {
-                        walls.add(new Wall((offset + x * 50), y, s, s, sand));
-
-                    }
-                }
             }
+
         }
+
     }
 
     /**
